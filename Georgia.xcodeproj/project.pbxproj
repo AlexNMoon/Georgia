@@ -14,6 +14,8 @@
 		9ED9EBF31BBC24AA007DEE61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ED9EBF21BBC24AA007DEE61 /* Images.xcassets */; };
 		9ED9EBF61BBC24AA007DEE61 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ED9EBF41BBC24AA007DEE61 /* LaunchScreen.xib */; };
 		9ED9EC021BBC24AA007DEE61 /* GeorgiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC011BBC24AA007DEE61 /* GeorgiaTests.swift */; };
+		9ED9EC0C1BBC3104007DEE61 /* Publishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0B1BBC3104007DEE61 /* Publishers.swift */; };
+		9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		9ED9EBFB1BBC24AA007DEE61 /* GeorgiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeorgiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED9EC001BBC24AA007DEE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9ED9EC011BBC24AA007DEE61 /* GeorgiaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeorgiaTests.swift; sourceTree = "<group>"; };
+		9ED9EC0B1BBC3104007DEE61 /* Publishers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publishers.swift; sourceTree = "<group>"; };
+		9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,8 @@
 				9ED9EBF41BBC24AA007DEE61 /* LaunchScreen.xib */,
 				9ED9EBEA1BBC24AA007DEE61 /* Georgia.xcdatamodeld */,
 				9ED9EBE61BBC24AA007DEE61 /* Supporting Files */,
+				9ED9EC0B1BBC3104007DEE61 /* Publishers.swift */,
+				9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */,
 			);
 			path = Georgia;
 			sourceTree = "<group>";
@@ -215,7 +221,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ED9EC0C1BBC3104007DEE61 /* Publishers.swift in Sources */,
 				9ED9EBEE1BBC24AA007DEE61 /* ViewController.swift in Sources */,
+				9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */,
 				9ED9EBEC1BBC24AA007DEE61 /* Georgia.xcdatamodeld in Sources */,
 				9ED9EBE91BBC24AA007DEE61 /* AppDelegate.swift in Sources */,
 			);
