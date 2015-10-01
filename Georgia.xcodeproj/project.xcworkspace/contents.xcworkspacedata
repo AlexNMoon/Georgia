@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../Georgia/Article.swift">
-   </FileRef>
-   <FileRef
-      location = "group:../Georgia/Publisher.swift">
-   </FileRef>
-   <FileRef
       location = "self:Georgia.xcodeproj">
    </FileRef>
 </Workspace>

@@ -8,12 +8,13 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Publisher" representedClassName="Geogia.Publisher" syncable="YES">
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephone" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Publisher" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="Article" positionX="-54" positionY="18" width="128" height="120"/>
+        <element name="Publisher" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>
