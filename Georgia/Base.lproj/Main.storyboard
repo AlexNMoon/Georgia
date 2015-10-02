@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AHu-QT-Y6d">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -37,18 +38,62 @@
         <scene sceneID="U6c-Lf-fCY">
             <objects>
                 <tableViewController id="awb-3e-BlY" customClass="Publishers" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wr9-DK-wOh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wr9-DK-wOh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publishers cell" id="bGO-rc-d4l" customClass="PublishersCell" customModule="Georgia" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publishers cell" rowHeight="83" id="bGO-rc-d4l" customClass="PublishersCell" customModule="Georgia" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bGO-rc-d4l" id="xNm-mb-QKi">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-Yy-Hpl">
+                                            <rect key="frame" x="82" y="8" width="377" height="66"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="377" id="Bev-EV-UzB"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-QP-YSW">
+                                            <rect key="frame" x="536" y="27" width="29" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="29" id="JCM-y9-MxL"/>
+                                            </constraints>
+                                            <state key="normal">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="tapAddPublisherButton:" destination="bGO-rc-d4l" eventType="touchUpInside" id="jAn-7S-CRm"/>
+                                            </connections>
+                                        </button>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Xy-c5-o4N">
+                                            <rect key="frame" x="8" y="8" width="66" height="66"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="66" id="nlh-ot-WMQ"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7Xy-c5-o4N" firstAttribute="bottom" secondItem="Ixr-Yy-Hpl" secondAttribute="bottom" id="69R-N7-Bg0"/>
+                                        <constraint firstItem="Ixr-Yy-Hpl" firstAttribute="top" secondItem="xNm-mb-QKi" secondAttribute="topMargin" id="9OL-Rb-QZ4"/>
+                                        <constraint firstItem="hfD-QP-YSW" firstAttribute="top" secondItem="xNm-mb-QKi" secondAttribute="topMargin" constant="19" id="AmF-Uw-nTW"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hfD-QP-YSW" secondAttribute="bottom" constant="19" id="C4f-jh-10r"/>
+                                        <constraint firstItem="hfD-QP-YSW" firstAttribute="leading" secondItem="Ixr-Yy-Hpl" secondAttribute="trailing" constant="77" id="E1D-GJ-Uky"/>
+                                        <constraint firstItem="7Xy-c5-o4N" firstAttribute="top" secondItem="Ixr-Yy-Hpl" secondAttribute="top" id="TBR-l0-eqx"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="hfD-QP-YSW" secondAttribute="trailing" constant="27" id="TaB-2j-6xL"/>
+                                        <constraint firstItem="Ixr-Yy-Hpl" firstAttribute="leading" secondItem="7Xy-c5-o4N" secondAttribute="trailing" constant="8" id="dSI-BE-IgB"/>
+                                        <constraint firstItem="7Xy-c5-o4N" firstAttribute="leading" secondItem="xNm-mb-QKi" secondAttribute="leading" constant="8" id="fq1-xP-ScW"/>
+                                        <constraint firstItem="Ixr-Yy-Hpl" firstAttribute="bottom" secondItem="xNm-mb-QKi" secondAttribute="bottomMargin" id="qI9-xu-XVW"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="addPublisher" destination="hfD-QP-YSW" id="sTu-TZ-3a9"/>
+                                    <outlet property="logo" destination="7Xy-c5-o4N" id="q77-3w-ZYG"/>
+                                    <outlet property="name" destination="Ixr-Yy-Hpl" id="Mca-Uu-cE2"/>
                                     <segue destination="bGa-oY-MiU" kind="show" id="ebY-wa-7AH"/>
                                 </connections>
                             </tableViewCell>

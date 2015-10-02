@@ -35,8 +35,11 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs() {
-        addPublisher.setBackgroundImage(add, forState: UIControlState.Normal)
+    func setParametrs(publisher: Publishers) {
+        self.addPublisher.setBackgroundImage(add, forState: UIControlState.Normal)
+        self.name.text = "Mmmmmmm"
+        self.logo.image = add
+        //self.logo.sd_setImageWithURL(NSURL(string: publisher.logo as String))
     }
     
 }

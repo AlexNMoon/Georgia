@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/mozidevelopment/Desktop/Georgia/Publishers.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Categories.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/mozidevelopment/Desktop/Georgia/Articles.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Banners.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Georgia.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

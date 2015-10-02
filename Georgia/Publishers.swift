@@ -11,6 +11,8 @@ import CoreData
 
 class Publishers: UITableViewController {
     
+    var publishers = Publishers()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -25,7 +27,7 @@ class Publishers: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Publishers cell", forIndexPath: indexPath) as! PublishersCell
-        cell.name.text = "Mmmmmmm"
+        
         return cell
     }
 
