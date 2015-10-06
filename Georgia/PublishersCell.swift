@@ -35,7 +35,7 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs(publisher: Publishers) {
+    func setParametrs() {
         self.addPublisher.setBackgroundImage(add, forState: UIControlState.Normal)
         self.name.text = "Mmmmmmm"
         self.logo.image = add

@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Publisher View-->
         <scene sceneID="hEw-OY-JfO">
             <objects>
-                <viewController id="bGa-oY-MiU" sceneMemberID="viewController">
+                <viewController id="bGa-oY-MiU" customClass="PublisherView" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6gQ-dK-N1x"/>
                         <viewControllerLayoutGuide type="bottom" id="TF7-4D-rcd"/>
@@ -17,18 +17,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-y6-Rui">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iSf-y6-Rui">
                                 <rect key="frame" x="170" y="72" width="261" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="261" id="uhR-NN-0Ne"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-sG-BTG">
+                                <rect key="frame" x="218" y="101" width="164" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="lzY-2N-NLo"/>
+                                    <constraint firstAttribute="width" constant="164" id="uVw-8C-Rll"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6q-jw-XxA">
+                                <rect key="frame" x="16" y="284" width="568" height="215"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="Dvd-Bp-Sbd"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aiJ-sG-BTG">
-                                <rect key="frame" x="218" y="101" width="164" height="128"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u6q-jw-XxA" firstAttribute="top" secondItem="aiJ-sG-BTG" secondAttribute="bottom" constant="55" id="6Ao-Nw-8Vw"/>
+                            <constraint firstItem="TF7-4D-rcd" firstAttribute="top" secondItem="u6q-jw-XxA" secondAttribute="bottom" constant="101" id="6dW-L2-33g"/>
+                            <constraint firstItem="u6q-jw-XxA" firstAttribute="trailing" secondItem="WUu-dZ-3j8" secondAttribute="trailingMargin" id="8El-Dt-vEM"/>
+                            <constraint firstItem="iSf-y6-Rui" firstAttribute="centerX" secondItem="aiJ-sG-BTG" secondAttribute="centerX" id="R56-Gc-3kC"/>
+                            <constraint firstItem="iSf-y6-Rui" firstAttribute="top" secondItem="6gQ-dK-N1x" secondAttribute="bottom" constant="8" symbolic="YES" id="XsK-KW-tj1"/>
+                            <constraint firstItem="iSf-y6-Rui" firstAttribute="centerX" secondItem="u6q-jw-XxA" secondAttribute="centerX" id="kZ8-dU-OhT"/>
+                            <constraint firstItem="u6q-jw-XxA" firstAttribute="leading" secondItem="WUu-dZ-3j8" secondAttribute="leadingMargin" id="qeQ-E0-lXt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textLable" destination="u6q-jw-XxA" id="1uK-jZ-HjN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxt-hz-vsR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -37,7 +65,7 @@
         <!--Publishers-->
         <scene sceneID="U6c-Lf-fCY">
             <objects>
-                <tableViewController id="awb-3e-BlY" customClass="Publishers" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="awb-3e-BlY" customClass="PublishersView" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wr9-DK-wOh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +83,7 @@
                                                 <constraint firstAttribute="width" constant="377" id="Bev-EV-UzB"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfD-QP-YSW">

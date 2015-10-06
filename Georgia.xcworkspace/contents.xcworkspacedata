@@ -2,16 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/mozidevelopment/Desktop/Georgia/Publishers.swift">
+      location = "group:Georgia/Publishers.swift">
    </FileRef>
    <FileRef
-      location = "group:Categories.swift">
+      location = "group:Georgia/Banners.swift">
    </FileRef>
    <FileRef
-      location = "group:/Users/mozidevelopment/Desktop/Georgia/Articles.swift">
+      location = "group:Georgia/Categories.swift">
    </FileRef>
    <FileRef
-      location = "group:Banners.swift">
+      location = "group:Georgia/Articles.swift">
    </FileRef>
    <FileRef
       location = "group:Georgia.xcodeproj">

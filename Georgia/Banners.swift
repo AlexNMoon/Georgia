@@ -2,7 +2,7 @@
 //  Banners.swift
 //  
 //
-//  Created by MOZI Development on 10/2/15.
+//  Created by MOZI Development on 10/6/15.
 //
 //
 
@@ -12,9 +12,9 @@ import CoreData
 class Banners: NSManagedObject {
 
     @NSManaged var bannerId: NSNumber
-    @NSManaged var title: String
+    @NSManaged var count: NSNumber
     @NSManaged var image: String
     @NSManaged var link: String
-    @NSManaged var count: NSNumber
+    @NSManaged var title: String
 
 }

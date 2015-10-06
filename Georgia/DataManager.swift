@@ -7,13 +7,20 @@
 //
 
 import Foundation
+import CoreData
 
 class DataManager {
     
     let api = API()
     
-    func getData(completionHandler: (publishers: Publishers, categories: Categories, article: Articles, banners: Banners) -> Void) {
-        
+    func getText(completionHandler: (text: String) -> Void) {
+        api.searchFor(.Text, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+            if let textDictionary = JSONDictionary["data"] as? NSDictionary {
+                if let text = textDictionary["full_description"] as? String {
+                completionHandler(text: text)
+                }
+            }
+        })
     }
 
 }

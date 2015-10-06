@@ -2,7 +2,7 @@
 //  Categories.swift
 //  
 //
-//  Created by MOZI Development on 10/2/15.
+//  Created by MOZI Development on 10/6/15.
 //
 //
 
@@ -11,10 +11,10 @@ import CoreData
 
 class Categories: NSManagedObject {
 
-    @NSManaged var categoriesId: NSNumber
-    @NSManaged var title: String
     @NSManaged var categIsDeleted: NSNumber
+    @NSManaged var categoriesId: NSNumber
     @NSManaged var isSelected: NSNumber
+    @NSManaged var title: String
     @NSManaged var catArticles: NSSet
 
 }
