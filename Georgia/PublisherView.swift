@@ -11,16 +11,14 @@ import UIKit
 class PublisherView: UIViewController {
     
     let dataManager = DataManager()
-    
-    @IBOutlet weak var textLable: UILabel!
+   
+    @IBOutlet weak var text: UITextView!
     
     override func viewDidLoad() {
         dataManager.getText({ (text: String) -> Void in
-            
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.textLable.text = text
+                self.text.text = text
             })
-            println("text\(text)")
         })
     }
 

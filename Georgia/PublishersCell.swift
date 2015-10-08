@@ -9,6 +9,8 @@
 import UIKit
 
 class PublishersCell: UITableViewCell {
+    
+    let dataManager = DataManager()
 
     @IBOutlet weak var addPublisher: UIButton!
     
@@ -37,9 +39,7 @@ class PublishersCell: UITableViewCell {
     
     func setParametrs() {
         self.addPublisher.setBackgroundImage(add, forState: UIControlState.Normal)
-        self.name.text = "Mmmmmmm"
-        self.logo.image = add
-        //self.logo.sd_setImageWithURL(NSURL(string: publisher.logo as String))
+        dataManager.getPublishers( {(id: Int, name: String) -> Void in})
     }
     
 }

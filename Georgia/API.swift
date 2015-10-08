@@ -16,14 +16,22 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case Articles
         case Text
         case Categories
+        case Publishers
         
     }
     
     func searchFor(urltipe: urlTipe, completionHandler: (JSONDictionary: NSDictionary) -> Void) {
         var JSONDictionary: NSDictionary!
-        var searchTerm = "http://46.101.211.105"
-        if urltipe == urlTipe.Text {
-            searchTerm += "/v1/articles/text/2"
+        var searchTerm: String
+        switch urltipe {
+        case .Text:
+            searchTerm = "http://46.101.211.105/v1/articles/text/2"
+        case .Articles:
+            searchTerm = "http://46.101.211.105/v1/articles"
+        case .Publishers:
+           searchTerm = "http://46.101.211.105/v1/publishers"
+        default:
+           searchTerm = "http://46.101.211.105"
         }
         let url = NSURL(string: searchTerm)
         var request1: NSURLRequest = NSURLRequest(URL: url!)

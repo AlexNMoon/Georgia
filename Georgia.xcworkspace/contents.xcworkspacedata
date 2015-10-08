@@ -5,10 +5,10 @@
       location = "group:Georgia/Publishers.swift">
    </FileRef>
    <FileRef
-      location = "group:Georgia/Banners.swift">
+      location = "group:Georgia/Categories.swift">
    </FileRef>
    <FileRef
-      location = "group:Georgia/Categories.swift">
+      location = "group:Georgia/Banners.swift">
    </FileRef>
    <FileRef
       location = "group:Georgia/Articles.swift">
