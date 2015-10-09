@@ -37,9 +37,14 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs() {
+    func setParametrs(index: Int) {
         self.addPublisher.setBackgroundImage(add, forState: UIControlState.Normal)
-        dataManager.getPublishers( {(id: Int, name: String) -> Void in})
+        dataManager.getPublishers(index, completionHandler: {(id: Int, name: String, logoUrl: String) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+                self.name.text = name
+            })
+        })
     }
     
 }
