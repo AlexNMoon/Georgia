@@ -11,13 +11,12 @@ import CoreData
 
 class PublishersView: UITableViewController {
     
-    
-    
     let dataManager = DataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,5 +32,10 @@ class PublishersView: UITableViewController {
         cell.setParametrs(indexPath.item)
         return cell
     }
-        
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+    }
+    
 }

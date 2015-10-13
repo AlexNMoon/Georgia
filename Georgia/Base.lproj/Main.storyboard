@@ -180,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Articles Cell" rowHeight="126" id="mgT-w3-4C0" customClass="ArticlesCell" customModule="Georgia" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Articles Cell" rowHeight="126" id="mgT-w3-4C0" customClass="ArticlesCell" customModule="Georgia" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mgT-w3-4C0" id="A9y-I8-ZyL">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -197,7 +197,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPF-Sa-lnx">
+                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xPF-Sa-lnx">
                                             <rect key="frame" x="114" y="24" width="478" height="53"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -221,7 +221,7 @@
                                     <outlet property="articleImage" destination="vP6-2G-AEC" id="QFs-re-DTq"/>
                                     <outlet property="pablisher" destination="e3A-Zh-rqf" id="dZz-DA-Qng"/>
                                     <outlet property="title" destination="xPF-Sa-lnx" id="n95-np-Xr9"/>
-                                    <segue destination="Mft-R0-JZg" kind="show" id="nWV-iA-ncj"/>
+                                    <segue destination="Xoc-jT-Dj7" kind="show" id="hle-m7-86c"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -250,29 +250,31 @@
             </objects>
             <point key="canvasLocation" x="1435" y="-128"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="Idj-kb-0ZU">
+        <!--Article View-->
+        <scene sceneID="xw2-uW-hCm">
             <objects>
-                <viewController id="Mft-R0-JZg" sceneMemberID="viewController">
+                <viewController id="Xoc-jT-Dj7" customClass="ArticleView" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="duI-RN-aPw"/>
-                        <viewControllerLayoutGuide type="bottom" id="1z0-N8-GsX"/>
+                        <viewControllerLayoutGuide type="top" id="gRf-Bw-Xd3"/>
+                        <viewControllerLayoutGuide type="bottom" id="yO2-3B-DgG"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TF1-8Q-ozM">
+                    <view key="view" contentMode="scaleToFill" id="rxe-xU-fRv">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UOx-Zj-mXD"/>
+                    <navigationItem key="navigationItem" id="hgf-S0-q0y">
+                        <barButtonItem key="rightBarButtonItem" image="article_share_icon@3x.png" id="SyN-7R-UeN"/>
+                    </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="g0q-lj-bt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mzn-9V-j02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2135" y="-128"/>
+            <point key="canvasLocation" x="2145" y="-128"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View-->
         <scene sceneID="c0x-Nf-eqQ">
             <objects>
-                <viewController id="oRS-Dy-IQx" sceneMemberID="viewController">
+                <viewController id="oRS-Dy-IQx" customClass="SettingsView" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZp-E7-DUp"/>
                         <viewControllerLayoutGuide type="bottom" id="s9C-bk-zm1"/>
@@ -282,10 +284,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="46C-w8-GdD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYf-P2-t62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2135" y="592"/>
+            <point key="canvasLocation" x="2072" y="584"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Eck-43-zyQ">
@@ -305,6 +308,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="article_share_icon@3x.png" width="53" height="53"/>
         <image name="feed_filter_icon@3x.png" width="56" height="56"/>
         <image name="feed_settings_icon@3x.png" width="56" height="56"/>
         <image name="publishers_add_icon@3x.png" width="96" height="97"/>

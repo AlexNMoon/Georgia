@@ -10,19 +10,17 @@ import UIKit
 
 class ArticlesView: UITableViewController {
     
-    var backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button@3x.png"), style: .Plain, target: nil, action: nil)
-    
     @IBOutlet var filters: UIBarButtonItem!
     
     @IBOutlet var settings: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.rightBarButtonItems = [self.filters, self.settings] as [AnyObject]
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        navigationItem.title = "News Feed"
-        navigationItem.backBarButtonItem = backButton
+        self.navigationItem.rightBarButtonItems = [self.filters, self.settings] as [AnyObject]
+        self.navigationItem.title = "News Feed"
+        var backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button@3x.png"), style: .Plain, target: self, action: "closeView")
+        self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.setHidesBackButton(false, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,6 +35,15 @@ class ArticlesView: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
         cell.setParametrs()
         return cell
+    }
+    
+    func closeView() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
     }
     
 }
