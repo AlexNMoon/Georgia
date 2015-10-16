@@ -17,6 +17,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case Text
         case Categories
         case Publishers
+        case Banners
         
     }
     
@@ -25,13 +26,15 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         var searchTerm: String
         switch urltipe {
         case .Text:
-            searchTerm = "http://46.101.211.105/v1/articles/text/2"
+            searchTerm = "http://188.166.95.235/v1/articles/text/2"
         case .Articles:
-            searchTerm = "http://46.101.211.105/v1/articles"
+            searchTerm = "http://188.166.95.235/v1/articles"
         case .Publishers:
-           searchTerm = "http://46.101.211.105/v1/publishers"
+           searchTerm = "http://188.166.95.235/v1/publishers"
+        case .Banners:
+            searchTerm = "http://46.101.211.105/v1/banners"
         default:
-           searchTerm = "http://46.101.211.105"
+           searchTerm = "http://188.166.95.235"
         }
         let url = NSURL(string: searchTerm)
         var request1: NSURLRequest = NSURLRequest(URL: url!)

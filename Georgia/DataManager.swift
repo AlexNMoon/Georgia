@@ -30,7 +30,7 @@ class DataManager {
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 if let articleData = data[0] as? NSDictionary {
                     if let title = articleData["title"] as? String {
-                        completionHandler(id: articleData["id"] as! Int, title: NSAttributedString(data: title.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string)
+                        completionHandler(id: articleData["id"] as! Int, title: title)
                     }
                 }
             }
@@ -47,7 +47,22 @@ class DataManager {
                 }
             }
         })
-        
+    }
+    
+    func getBanners(completitionHandler: (image: UIImage) ->  Void) {
+        api.searchFor(.Banners, completionHandler: { ( JSONDictionary: NSDictionary) -> Void in
+            if let data = JSONDictionary["data"] as? [AnyObject] {
+                if data.count == 0 {
+                    completitionHandler(image: UIImage(named: "launch_background.png")!)
+                } else {
+                    if let bannerData = data[0] as? NSDictionary {
+                        if let image = bannerData["image"] as? String {
+                            completitionHandler(image: UIImage(named: image)!)
+                        }
+                    }
+                }
+            }
+        })
     }
     
     
