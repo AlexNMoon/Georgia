@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3B6ABF9EDCECA7B7CDAF01DD /* libPods-Georgia.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E64F68DCAA39C8D409F3C0 /* libPods-Georgia.a */; };
+		9E00C8FD1BD52ED500D9539F /* publisher_location_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00C8FA1BD52ED500D9539F /* publisher_location_icon@3x.png */; };
+		9E00C8FE1BD52ED500D9539F /* publisher_mail_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00C8FB1BD52ED500D9539F /* publisher_mail_icon@3x.png */; };
+		9E00C8FF1BD52ED500D9539F /* publisher_phone_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E00C8FC1BD52ED500D9539F /* publisher_phone_icon@3x.png */; };
 		9E3D5F371BC55B11005CF2B8 /* launch_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E3D5F361BC55B11005CF2B8 /* launch_background.png */; };
 		9E3D5F391BC55F92005CF2B8 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3D5F381BC55F92005CF2B8 /* Articles.swift */; };
 		9E3D5F3B1BC55F98005CF2B8 /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3D5F3A1BC55F98005CF2B8 /* Categories.swift */; };
@@ -54,6 +57,9 @@
 		376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.debug.xcconfig"; sourceTree = "<group>"; };
 		39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.release.xcconfig"; sourceTree = "<group>"; };
 		46E64F68DCAA39C8D409F3C0 /* libPods-Georgia.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Georgia.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E00C8FA1BD52ED500D9539F /* publisher_location_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "publisher_location_icon@3x.png"; sourceTree = "<group>"; };
+		9E00C8FB1BD52ED500D9539F /* publisher_mail_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "publisher_mail_icon@3x.png"; sourceTree = "<group>"; };
+		9E00C8FC1BD52ED500D9539F /* publisher_phone_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "publisher_phone_icon@3x.png"; sourceTree = "<group>"; };
 		9E3D5F361BC55B11005CF2B8 /* launch_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_background.png; sourceTree = "<group>"; };
 		9E3D5F381BC55F92005CF2B8 /* Articles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
 		9E3D5F3A1BC55F98005CF2B8 /* Categories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
@@ -141,6 +147,9 @@
 		9ED9EBE51BBC24AA007DEE61 /* Georgia */ = {
 			isa = PBXGroup;
 			children = (
+				9E00C8FC1BD52ED500D9539F /* publisher_phone_icon@3x.png */,
+				9E00C8FB1BD52ED500D9539F /* publisher_mail_icon@3x.png */,
+				9E00C8FA1BD52ED500D9539F /* publisher_location_icon@3x.png */,
 				9E4F09C71BCBE8C000E8B99D /* feed_back_button@3x.png */,
 				9EBC83931BCD18E0005A671C /* filters_close_button@3x.png */,
 				9E4F09C91BCBE8C000E8B99D /* feed_settings_icon@3x.png */,
@@ -298,6 +307,9 @@
 				9EBC83981BCD27AB005A671C /* article_share_icon@3x.png in Resources */,
 				9ECC9F811BC40C34004400C9 /* launch_logo@3x.png in Resources */,
 				9E4F09C61BCBE5B100E8B99D /* publishers_new_icon@3x.png in Resources */,
+				9E00C8FE1BD52ED500D9539F /* publisher_mail_icon@3x.png in Resources */,
+				9E00C8FD1BD52ED500D9539F /* publisher_location_icon@3x.png in Resources */,
+				9E00C8FF1BD52ED500D9539F /* publisher_phone_icon@3x.png in Resources */,
 				9E4F09CC1BCBE8C000E8B99D /* feed_settings_icon@3x.png in Resources */,
 				9E4F09CB1BCBE8C000E8B99D /* feed_filter_icon@3x.png in Resources */,
 				9E515F341BBD7A75004FF58E /* publishers_add_icon@3x.png in Resources */,
