@@ -32,7 +32,9 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case .Publishers:
            searchTerm = "http://188.166.95.235/v1/publishers"
         case .Banners:
-            searchTerm = "http://46.101.211.105/v1/banners"
+            searchTerm = "http://188.166.95.235/v1/banners"
+        case .Categories:
+            searchTerm = "http://188.166.95.235/v1/categories"
         default:
            searchTerm = "http://188.166.95.235"
         }

@@ -7,10 +7,9 @@
 //
 
 import UIKit
+import CoreData
 
 class PublishersCell: UITableViewCell {
-    
-    let dataManager = DataManager()
 
     @IBOutlet weak var addPublisher: UIButton!
     
@@ -42,15 +41,12 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs(index: Int) {
+    func setParametrs(publisher: NSManagedObject) {
         self.addPublisher.setBackgroundImage(new, forState: UIControlState.Normal)
         addPublisher.tintColor = UIColor.clearColor()
-        dataManager.getPublishers(index, completionHandler: {(id: Int, name: String, logoUrl: String) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
-                self.name.text = name
-            })
-        })
+        if let logoUrl = publisher.valueForKey("logo") as? String {
+            
+        }
     }
     
 }

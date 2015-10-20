@@ -32,6 +32,7 @@
         <relationship name="catArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="category" inverseEntity="Articles" syncable="YES"/>
     </entity>
     <entity name="Publishers" representedClassName="Geogia.Publishers" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -41,15 +42,15 @@
         <attribute name="publidherId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="publIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="telephone" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="publisher" inverseEntity="Articles" syncable="YES"/>
     </entity>
     <elements>
         <element name="Articles" positionX="142" positionY="-9" width="128" height="268"/>
-        <element name="Publishers" positionX="-65" positionY="131" width="128" height="238"/>
-        <element name="Categories" positionX="-65" positionY="-9" width="128" height="118"/>
         <element name="Banners" positionX="142" positionY="285" width="128" height="118"/>
+        <element name="Categories" positionX="-65" positionY="-9" width="128" height="118"/>
+        <element name="Publishers" positionX="-65" positionY="131" width="128" height="255"/>
     </elements>
 </model>

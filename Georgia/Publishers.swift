@@ -20,9 +20,10 @@ class Publishers: NSManagedObject {
     @NSManaged var publidherId: NSNumber
     @NSManaged var publIsDeleted: NSNumber
     @NSManaged var site: String
-    @NSManaged var telephone: NSNumber
+    @NSManaged var telephone: String
     @NSManaged var updatedAt: NSNumber
     @NSManaged var url: String
     @NSManaged var pubArticles: NSSet
+    @NSManaged var address: String
 
 }
