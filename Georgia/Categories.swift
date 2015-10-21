@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Categories)
+
 class Categories: NSManagedObject {
 
     @NSManaged var categIsDeleted: NSNumber

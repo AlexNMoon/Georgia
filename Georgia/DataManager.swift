@@ -28,9 +28,11 @@ class DataManager {
     func getArticles(completionHandler: (id: Int, title: String) -> Void) {
         api.searchFor(.Articles, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
             if let data = JSONDictionary["data"] as? [AnyObject] {
+                if data.count > 0 {
                 if let articleData = data[0] as? NSDictionary {
                     if let title = articleData["title"] as? String {
                         completionHandler(id: articleData["id"] as! Int, title: title)
+                    }
                     }
                 }
             }
@@ -38,7 +40,11 @@ class DataManager {
     }
     
     func getPublishers(completionHandler: (publishers: [NSManagedObject]) -> Void) {
-        let fetchRequest = NSFetchRequest(entityName: "Publishers")
+        let entityDescription =
+            NSEntityDescription.entityForName("Publishers",
+                inManagedObjectContext: managedObjectContext!)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
         let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
         let publishers = results as! [NSManagedObject]
         api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
@@ -46,7 +52,7 @@ class DataManager {
                 let entity = NSEntityDescription.entityForName("Publishers", inManagedObjectContext: self.managedObjectContext!)
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
-                        let publisher = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext)
+                        let publisher = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Publishers
                         if let publisherData = data[index] as? NSDictionary{
                             if let address = publisherData["address"] as? String {
                                 publisher.setValue(NSAttributedString(data: address.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string, forKey: "address")
@@ -78,15 +84,20 @@ class DataManager {
                             if let createdAt = publisherData["created_at"] as? Int {
                                 publisher.setValue(createdAt, forKey: "createdAt")
                             }
-                            if let updetedAt = publisherData["updated_at"] as? Int {
-                                publisher.setValue(updetedAt, forKey: "updetedAt")
+                            if let updatedAt = publisherData["updated_at"] as? Int {
+                                publisher.setValue(updatedAt, forKey: "updatedAt")
                             }
                         }
                     }
+                    self.managedObjectContext?.save(nil)
+                    let publishersFirstDownload = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [NSManagedObject]
+                    completionHandler(publishers: publishersFirstDownload)
+                } else {
+                    completionHandler(publishers: publishers)
                 }
             }
         })
-        managedObjectContext?.save(nil)
+        
     }
     
     func getBanners(completitionHandler: (image: UIImage) ->  Void) {

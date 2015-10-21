@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Articles)
+
 class Articles: NSManagedObject {
 
     @NSManaged var articleId: NSNumber

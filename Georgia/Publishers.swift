@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Publishers)
+
 class Publishers: NSManagedObject {
 
     @NSManaged var createdAt: NSNumber

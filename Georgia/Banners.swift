@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Banners)
+
 class Banners: NSManagedObject {
 
     @NSManaged var bannerId: NSNumber

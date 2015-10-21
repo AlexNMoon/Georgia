@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Articles" representedClassName="Geogia.Articles" syncable="YES">
+    <entity name="Articles" representedClassName="Articles" syncable="YES">
         <attribute name="articleId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="articleIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -17,21 +17,21 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categories" inverseName="catArticles" inverseEntity="Categories" syncable="YES"/>
         <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publishers" inverseName="pubArticles" inverseEntity="Publishers" syncable="YES"/>
     </entity>
-    <entity name="Banners" representedClassName="Geogia.Banners" syncable="YES">
+    <entity name="Banners" representedClassName="Banners" syncable="YES">
         <attribute name="bannerId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="count" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Categories" representedClassName="Geogia.Categories" syncable="YES">
+    <entity name="Categories" representedClassName="Categories" syncable="YES">
         <attribute name="categIsDeleted" attributeType="Boolean" syncable="YES"/>
         <attribute name="categoriesId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="catArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="category" inverseEntity="Articles" syncable="YES"/>
     </entity>
-    <entity name="Publishers" representedClassName="Geogia.Publishers" syncable="YES">
+    <entity name="Publishers" representedClassName="Publishers" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,6 +51,6 @@
         <element name="Articles" positionX="142" positionY="-9" width="128" height="268"/>
         <element name="Banners" positionX="142" positionY="285" width="128" height="118"/>
         <element name="Categories" positionX="-65" positionY="-9" width="128" height="118"/>
-        <element name="Publishers" positionX="-65" positionY="131" width="128" height="255"/>
+        <element name="Publishers" positionX="-65" positionY="131" width="128" height="253"/>
     </elements>
 </model>

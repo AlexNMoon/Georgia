@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class PublisherView: UIViewController {
     
-    let dataManager = DataManager()
+    var publisher: NSManagedObject!
    
     @IBOutlet weak var name: UILabel!
     
@@ -27,19 +28,26 @@ class PublisherView: UIViewController {
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        dataManager.getPublishers(0, completionHandler: {(id: Int, name: String, logoUrl: String) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.name.text = name
-                self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
-            })
-        })
-        dataManager.getText({ (text: String) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.text.text = text
-                let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
-                self.textHeightConstraint.constant = size.height
-            })
-        })
+        if let logoUrl = publisher.valueForKey("logo") as? String {
+            self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+        }
+        if let name = publisher.valueForKey("name") as? String {
+            self.name.text = name
+        }
+        if let text = publisher.valueForKey("description") as? String {
+            self.text.text = text
+            let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
+            self.textHeightConstraint.constant = size.height
+        }
+        if let address = publisher.valueForKey("address") as? String {
+            self.address.text = address
+        }
+        if let mail = publisher.valueForKey("mail") as? String {
+            self.mail.text = mail
+        }
+        if let phone = publisher.valueForKey("telephone") as? String {
+            self.phone.text = phone
+        }
         var backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button@3x.png"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)
