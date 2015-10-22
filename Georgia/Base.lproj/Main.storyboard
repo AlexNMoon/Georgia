@@ -319,6 +319,9 @@
                     <navigationItem key="navigationItem" id="wte-fv-NbY">
                         <barButtonItem key="leftBarButtonItem" title="Select All" id="gHz-DM-LZX">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="tapSelectAll:" destination="awb-3e-BlY" id="evl-dT-sxs"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="View Selected" id="TNj-zz-VGo">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -327,6 +330,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="selectAll" destination="gHz-DM-LZX" id="jg4-jr-E6y"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNF-4r-hH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

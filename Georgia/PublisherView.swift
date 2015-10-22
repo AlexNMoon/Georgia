@@ -28,26 +28,6 @@ class PublisherView: UIViewController {
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        if let logoUrl = publisher.valueForKey("logo") as? String {
-            self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
-        }
-        if let name = publisher.valueForKey("name") as? String {
-            self.name.text = name
-        }
-        if let text = publisher.valueForKey("description") as? String {
-            self.text.text = text
-            let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
-            self.textHeightConstraint.constant = size.height
-        }
-        if let address = publisher.valueForKey("address") as? String {
-            self.address.text = address
-        }
-        if let mail = publisher.valueForKey("mail") as? String {
-            self.mail.text = mail
-        }
-        if let phone = publisher.valueForKey("telephone") as? String {
-            self.phone.text = phone
-        }
         var backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button@3x.png"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -60,6 +40,26 @@ class PublisherView: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        if let logoUrl = publisher.valueForKey("logo") as? String {
+            self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+        }
+        if let name = publisher.valueForKey("name") as? String {
+            self.name.text = name
+        }
+        if let text = publisher.valueForKey("publDescription") as? String {
+            self.text.text = text
+            let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
+            self.textHeightConstraint.constant = size.height
+        }
+        if let address = publisher.valueForKey("address") as? String {
+            self.address.text = address
+        }
+        if let mail = publisher.valueForKey("email") as? String {
+            self.mail.text = mail
+        }
+        if let phone = publisher.valueForKey("telephone") as? String {
+            self.phone.text = phone
+        }
     }
     
 }

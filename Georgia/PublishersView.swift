@@ -11,11 +11,19 @@ import CoreData
 
 class PublishersView: UITableViewController {
     
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
     let dataManager = DataManager()
     
     var publishers = [NSManagedObject]()
     
-    var indexOfSelectedCell = 0
+    var indexOfSelectedCell: Int!
+    
+    @IBOutlet weak var selectAll: UIBarButtonItem!
+    
+    let added = UIImage(named: "publishers_added_icon@3x.png")
+    
+    let add = UIImage(named: "publishers_add_icon@3x.png")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +48,7 @@ class PublishersView: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Publishers cell", forIndexPath: indexPath) as! PublishersCell
         if publishers.count > 0 {
-            cell.setParametrs(publishers[indexPath.item])
+            cell.setParametrs(publishers[indexPath.row])
         }
         return cell
     }
@@ -57,8 +65,33 @@ class PublishersView: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        indexOfSelectedCell = indexPath.item
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        indexOfSelectedCell = indexPath.row
+        return indexPath
     }
+    
+    @IBAction func tapSelectAll(sender: AnyObject) {
+        if selectAll.title == "Select All" {
+            for index in 0 ..< publishers.count {
+                if publishers[index].valueForKey("isSelected") as? Int != 1 {
+                    publishers[index].setValue(1, forKey: "isSelected")
+                }
+            }
+            self.selectAll.title = "Unselect All"
+        } else {
+            if selectAll.title == "Unselect All" {
+                for index in 0 ..< publishers.count {
+                    if publishers[index].valueForKey("isSelected") as? Int == 1 {
+                        publishers[index].setValue(0, forKey: "isSelected")
+                    }
+                }
+                self.selectAll.title = "Select All"
+            }
+        }
+        self.tableView.reloadData()
+        self.managedObjectContext?.save(nil)
+    }
+    
+    
     
 }

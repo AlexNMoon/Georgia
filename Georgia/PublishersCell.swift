@@ -25,27 +25,22 @@ class PublishersCell: UITableViewCell {
     
     let new = UIImage(named: "publishers_new_icon@3x.png")
     
-    var publisher = NSManagedObject()
+    var publisher: NSManagedObject!
 
     @IBAction func tapAddPublisherButton(sender: AnyObject) {
-        addPublisher.setBackgroundImage(nil, forState: UIControlState.Normal)
-        if publisher.valueForKey("isSelected") as? Int == 0 {
-            self.publisherIsSelected()
-            publisher.setValue(1, forKey: "isSelected")
-            managedObjectContext?.save(nil)
+        if publisher.valueForKey("isSelected") as? Int == 1 {
+            self.publiserIsUnselected()
+            self.publisherUnselectedCoreData()
         } else {
-            if publisher.valueForKey("isSelected") as? Int == 1 {
-                self.publiserIsNotSelected()
-                publisher.setValue(0, forKey: "isSelected")
-                managedObjectContext?.save(nil)
-            }
+            self.publisherIsSelected()
+            self.publisherSelectedCoreData()
         }
     }
     
     func setParametrs(publisher: NSManagedObject) {
         self.publisher = publisher
         if publisher.valueForKey("isSelected") as? Int == 0 {
-            self.publiserIsNotSelected()
+            self.publiserIsUnselected()
         } else {
             if publisher.valueForKey("isSelected") as? Int == 1 {
                 self.publisherIsSelected()
@@ -60,15 +55,25 @@ class PublishersCell: UITableViewCell {
     }
     
     func publisherIsSelected() {
-        addPublisher.setImage(add, forState: UIControlState.Normal)
-        addPublisher.tintColor = UIColor.grayColor()
-    }
-    
-    func publiserIsNotSelected() {
         addPublisher.setImage(added, forState: UIControlState.Normal)
-        addPublisher.tintColor = UIColor.cyanColor()
+        addPublisher.tintColor = UIColor.grayColor()
+        addPublisher.imageEdgeInsets = UIEdgeInsetsMake(0, addPublisher.frame.size.width - (added!.size.width), 0, 0)
     }
     
-
+    func publiserIsUnselected() {
+        addPublisher.setImage(add, forState: UIControlState.Normal)
+        addPublisher.tintColor = UIColor.cyanColor()
+        addPublisher.imageEdgeInsets = UIEdgeInsetsMake(0, addPublisher.frame.size.width - (add!.size.width), 0, 0)
+    }
+    
+    func publisherSelectedCoreData() {
+        publisher.setValue(1, forKey: "isSelected")
+        managedObjectContext?.save(nil)
+    }
+    
+    func publisherUnselectedCoreData() {
+        publisher.setValue(0, forKey: "isSelected")
+        managedObjectContext?.save(nil)
+    }
     
 }

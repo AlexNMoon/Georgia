@@ -14,14 +14,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_logo@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="9aJ-5V-t2m">
-                    <rect key="frame" x="176" y="190" width="128" height="128"/>
+                    <rect key="frame" x="176" y="176" width="128" height="128"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="128" id="V2l-8X-Zzg"/>
                         <constraint firstAttribute="width" constant="128" id="ZuW-MW-u4R"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Best News from Georgia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RiW-Mp-4OE">
-                    <rect key="frame" x="127" y="326" width="226" height="31"/>
+                    <rect key="frame" x="127" y="312" width="226" height="31"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="226" id="FMC-hp-WqU"/>
                         <constraint firstAttribute="height" constant="31" id="eDU-fF-2Lc"/>
@@ -37,7 +37,7 @@
                 <constraint firstItem="siL-AW-0e8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IpY-Am-T91"/>
                 <constraint firstAttribute="trailing" secondItem="siL-AW-0e8" secondAttribute="trailing" id="ODc-Rz-Vus"/>
                 <constraint firstAttribute="bottom" secondItem="siL-AW-0e8" secondAttribute="bottom" id="WGR-Hm-2NZ"/>
-                <constraint firstItem="9aJ-5V-t2m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="190" id="eAj-v6-ejJ"/>
+                <constraint firstItem="9aJ-5V-t2m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="176" id="eAj-v6-ejJ"/>
                 <constraint firstItem="siL-AW-0e8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jLJ-ey-lYB"/>
                 <constraint firstItem="RiW-Mp-4OE" firstAttribute="centerX" secondItem="9aJ-5V-t2m" secondAttribute="centerX" id="oQk-F0-Rcq"/>
                 <constraint firstItem="RiW-Mp-4OE" firstAttribute="top" secondItem="9aJ-5V-t2m" secondAttribute="bottom" constant="8" symbolic="YES" id="qNW-hP-gxC"/>

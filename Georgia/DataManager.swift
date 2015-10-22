@@ -34,6 +34,8 @@ class DataManager {
                         completionHandler(id: articleData["id"] as! Int, title: title)
                     }
                     }
+                } else {
+                    completionHandler(id: 0, title: "")
                 }
             }
         })
@@ -92,9 +94,9 @@ class DataManager {
                     self.managedObjectContext?.save(nil)
                     let publishersFirstDownload = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [NSManagedObject]
                     completionHandler(publishers: publishersFirstDownload)
-                } else {
-                    completionHandler(publishers: publishers)
-                }
+                } 
+            } else {
+                completionHandler(publishers: publishers)
             }
         })
         
