@@ -45,6 +45,7 @@ class PublisherView: UIViewController {
         }
         if let name = publisher.valueForKey("name") as? String {
             self.name.text = name
+            self.navigationItem.title = name
         }
         if let text = publisher.valueForKey("publDescription") as? String {
             self.text.text = text
@@ -59,6 +60,27 @@ class PublisherView: UIViewController {
         }
         if let phone = publisher.valueForKey("telephone") as? String {
             self.phone.text = phone
+        }
+    }
+    
+    @IBAction func tapGoToWebSiteButton(sender: AnyObject) {
+        if let url = self.publisher.valueForKey("site") as? String {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        } else {
+            println("there is no web site")
+        }
+    }
+    
+    @IBAction func tapAddress(sender: AnyObject) {
+    }
+    
+    @IBAction func tapMail(sender: AnyObject) {
+    }
+    
+    @IBAction func tapPhone(sender: AnyObject) {
+        if let phone = self.publisher.valueForKey("telephone") as? String {
+            let url = "tel://" + phone.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }
     }
     

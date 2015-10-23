@@ -12,7 +12,7 @@ class SettingsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "About program"
+        self.navigationItem.title = "About Application"
         var backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button@3x.png"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)

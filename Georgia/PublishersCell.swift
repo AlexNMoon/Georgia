@@ -12,6 +12,8 @@ import CoreData
 class PublishersCell: UITableViewCell {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var selectAll: UIBarButtonItem!
 
     @IBOutlet weak var addPublisher: UIButton!
     
@@ -34,6 +36,9 @@ class PublishersCell: UITableViewCell {
         } else {
             self.publisherIsSelected()
             self.publisherSelectedCoreData()
+            if self.selectAll.title == "Select All" {
+                self.selectAll.title = "Unselect All"
+            }
         }
     }
     

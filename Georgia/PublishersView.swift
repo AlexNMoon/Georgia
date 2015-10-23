@@ -32,6 +32,12 @@ class PublishersView: UITableViewController {
         self.dataManager.getPublishers({(publishers: [NSManagedObject]) -> Void in
             self.publishers = publishers
             dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                for index in 0 ..< publishers.count {
+                    if publishers[index].valueForKey("isSelected") as? Int == 1 {
+                        self.selectAll.title = "Unselect All"
+                        break
+                    }
+                }
                 self.tableView!.reloadData()
             })
         })
@@ -50,6 +56,7 @@ class PublishersView: UITableViewController {
         if publishers.count > 0 {
             cell.setParametrs(publishers[indexPath.row])
         }
+        cell.selectAll = self.selectAll
         return cell
     }
     

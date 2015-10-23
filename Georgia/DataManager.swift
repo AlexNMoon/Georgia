@@ -26,16 +26,48 @@ class DataManager {
     }
     
     func getArticles(completionHandler: (id: Int, title: String) -> Void) {
+        let entityDescription =
+        NSEntityDescription.entityForName("Articles",
+            inManagedObjectContext: managedObjectContext!)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
+        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        let articles = results as! [NSManagedObject]
         api.searchFor(.Articles, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
-            if let data = JSONDictionary["data"] as? [AnyObject] {
-                if data.count > 0 {
-                if let articleData = data[0] as? NSDictionary {
-                    if let title = articleData["title"] as? String {
-                        completionHandler(id: articleData["id"] as! Int, title: title)
+            if articles.count == 0 {
+                let entity = NSEntityDescription.entityForName("Articles", inManagedObjectContext: self.managedObjectContext!)
+                if let data = JSONDictionary["data"] as? [AnyObject] {
+                    for index in 0 ..< data.count {
+                        let article = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Articles
+                        if let articleData = data[index] as? NSDictionary {
+                            if let id = articleData["id"] as? Int {
+                                article.setValue(id, forKey: "articleId")
+                            }
+                            if let isDeleted = articleData["is_deleted"] as? Int {
+                                article.setValue(isDeleted, forKey: "articleIsDeleted")
+                            }
+                            if let createdAt = articleData["created_at"] as? Int {
+                                article.setValue(createdAt, forKey: "createdAt")
+                            }
+                            if let title = articleData["title"] as? String {
+                                article.setValue(title, forKey: "title")
+                            }
+                            
+                            
+                        }
+                        
                     }
+                    
+                    
+                    if data.count > 0 {
+                        if let articleData = data[0] as? NSDictionary {
+                            if let title = articleData["title"] as? String {
+                                completionHandler(id: articleData["id"] as! Int, title: title)
+                            }
+                        }
+                    } else {
+                        completionHandler(id: 0, title: "")
                     }
-                } else {
-                    completionHandler(id: 0, title: "")
                 }
             }
         })
