@@ -433,7 +433,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="articleImage" destination="p7Q-cE-WGP" id="Ev3-gf-bCe"/>
-                                            <outlet property="pablisher" destination="Byw-lB-QN5" id="44f-09-isI"/>
+                                            <outlet property="publisher" destination="Byw-lB-QN5" id="wjV-eX-IUu"/>
                                             <outlet property="title" destination="wOP-Ev-WP7" id="EzE-Ne-rco"/>
                                             <segue destination="Xoc-jT-Dj7" kind="show" id="t1S-NV-0rl"/>
                                         </connections>

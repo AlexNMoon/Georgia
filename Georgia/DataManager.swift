@@ -15,6 +15,8 @@ class DataManager {
     
     let api = API()
     
+    var publishers = [NSManagedObject]()
+    
     func getText(completionHandler: (text: String) -> Void) {
         api.searchFor(.Text, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
             if let data = JSONDictionary["data"] as? NSDictionary {
@@ -25,7 +27,7 @@ class DataManager {
         })
     }
     
-    func getArticles(completionHandler: (id: Int, title: String) -> Void) {
+    func getArticles(completionHandler: (articles: [NSManagedObject]) -> Void) {
         let entityDescription =
         NSEntityDescription.entityForName("Articles",
             inManagedObjectContext: managedObjectContext!)
@@ -33,8 +35,11 @@ class DataManager {
         fetchRequest.entity = entityDescription
         let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
         let articles = results as! [NSManagedObject]
+        for index in 0 ..< articles.count {
+            self.managedObjectContext?.deleteObject(articles[index])
+        }
+        self.managedObjectContext?.save(nil)
         api.searchFor(.Articles, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
-            if articles.count == 0 {
                 let entity = NSEntityDescription.entityForName("Articles", inManagedObjectContext: self.managedObjectContext!)
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
@@ -52,24 +57,45 @@ class DataManager {
                             if let title = articleData["title"] as? String {
                                 article.setValue(title, forKey: "title")
                             }
-                            
-                            
+                            if let publisherId = articleData["publisher_id"] as? Int {
+                                for indexPubl in 0 ..< self.publishers.count {
+                                    if self.publishers[indexPubl].valueForKey("publidherId") as? Int == publisherId {
+                                        article.setValue(self.publishers[indexPubl], forKey: "publisher")
+                                        let articlesSet = self.publishers[indexPubl].valueForKey("pubArticles") as! NSSet
+                                        var articlesArray = articlesSet.allObjects
+                                        articlesArray.append(article)
+                                        self.publishers[indexPubl].setValue(
+                                            "", forKey: "pubArticles")
+                                        break
+                                    }
+                                }
+                                
+                            }
+                            if let publisherTime = articleData["publisher_time"] as? Int {
+                                article.setValue(publisherTime, forKey: "publisherTime")
+                            }
+                            if let status = articleData["status"] as? Int {
+                                article.setValue(status, forKey: "status")
+                            }
+                            if let image = articleData["image"] as? String {
+                                article.setValue(image, forKey: "image")
+                            }
+                            if let link = articleData["link"] as? String {
+                                article.setValue(link, forKey: "link")
+                            }
+                            if let updatedAt = articleData["updated_at"] as? Int {
+                                article.setValue(updatedAt, forKey: "updatedAt")
+                            }
+                            if let video = articleData["video"] as? String {
+                                article.setValue(video, forKey: "video")
+                            }
                         }
                         
                     }
-                    
-                    
-                    if data.count > 0 {
-                        if let articleData = data[0] as? NSDictionary {
-                            if let title = articleData["title"] as? String {
-                                completionHandler(id: articleData["id"] as! Int, title: title)
-                            }
-                        }
-                    } else {
-                        completionHandler(id: 0, title: "")
-                    }
                 }
-            }
+            self.managedObjectContext?.save(nil)
+            let articlesDownload = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [NSManagedObject]
+            completionHandler(articles: articlesDownload)
         })
     }
     
@@ -80,9 +106,9 @@ class DataManager {
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
         let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
-        let publishers = results as! [NSManagedObject]
+        self.publishers = results as! [NSManagedObject]
         api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
-            if publishers.count == 0 {
+            if self.publishers.count == 0 {
                 let entity = NSEntityDescription.entityForName("Publishers", inManagedObjectContext: self.managedObjectContext!)
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
@@ -121,14 +147,16 @@ class DataManager {
                             if let updatedAt = publisherData["updated_at"] as? Int {
                                 publisher.setValue(updatedAt, forKey: "updatedAt")
                             }
+                            publisher.setValue([], forKey: "pubArticles")
                         }
                     }
                     self.managedObjectContext?.save(nil)
                     let publishersFirstDownload = self.managedObjectContext?.executeFetchRequest(fetchRequest, error: nil) as! [NSManagedObject]
                     completionHandler(publishers: publishersFirstDownload)
+                    self.publishers = publishersFirstDownload
                 } 
             } else {
-                completionHandler(publishers: publishers)
+                completionHandler(publishers: self.publishers)
             }
         })
         

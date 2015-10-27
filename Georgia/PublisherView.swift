@@ -44,6 +44,7 @@ class PublisherView: UIViewController {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
         }
         if let name = publisher.valueForKey("name") as? String {
+            
             self.name.text = name
             self.navigationItem.title = name
         }

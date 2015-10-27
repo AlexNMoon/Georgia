@@ -7,25 +7,31 @@
 //
 
 import UIKit
+import CoreData
 
 class ArticlesCell: UITableViewCell {
     
     let dataManager = DataManager()
     
-    @IBOutlet weak var pablisher: UILabel!
+    @IBOutlet weak var publisher: UILabel!
     
     @IBOutlet weak var title: UILabel!
     
     @IBOutlet weak var articleImage: UIImageView!
     
-    func setParametrs() {
-        self.pablisher.textColor = UIColor.cyanColor()
-        self.dataManager.getArticles({ (id: Int, title: String) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.title.text = title
-                self.pablisher.text = "\(id)"
-            })
-        })
+    func setParametrs(article: NSManagedObject) {
+        self.publisher.textColor = UIColor.cyanColor()
+        if let articlesPublisher = article.valueForKey("publisher") as? Publishers {
+            if let name = articlesPublisher.valueForKey("name") as? String {
+                self.publisher.text = name
+            }
+        }
+        if let articleTitle = article.valueForKey("title") as? String {
+            self.title.text = articleTitle
+        }
+        if let image = article.valueForKey("image") as? String {
+            self.articleImage.sd_setImageWithURL(NSURL(string: image))
+        }
     }
     
 }

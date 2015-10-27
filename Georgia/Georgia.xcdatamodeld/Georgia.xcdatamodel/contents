@@ -8,7 +8,6 @@
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="publisherTime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="punlisherId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,7 +47,7 @@
         <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="publisher" inverseEntity="Articles" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Articles" positionX="142" positionY="-9" width="128" height="268"/>
+        <element name="Articles" positionX="142" positionY="-9" width="128" height="255"/>
         <element name="Banners" positionX="142" positionY="285" width="128" height="118"/>
         <element name="Categories" positionX="-65" positionY="-9" width="128" height="118"/>
         <element name="Publishers" positionX="-65" positionY="131" width="128" height="253"/>

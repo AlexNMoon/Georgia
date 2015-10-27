@@ -20,7 +20,6 @@ class Articles: NSManagedObject {
     @NSManaged var image: String
     @NSManaged var link: String
     @NSManaged var publisherTime: NSNumber
-    @NSManaged var punlisherId: NSNumber
     @NSManaged var status: NSNumber
     @NSManaged var text: String
     @NSManaged var title: String

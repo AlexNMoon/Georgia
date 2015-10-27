@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -19,6 +20,8 @@ class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet var filters: UIBarButtonItem!
    
     @IBOutlet var settings: UIBarButtonItem!
+    
+    var articles = [NSManagedObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +42,14 @@ class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return articles.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
-        cell.setParametrs()
+        if articles.count > 0 {
+            cell.setParametrs(articles[indexPath.row])
+        }
         return cell
     }
     
@@ -56,9 +61,21 @@ class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func getArticles() {
+        
+
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.dataManager.getArticles({(articles: [NSManagedObject]) -> Void in
+            self.articles = articles
+            dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                self.tableView!.reloadData()
+            })
+            
+        })
     }
-
+    
 }
