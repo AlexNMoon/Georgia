@@ -2,18 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Georgia/Publishers.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Georgia/Categories.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Georgia/Banners.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Georgia/Articles.swift">
-   </FileRef>
-   <FileRef
       location = "group:Georgia.xcodeproj">
    </FileRef>
    <FileRef

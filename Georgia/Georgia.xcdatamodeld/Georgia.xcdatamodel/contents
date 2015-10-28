@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Articles" representedClassName="Articles" syncable="YES">
+    <entity name="Article" representedClassName="Article" syncable="YES">
         <attribute name="articleId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="articleIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -13,24 +13,24 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="video" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categories" inverseName="catArticles" inverseEntity="Categories" syncable="YES"/>
-        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publishers" inverseName="pubArticles" inverseEntity="Publishers" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="catArticles" inverseEntity="Category" syncable="YES"/>
+        <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="pubArticles" inverseEntity="Publisher" syncable="YES"/>
     </entity>
-    <entity name="Banners" representedClassName="Banners" syncable="YES">
+    <entity name="Banner" representedClassName="Banner" syncable="YES">
         <attribute name="bannerId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="count" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Categories" representedClassName="Categories" syncable="YES">
+    <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="categIsDeleted" attributeType="Boolean" syncable="YES"/>
         <attribute name="categoriesId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
-        <relationship name="catArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="category" inverseEntity="Articles" syncable="YES"/>
+        <relationship name="catArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="category" inverseEntity="Article" syncable="YES"/>
     </entity>
-    <entity name="Publishers" representedClassName="Publishers" syncable="YES">
+    <entity name="Publisher" representedClassName="Publisher" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -43,13 +43,12 @@
         <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Articles" inverseName="publisher" inverseEntity="Articles" syncable="YES"/>
+        <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="publisher" inverseEntity="Article" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Articles" positionX="142" positionY="-9" width="128" height="255"/>
-        <element name="Banners" positionX="142" positionY="285" width="128" height="118"/>
-        <element name="Categories" positionX="-65" positionY="-9" width="128" height="118"/>
-        <element name="Publishers" positionX="-65" positionY="131" width="128" height="253"/>
+        <element name="Article" positionX="142" positionY="-9" width="128" height="253"/>
+        <element name="Banner" positionX="142" positionY="285" width="128" height="118"/>
+        <element name="Category" positionX="-65" positionY="-9" width="128" height="118"/>
+        <element name="Publisher" positionX="-65" positionY="131" width="128" height="238"/>
     </elements>
 </model>

@@ -46,5 +46,7 @@ class FiltersView: UITableViewController {
         return cell
     }
     
+    @IBAction func tapSelectAll(sender: AnyObject) {
+    }
     
   }

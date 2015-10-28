@@ -1,18 +1,17 @@
 //
 //  Publishers.swift
-//  
+//  Georgia
 //
-//  Created by MOZI Development on 10/7/15.
-//
+//  Created by MOZI Development on 10/28/15.
+//  Copyright (c) 2015 MOZI Development. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-@objc(Publishers)
+class Publisher: NSManagedObject {
 
-class Publishers: NSManagedObject {
-
+    @NSManaged var address: String
     @NSManaged var createdAt: NSNumber
     @NSManaged var email: String
     @NSManaged var isSelected: NSNumber
@@ -24,8 +23,6 @@ class Publishers: NSManagedObject {
     @NSManaged var site: String
     @NSManaged var telephone: String
     @NSManaged var updatedAt: NSNumber
-    @NSManaged var url: String
     @NSManaged var pubArticles: NSSet
-    @NSManaged var address: String
 
 }

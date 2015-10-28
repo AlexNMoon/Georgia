@@ -43,7 +43,7 @@ class DataManager {
                 let entity = NSEntityDescription.entityForName("Articles", inManagedObjectContext: self.managedObjectContext!)
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
-                        let article = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Articles
+                        let article = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Article
                         if let articleData = data[index] as? NSDictionary {
                             if let id = articleData["id"] as? Int {
                                 article.setValue(id, forKey: "articleId")
@@ -112,7 +112,7 @@ class DataManager {
                 let entity = NSEntityDescription.entityForName("Publishers", inManagedObjectContext: self.managedObjectContext!)
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
-                        let publisher = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Publishers
+                        let publisher = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.managedObjectContext) as! Publisher
                         if let publisherData = data[index] as? NSDictionary{
                             if let address = publisherData["address"] as? String {
                                 publisher.setValue(NSAttributedString(data: address.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string, forKey: "address")

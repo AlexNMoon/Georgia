@@ -60,12 +60,15 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="selectAllButton" destination="Of3-ea-lrQ" id="xT2-7q-8b5"/>
+                        <outlet property="selectAllButton" destination="Of3-ea-lrQ" id="YrS-HY-JnE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGo-sW-JlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Select All" id="Of3-ea-lrQ">
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="tapSelectAll:" destination="axa-e2-rhu" id="wGv-JG-7oe"/>
+                    </connections>
                 </barButtonItem>
             </objects>
             <point key="canvasLocation" x="2124" y="-467"/>

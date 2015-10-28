@@ -1,17 +1,15 @@
 //
 //  Articles.swift
-//  
+//  Georgia
 //
-//  Created by MOZI Development on 10/7/15.
-//
+//  Created by MOZI Development on 10/28/15.
+//  Copyright (c) 2015 MOZI Development. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-@objc(Articles)
-
-class Articles: NSManagedObject {
+class Article: NSManagedObject {
 
     @NSManaged var articleId: NSNumber
     @NSManaged var articleIsDeleted: NSNumber
@@ -25,7 +23,7 @@ class Articles: NSManagedObject {
     @NSManaged var title: String
     @NSManaged var updatedAt: NSNumber
     @NSManaged var video: String
-    @NSManaged var category: Categories
-    @NSManaged var publisher: Publishers
+    @NSManaged var category: Category
+    @NSManaged var publisher: Publisher
 
 }
