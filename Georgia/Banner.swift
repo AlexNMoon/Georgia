@@ -18,3 +18,21 @@ class Banner: NSManagedObject {
     @NSManaged var title: String
 
 }
+
+extension Banner {
+    convenience init(banner: RestBanner) {
+        self.init()
+        if let id = banner.bannerId {
+            self.bannerId = id
+        }
+        if let image = banner.image {
+            self.image = image
+        }
+        if let link = banner.link {
+            self.link = link
+        }
+        if let title = banner.title {
+            self.title = title
+        }
+    }
+}

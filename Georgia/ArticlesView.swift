@@ -69,13 +69,8 @@ class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        self.dataManager.getArticles({(articles: [NSManagedObject]) -> Void in
-            self.articles = articles
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.tableView!.reloadData()
-            })
-            
-        })
+        self.dataManager.getArticles()
+        self.tableView!.reloadData()
     }
     
 }

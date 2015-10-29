@@ -21,7 +21,7 @@ class ArticlesCell: UITableViewCell {
     
     func setParametrs(article: NSManagedObject) {
         self.publisher.textColor = UIColor.cyanColor()
-        if let articlesPublisher = article.valueForKey("publisher") as? Publishers {
+        if let articlesPublisher = article.valueForKey("publisher") as? Publisher {
             if let name = articlesPublisher.valueForKey("name") as? String {
                 self.publisher.text = name
             }

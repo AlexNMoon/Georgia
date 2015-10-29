@@ -3,7 +3,6 @@
     <entity name="Article" representedClassName="Article" syncable="YES">
         <attribute name="articleId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="articleIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="categoryId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
@@ -46,7 +45,7 @@
         <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="publisher" inverseEntity="Article" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Article" positionX="142" positionY="-9" width="128" height="253"/>
+        <element name="Article" positionX="142" positionY="-9" width="128" height="240"/>
         <element name="Banner" positionX="142" positionY="285" width="128" height="118"/>
         <element name="Category" positionX="-65" positionY="-9" width="128" height="118"/>
         <element name="Publisher" positionX="-65" positionY="131" width="128" height="238"/>

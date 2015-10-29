@@ -27,7 +27,7 @@
 		9E52D3901BE1193100F5A0D3 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D38F1BE1193100F5A0D3 /* Publisher.swift */; };
 		9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3911BE119F300F5A0D3 /* RestArticle.swift */; };
 		9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */; };
-		9E52D3961BE11A1C00F5A0D3 /* RestCategorie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3951BE11A1C00F5A0D3 /* RestCategorie.swift */; };
+		9E52D3961BE11A1C00F5A0D3 /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */; };
 		9E52D3981BE11A2E00F5A0D3 /* RestBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */; };
 		9E52D39A1BE1222800F5A0D3 /* StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3991BE1222800F5A0D3 /* StringEncoding.swift */; };
 		9E5560611BBEB4650065B5EC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5560601BBEB4650065B5EC /* API.swift */; };
@@ -82,7 +82,7 @@
 		9E52D38F1BE1193100F5A0D3 /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		9E52D3911BE119F300F5A0D3 /* RestArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestArticle.swift; sourceTree = "<group>"; };
 		9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestPablisher.swift; sourceTree = "<group>"; };
-		9E52D3951BE11A1C00F5A0D3 /* RestCategorie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestCategorie.swift; sourceTree = "<group>"; };
+		9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestCategory.swift; sourceTree = "<group>"; };
 		9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestBanner.swift; sourceTree = "<group>"; };
 		9E52D3991BE1222800F5A0D3 /* StringEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEncoding.swift; sourceTree = "<group>"; };
 		9E55605F1BBEAE520065B5EC /* Georgia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Georgia-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 				9ED9EBE71BBC24AA007DEE61 /* Info.plist */,
 				9E52D3911BE119F300F5A0D3 /* RestArticle.swift */,
 				9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */,
-				9E52D3951BE11A1C00F5A0D3 /* RestCategorie.swift */,
+				9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */,
 				9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */,
 				9E52D3991BE1222800F5A0D3 /* StringEncoding.swift */,
 			);
@@ -425,7 +425,7 @@
 				9EB784031BC6A8BA007F963A /* ArticlesCell.swift in Sources */,
 				9EC30D3C1BCFE3C100C0B218 /* ArticlesView.swift in Sources */,
 				9E52D3981BE11A2E00F5A0D3 /* RestBanner.swift in Sources */,
-				9E52D3961BE11A1C00F5A0D3 /* RestCategorie.swift in Sources */,
+				9E52D3961BE11A1C00F5A0D3 /* RestCategory.swift in Sources */,
 				9ED9EC0C1BBC3104007DEE61 /* PublishersView.swift in Sources */,
 				9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */,
 				9ED9EBEC1BBC24AA007DEE61 /* Georgia.xcdatamodeld in Sources */,

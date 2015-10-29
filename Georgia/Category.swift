@@ -18,3 +18,18 @@ class Category: NSManagedObject {
     @NSManaged var catArticles: NSSet
 
 }
+
+extension Category {
+    convenience init(category: RestCategory) {
+        self.init()
+        if let isDeleted = category.categIsDeleted {
+            self.categIsDeleted = isDeleted
+        }
+        if let id = category.categoriesId {
+            self.categoriesId = id
+        }
+        if let title = category.title {
+            self.title = title
+        }
+    }
+}

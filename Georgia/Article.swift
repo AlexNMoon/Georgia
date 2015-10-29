@@ -13,7 +13,6 @@ class Article: NSManagedObject {
 
     @NSManaged var articleId: NSNumber
     @NSManaged var articleIsDeleted: NSNumber
-    @NSManaged var categoryId: NSNumber
     @NSManaged var createdAt: NSNumber
     @NSManaged var image: String
     @NSManaged var link: String
@@ -26,4 +25,43 @@ class Article: NSManagedObject {
     @NSManaged var category: Category
     @NSManaged var publisher: Publisher
 
+}
+
+extension Article {
+    convenience init(article: RestArticle) {
+        self.init()
+        if let id = article.articleId {
+            self.articleId = id
+        }
+        if let isDeleted = article.articleIsDeleted {
+            self.articleIsDeleted = isDeleted
+        }
+        if let createdAt = article.createdAt {
+            self.createdAt = createdAt
+        }
+        if let image = article.image {
+            self.image = image
+        }
+        if let link = article.link {
+            self.link = link
+        }
+        if let publisherTime = article.publisherTime {
+            self.publisherTime = publisherTime
+        }
+        if let status = article.status {
+            self.status = status
+        }
+        if let text = article.text {
+            self.text = text
+        }
+        if let title = article.title {
+            self.title = title
+        }
+        if let updatedAt = article.updatedAt {
+            self.updatedAt = updatedAt
+        }
+        if let video = article.video {
+            self.video = video
+        }
+    }
 }
