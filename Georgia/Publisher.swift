@@ -9,28 +9,30 @@
 import Foundation
 import CoreData
 
+@objc(Publisher)
+
 class Publisher: NSManagedObject {
 
-    @NSManaged var address: String
-    @NSManaged var createdAt: NSNumber
-    @NSManaged var email: String
-    @NSManaged var isSelected: NSNumber
-    @NSManaged var logo: String
-    @NSManaged var name: String
-    @NSManaged var publDescription: String
+    @NSManaged var address: String?
+    @NSManaged var createdAt: NSNumber?
+    @NSManaged var email: String?
+    @NSManaged var isSelected: NSNumber?
+    @NSManaged var logo: String?
+    @NSManaged var name: String?
+    @NSManaged var publDescription: String?
     @NSManaged var publidherId: NSNumber
-    @NSManaged var publIsDeleted: NSNumber
-    @NSManaged var site: String
-    @NSManaged var telephone: String
-    @NSManaged var updatedAt: NSNumber
+    @NSManaged var publIsDeleted: NSNumber?
+    @NSManaged var site: String?
+    @NSManaged var telephone: String?
+    @NSManaged var updatedAt: NSNumber?
     @NSManaged var pubArticles: NSSet
 
 }
 
 
 extension Publisher {
-     convenience init(publisher: RestPublisher) {
-        self.init()
+     convenience init(publisher: RestPublisher, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
+        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
         if let address = publisher.address {
             self.address = address
         }

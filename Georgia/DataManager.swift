@@ -49,7 +49,7 @@ class DataManager {
                 for index in 0 ..< data.count {
                     if let articleData = data[index] as? NSDictionary {
                         let restArticle = RestArticle(articleData: articleData)
-                        let article = Article(article: restArticle)
+                        let article = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                         articlesResult.append(article)
                     }
                 }
@@ -58,22 +58,28 @@ class DataManager {
         })
     }
     
-    func getPublishers() {
+    func getPublishers(publisherIndex: Int?, completionHandler: (publisherForArticle: Publisher) -> Void) {
+        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext!)
         var publishers = [Publisher]()
-        let entityDescription =
-            NSEntityDescription.entityForName("Publisher",
-                inManagedObjectContext: managedObjectContext!)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
         let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
         publishers = results as! [Publisher]
+        if let publIndex = publisherIndex {
+            for publisher in publishers {
+                if publisher.publidherId == publIndex {
+                    completionHandler(publisherForArticle: publisher)
+                    break
+                }
+            }
+        } else {
         api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
             if publishers.count == 0 {
                 if let data = JSONDictionary["data"] as? [AnyObject] {
                     for index in 0 ..< data.count {
                         if let publisherData = data[index] as? NSDictionary{
                             let restPublisher = RestPublisher(publisherData: publisherData)
-                            let publisher = Publisher(publisher: restPublisher)
+                            let publisher = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                             publishers.append(publisher)
                         }
                     }
@@ -83,34 +89,57 @@ class DataManager {
                 
             }
         })
-        
+        }
     }
     
-    func getBanners(completitionHandler: (image: UIImage) ->  Void) {
+    func getBanners(completitionHandler: (image: UIImage?) ->  Void) {
+        let entityDescription =
+        NSEntityDescription.entityForName("Banner",
+            inManagedObjectContext: managedObjectContext!)
         api.searchFor(.Banners, completionHandler: { ( JSONDictionary: NSDictionary) -> Void in
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 if data.count == 0 {
                     completitionHandler(image: UIImage(named: "launch_background.png")!)
                 } else {
-                    if let bannerData = data[0] as? NSDictionary {
-                        if let image = bannerData["image"] as? String {
-                            completitionHandler(image: UIImage(named: image)!)
+                    for index in 0 ..< data.count {
+                        if let bannerData = data[index] as? NSDictionary {
+                            let restBanner = RestBanner(bannerData: bannerData)
+                            let banner = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                         }
                     }
+                    self.managedObjectContext?.save(nil)
                 }
             }
         })
     }
     
-    func getCategories(index: Int, completitionHandler: (name: String) -> Void) {
+    func getCategories(categoryIndex: Int?, completionHandler: (categoryForArticle: Category) -> Void) {
+        let entityDescription =
+        NSEntityDescription.entityForName("Category",
+            inManagedObjectContext: managedObjectContext!)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
+        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        let categories = results as! [Category]
+        if let categIndex = categoryIndex {
+            for category in categories {
+                if category.categoriesId == categIndex {
+                    completionHandler(categoryForArticle: category)
+                    break
+                }
+            }
+        } else {
         api.searchFor(.Categories, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
             if let data = JSONDictionary["data"] as? [AnyObject] {
+                for index in 0 ..< data.count {
                 if let categoryData = data[index] as? NSDictionary {
-                    let name = NSAttributedString(data: categoryData["title"]!.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil, error: nil)!.string
-                    completitionHandler(name: name)
+                    let restCategory = RestCategory(categoryData: categoryData)
+                    let category = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+                }
                 }
             }
         })
+        }
     }
     
     

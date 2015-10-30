@@ -27,10 +27,10 @@ class PublishersCell: UITableViewCell {
     
     let new = UIImage(named: "publishers_new_icon@3x.png")
     
-    var publisher: NSManagedObject!
+    var publisher: Publisher!
 
     @IBAction func tapAddPublisherButton(sender: AnyObject) {
-        if publisher.valueForKey("isSelected") as? Int == 1 {
+        if publisher.isSelected == 1 {
             self.publiserIsUnselected()
             self.publisherUnselectedCoreData()
         } else {
@@ -42,19 +42,19 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs(publisher: NSManagedObject) {
+    func setParametrs(publisher: Publisher) {
         self.publisher = publisher
-        if publisher.valueForKey("isSelected") as? Int == 0 {
+        if publisher.isSelected == 0 {
             self.publiserIsUnselected()
         } else {
-            if publisher.valueForKey("isSelected") as? Int == 1 {
+            if publisher.isSelected == 1 {
                 self.publisherIsSelected()
             }
         }
-        if let logoUrl = publisher.valueForKey("logo") as? String {
+        if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
         }
-        if let name = publisher.valueForKey("name") as? String {
+        if let name = publisher.name {
             self.name.text = name
         }
     }
@@ -72,12 +72,12 @@ class PublishersCell: UITableViewCell {
     }
     
     func publisherSelectedCoreData() {
-        publisher.setValue(1, forKey: "isSelected")
+        publisher.isSelected = 1
         managedObjectContext?.save(nil)
     }
     
     func publisherUnselectedCoreData() {
-        publisher.setValue(0, forKey: "isSelected")
+        publisher.isSelected = 0
         managedObjectContext?.save(nil)
     }
     

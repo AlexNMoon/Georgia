@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Article)
+
 class Article: NSManagedObject {
 
     @NSManaged var articleId: NSNumber
@@ -28,8 +30,8 @@ class Article: NSManagedObject {
 }
 
 extension Article {
-    convenience init(article: RestArticle) {
-        self.init()
+    convenience init(article: RestArticle, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
+        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
         if let id = article.articleId {
             self.articleId = id
         }

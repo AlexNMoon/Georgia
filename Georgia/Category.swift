@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Category)
+
 class Category: NSManagedObject {
 
     @NSManaged var categIsDeleted: NSNumber
@@ -20,8 +22,8 @@ class Category: NSManagedObject {
 }
 
 extension Category {
-    convenience init(category: RestCategory) {
-        self.init()
+    convenience init(category: RestCategory, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
+        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
         if let isDeleted = category.categIsDeleted {
             self.categIsDeleted = isDeleted
         }

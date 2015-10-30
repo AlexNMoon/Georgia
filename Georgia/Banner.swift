@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@objc(Banner)
+
 class Banner: NSManagedObject {
 
     @NSManaged var bannerId: NSNumber
@@ -20,8 +22,8 @@ class Banner: NSManagedObject {
 }
 
 extension Banner {
-    convenience init(banner: RestBanner) {
-        self.init()
+    convenience init(banner: RestBanner, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
+        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
         if let id = banner.bannerId {
             self.bannerId = id
         }

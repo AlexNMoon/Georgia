@@ -15,7 +15,7 @@ class PublishersView: UITableViewController {
     
     let dataManager = DataManager()
     
-    var publishers = [NSManagedObject]()
+    var publishers = [Publisher]()
     
     var indexOfSelectedCell: Int!
     
@@ -29,18 +29,19 @@ class PublishersView: UITableViewController {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        self.dataManager.getPublishers({(publishers: [NSManagedObject]) -> Void in
-            self.publishers = publishers
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                for index in 0 ..< publishers.count {
-                    if publishers[index].valueForKey("isSelected") as? Int == 1 {
-                        self.selectAll.title = "Unselect All"
-                        break
-                    }
-                }
-                self.tableView!.reloadData()
-            })
-        })
+        self.dataManager.getPublishers(nil, completionHandler: {(publisherForArticle) -> Void in})
+        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext!)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
+        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        self.publishers = results as! [Publisher]
+        for publisher in publishers {
+            if publisher.isSelected as? Int == 1 {
+                self.selectAll.title = "Unselect All"
+                break
+            }
+        }
+        self.tableView!.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,17 +80,17 @@ class PublishersView: UITableViewController {
     
     @IBAction func tapSelectAll(sender: AnyObject) {
         if selectAll.title == "Select All" {
-            for index in 0 ..< publishers.count {
-                if publishers[index].valueForKey("isSelected") as? Int != 1 {
-                    publishers[index].setValue(1, forKey: "isSelected")
+            for publisher in publishers {
+                if publisher.isSelected != 1 {
+                    publisher.isSelected = 1
                 }
             }
             self.selectAll.title = "Unselect All"
         } else {
             if selectAll.title == "Unselect All" {
-                for index in 0 ..< publishers.count {
-                    if publishers[index].valueForKey("isSelected") as? Int == 1 {
-                        publishers[index].setValue(0, forKey: "isSelected")
+                for publisher in publishers {
+                    if publisher.isSelected == 1 {
+                        publisher.isSelected = 0
                     }
                 }
                 self.selectAll.title = "Select All"

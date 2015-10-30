@@ -12,6 +12,8 @@ import CoreData
 class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let dataManager = DataManager()
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -30,11 +32,23 @@ class ArticlesView: UIViewController, UITableViewDelegate, UITableViewDataSource
         var backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button@3x.png"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
-        self.dataManager.getBanners({(image: UIImage) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.bannerButton.setBackgroundImage(image, forState: UIControlState.Normal)
-            })
-    })
+        self.dataManager.getBanners({(image: UIImage?) -> Void in
+            if let bannerImage = image {
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    self.bannerButton.setBackgroundImage(image, forState: UIControlState.Normal)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    let entityDescription = NSEntityDescription.entityForName("Banner", inManagedObjectContext: self.managedObjectContext!)
+                    let fetchRequest = NSFetchRequest()
+                    fetchRequest.entity = entityDescription
+                    let results = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)
+                    let banners = results as! [Banner]
+                    let bannerLogo = UIImage(named: banners[0].image)
+                    self.bannerButton.setBackgroundImage(bannerLogo, forState: UIControlState.Normal)
+                })
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
