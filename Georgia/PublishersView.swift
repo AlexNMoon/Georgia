@@ -11,6 +11,8 @@ import CoreData
 
 class PublishersView: UITableViewController, NSFetchedResultsControllerDelegate {
     
+    var cellQuantity: Int = 0
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var fetchedResultsController: NSFetchedResultsController {
@@ -73,7 +75,8 @@ class PublishersView: UITableViewController, NSFetchedResultsControllerDelegate 
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let info = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
-        return info.numberOfObjects
+        self.cellQuantity = info.numberOfObjects
+        return self.cellQuantity
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -103,8 +106,21 @@ class PublishersView: UITableViewController, NSFetchedResultsControllerDelegate 
     }
     
   /*  @IBAction func tapSelectAll(sender: AnyObject) {
+        for index in 0 ..< self.cellQuantity {
+            let publisher = self.fetchedResultsController.objectAtIndexPath(NSIndexPath(index: index)) as! Publisher
+            if selectAll.title == "Select All" {
+                if publisher.isSelected != 1 {
+                    publisher.isSelected = 1
+                }
+            } else {
+                
+            }
+        }
+
+        
         if selectAll.title == "Select All" {
-            for publisher in publishers {
+            for index in 0 ..< self.cellQuantity {
+                
                 if publisher.isSelected != 1 {
                     publisher.isSelected = 1
                 }
@@ -122,9 +138,9 @@ class PublishersView: UITableViewController, NSFetchedResultsControllerDelegate 
         }
         self.tableView.reloadData()
         self.managedObjectContext?.save(nil)
-    }
+    }*/
     
-    */
+    
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()

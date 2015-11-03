@@ -73,21 +73,23 @@ class DataManager {
                 }
             }
         } else {
-        api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
-            if publishers.count == 0 {
-                if let data = JSONDictionary["data"] as? [AnyObject] {
-                    for index in 0 ..< data.count {
-                        if let publisherData = data[index] as? NSDictionary{
-                            let restPublisher = RestPublisher(publisherData: publisherData)
-                            let publisher = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
-                        }
+            api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+                if publishers.count == 0 {
+                    if let data = JSONDictionary["data"] as? [AnyObject] {
+                        let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+                        publishersManagedObjectContext.parentContext = self.managedObjectContext
+                            for index in 0 ..< data.count {
+                                if let publisherData = data[index] as? NSDictionary{
+                                    let restPublisher = RestPublisher(publisherData: publisherData)
+                                    let publisher = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
+                                }
+                            }
+                            publishersManagedObjectContext.save(nil)
                     }
-                    self.managedObjectContext?.save(nil)
+                } else {
+                    
                 }
-            } else {
-                
-            }
-        })
+            })
         }
     }
     
