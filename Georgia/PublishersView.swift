@@ -9,15 +9,38 @@
 import UIKit
 import CoreData
 
-class PublishersView: UITableViewController {
+class PublishersView: UITableViewController, NSFetchedResultsControllerDelegate {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    var fetchedResultsController: NSFetchedResultsController {
+        if self.restFetchedResultsController != nil {
+            return self.restFetchedResultsController!
+        }
+        let managedObjectContext = self.managedObjectContext!
+        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
+        let sort = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [sort]
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        aFetchedResultsController.delegate = self
+        self.restFetchedResultsController = aFetchedResultsController
+        var e: NSError?
+        if !self.restFetchedResultsController!.performFetch(&e) {
+            println("fetch error: \(e!.localizedDescription)")
+            abort();
+        }
+        
+        return self.restFetchedResultsController!
+    }
+    var restFetchedResultsController: NSFetchedResultsController?
+    
     let dataManager = DataManager()
     
-    var publishers = [Publisher]()
+   // var publishers = [Publisher]()
     
-    var indexOfSelectedCell: Int!
+    var indexOfSelectedCell: NSIndexPath!
     
     @IBOutlet weak var selectAll: UIBarButtonItem!
     
@@ -30,7 +53,7 @@ class PublishersView: UITableViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.dataManager.getPublishers(nil, completionHandler: {(publisherForArticle) -> Void in})
-        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext!)
+      /*  let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext!)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
         let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
@@ -40,7 +63,7 @@ class PublishersView: UITableViewController {
                 self.selectAll.title = "Unselect All"
                 break
             }
-        }
+        }*/
         self.tableView!.reloadData()
     }
     
@@ -49,14 +72,14 @@ class PublishersView: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return publishers.count
+        let info = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        return info.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Publishers cell", forIndexPath: indexPath) as! PublishersCell
-        if publishers.count > 0 {
-            cell.setParametrs(publishers[indexPath.row])
-        }
+        let publisher = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Publisher
+        cell.setParametrs(publisher)
         cell.selectAll = self.selectAll
         return cell
     }
@@ -69,16 +92,17 @@ class PublishersView: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "seguePublisher" {
             let publisherView = segue.destinationViewController as! PublisherView
-            publisherView.publisher = publishers[indexOfSelectedCell]
+            let publisher = self.fetchedResultsController.objectAtIndexPath(indexOfSelectedCell) as! Publisher
+            publisherView.publisher = publisher
         }
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        indexOfSelectedCell = indexPath.row
+        indexOfSelectedCell = indexPath
         return indexPath
     }
     
-    @IBAction func tapSelectAll(sender: AnyObject) {
+  /*  @IBAction func tapSelectAll(sender: AnyObject) {
         if selectAll.title == "Select All" {
             for publisher in publishers {
                 if publisher.isSelected != 1 {
@@ -100,6 +124,47 @@ class PublishersView: UITableViewController {
         self.managedObjectContext?.save(nil)
     }
     
+    */
     
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.beginUpdates()
+    }
+    
+    /* called:
+    - when a new model is created
+    - when an existing model is updated
+    - when an existing model is deleted */
+    func controller(controller: NSFetchedResultsController,
+        didChangeObject object: AnyObject,
+        atIndexPath indexPath: NSIndexPath?,
+        forChangeType type: NSFetchedResultsChangeType,
+        newIndexPath: NSIndexPath?) {
+            switch type {
+            case .Insert:
+                println("insert")
+                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            case .Update:
+                let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! PublishersCell
+                let publisher = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Publisher
+                println("update")
+                cell.setParametrs(publisher)
+                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            case .Move:
+                println("move")
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            case .Delete:
+                println("delete")
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            default:
+                return
+            }
+    }
+    
+    /* called last
+    tells `UITableView` updates are complete */
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView.endUpdates()
+    }
     
 }

@@ -80,7 +80,6 @@ class DataManager {
                         if let publisherData = data[index] as? NSDictionary{
                             let restPublisher = RestPublisher(publisherData: publisherData)
                             let publisher = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
-                            publishers.append(publisher)
                         }
                     }
                     self.managedObjectContext?.save(nil)

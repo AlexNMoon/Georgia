@@ -9,7 +9,7 @@
 import UIKit
 
 class FiltersCell: UITableViewCell {
-
+    
     @IBOutlet weak var addCategory: UIButton!
     
     @IBOutlet weak var categoryName: UILabel!
@@ -33,5 +33,5 @@ class FiltersCell: UITableViewCell {
             }
         }
     }
-
+    
 }
