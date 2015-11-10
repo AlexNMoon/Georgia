@@ -28,11 +28,27 @@ class PublishersCell: UITableViewCell {
     let new = UIImage(named: "publishers_new_icon@3x.png")
     
     var publisher: Publisher!
+    
+    var fetchedResultsController: NSFetchedResultsController!
 
     @IBAction func tapAddPublisherButton(sender: AnyObject) {
         if publisher.isSelected == 1 {
             self.publiserIsUnselected()
             self.publisherUnselectedCoreData()
+            if self.selectAll.title != "Select All" {
+                let info = self.fetchedResultsController.sections![0] as! NSFetchedResultsSectionInfo
+                let cellQuantity = info.numberOfObjects
+                var selected: Int = 0
+                for index in 0 ..< cellQuantity {
+                    let publisher = self.fetchedResultsController.objectAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as! Publisher
+                    if publisher.isSelected != 1 {
+                        selected++
+                    }
+                }
+                if selected == cellQuantity {
+                    self.selectAll.title = "Select All"
+                }
+            }
         } else {
             self.publisherIsSelected()
             self.publisherSelectedCoreData()
@@ -42,8 +58,9 @@ class PublishersCell: UITableViewCell {
         }
     }
     
-    func setParametrs(publisher: Publisher) {
+    func setParametrs(publisher: Publisher, fetchedResultsController: NSFetchedResultsController) {
         self.publisher = publisher
+        self.fetchedResultsController = fetchedResultsController
         if publisher.isSelected == 0 {
             self.publiserIsUnselected()
         } else {
@@ -53,6 +70,8 @@ class PublishersCell: UITableViewCell {
         }
         if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+        } else {
+            self.logo.image = nil
         }
         if let name = publisher.name {
             self.name.text = name

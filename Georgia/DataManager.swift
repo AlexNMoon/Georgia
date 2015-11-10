@@ -32,29 +32,31 @@ class DataManager {
     }
     
     func getArticles() {
+        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+        articlesManagedObjectContext.parentContext = self.managedObjectContext
         let entityDescription =
         NSEntityDescription.entityForName("Article",
-            inManagedObjectContext: managedObjectContext!)
+            inManagedObjectContext: articlesManagedObjectContext)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        let results = articlesManagedObjectContext.executeFetchRequest(fetchRequest, error: nil)
         let articles = results as! [NSManagedObject]
         for index in 0 ..< articles.count {
-            self.managedObjectContext?.deleteObject(articles[index])
+            articlesManagedObjectContext.deleteObject(articles[index])
         }
-        self.managedObjectContext?.save(nil)
+        articlesManagedObjectContext.save(nil)
         api.searchFor(.Articles, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
             var articlesResult: [Article] = []
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 for index in 0 ..< data.count {
                     if let articleData = data[index] as? NSDictionary {
                         let restArticle = RestArticle(articleData: articleData)
-                        let article = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+                        let article = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: articlesManagedObjectContext)
                         articlesResult.append(article)
                     }
                 }
             }
-            self.managedObjectContext?.save(nil)
+            articlesManagedObjectContext.save(nil)
         })
     }
     

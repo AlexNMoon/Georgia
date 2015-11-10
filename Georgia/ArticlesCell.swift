@@ -19,7 +19,7 @@ class ArticlesCell: UITableViewCell {
     
     @IBOutlet weak var articleImage: UIImageView!
     
-    func setParametrs(article: NSManagedObject) {
+    func setParametrs(article: Article) {
         self.publisher.textColor = UIColor.cyanColor()
         if let articlesPublisher = article.valueForKey("publisher") as? Publisher {
             if let name = articlesPublisher.valueForKey("name") as? String {
@@ -31,6 +31,8 @@ class ArticlesCell: UITableViewCell {
         }
         if let image = article.valueForKey("image") as? String {
             self.articleImage.sd_setImageWithURL(NSURL(string: image))
+        } else {
+            self.articleImage.image = nil
         }
     }
     
