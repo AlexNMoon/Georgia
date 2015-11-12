@@ -21,11 +21,11 @@ class PublishersCell: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     
-    let add = UIImage(named: "publishers_add_icon@3x.png")
+    let add = UIImage(named: "publishers_add_icon")
     
-    let added = UIImage(named: "publishers_added_icon@3x.png")
+    let added = UIImage(named: "publishers_added_icon")
     
-    let new = UIImage(named: "publishers_new_icon@3x.png")
+    let new = UIImage(named: "publishers_new_icon")
     
     var publisher: Publisher!
     
@@ -36,7 +36,7 @@ class PublishersCell: UITableViewCell {
             self.publiserIsUnselected()
             self.publisherUnselectedCoreData()
             if self.selectAll.title != "Select All" {
-                let info = self.fetchedResultsController.sections![0] as! NSFetchedResultsSectionInfo
+                let info = self.fetchedResultsController.sections![0] 
                 let cellQuantity = info.numberOfObjects
                 var selected: Int = 0
                 for index in 0 ..< cellQuantity {
@@ -92,12 +92,18 @@ class PublishersCell: UITableViewCell {
     
     func publisherSelectedCoreData() {
         publisher.isSelected = 1
-        managedObjectContext?.save(nil)
+        do {
+            try managedObjectContext?.save()
+        } catch _ {
+        }
     }
     
     func publisherUnselectedCoreData() {
         publisher.isSelected = 0
-        managedObjectContext?.save(nil)
+        do {
+            try managedObjectContext?.save()
+        } catch _ {
+        }
     }
     
 }

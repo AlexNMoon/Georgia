@@ -14,9 +14,9 @@ class FiltersCell: UITableViewCell {
     
     @IBOutlet weak var categoryName: UILabel!
     
-    let add = UIImage(named: "publishers_add_icon@3x.png")
+    let add = UIImage(named: "publishers_add_icon")
     
-    let added = UIImage(named: "publishers_added_icon@3x.png")
+    let added = UIImage(named: "publishers_added_icon")
     
     var addedCategory: Bool = false
     
@@ -26,12 +26,9 @@ class FiltersCell: UITableViewCell {
             addCategory.tintColor = UIColor.grayColor()
             addedCategory = false
         } else {
-            if !addedCategory {
-                addCategory.setImage(added, forState: UIControlState.Normal)
-                addCategory.tintColor = UIColor.cyanColor()
-                addedCategory = true
-            }
+            addCategory.setImage(added, forState: UIControlState.Normal)
+            addCategory.tintColor = UIColor.cyanColor()
+            addedCategory = true
         }
     }
-    
 }

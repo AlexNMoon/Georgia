@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     
@@ -21,8 +22,8 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         
     }
     
-    func searchFor(urltipe: urlTipe, completionHandler: (JSONDictionary: NSDictionary) -> Void) {
-        var JSONDictionary: NSDictionary!
+    func searchFor(urltipe: urlTipe, completionHandler: (json: JSON) -> Void) {
+        //var json: JSON
         var searchTerm: String
         switch urltipe {
         case .Text:
@@ -35,17 +36,12 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             searchTerm = "http://188.166.95.235/v1/banners"
         case .Categories:
             searchTerm = "http://188.166.95.235/v1/categories"
-        default:
-           searchTerm = "http://188.166.95.235"
         }
         let url = NSURL(string: searchTerm)
-        var request1: NSURLRequest = NSURLRequest(URL: url!)
-        NSURLConnection.sendAsynchronousRequest(request1, queue: self.queue, completionHandler:{ (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var err: NSError
-            var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-            JSONDictionary = jsonResult
-            completionHandler(JSONDictionary: JSONDictionary)
-            println("AsSynchronous\(JSONDictionary)")
+        let request1: NSURLRequest = NSURLRequest(URL: url!)
+        NSURLConnection.sendAsynchronousRequest(request1, queue: self.queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+                let json = JSON(data!)
+                completionHandler(json: json)
         })
     }
 

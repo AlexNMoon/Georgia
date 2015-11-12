@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class RestPublisher {
     
@@ -24,8 +25,8 @@ class RestPublisher {
     let telephone: String?
     let updatedAt: Int?
     
-    init(publisherData: NSDictionary) {
-        if let address = publisherData["address"] as? String {
+    init(publisherData: AnyObject) {
+        if let address = publisherData["address"] {
             self.address = self.stringEncoding.encoding(address)
         } else {
             self.address = nil

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftyJSON
 
 class DataManager {
     
@@ -21,7 +22,7 @@ class DataManager {
     
     func getText(id: Int) -> String? {
         var text: String? = nil
-        api.searchFor(.Text, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+        api.searchFor(.Text, completionHandler: { (json: JSON) -> Void in
             if let data = JSONDictionary["data"] as? NSDictionary {
                 if let textData = data["full_description"] as? String {
                      text = self.stringEncoding.encoding(textData)
@@ -39,13 +40,16 @@ class DataManager {
             inManagedObjectContext: articlesManagedObjectContext)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let results = articlesManagedObjectContext.executeFetchRequest(fetchRequest, error: nil)
+        let results = try? articlesManagedObjectContext.executeFetchRequest(fetchRequest)
         let articles = results as! [NSManagedObject]
         for index in 0 ..< articles.count {
             articlesManagedObjectContext.deleteObject(articles[index])
         }
-        articlesManagedObjectContext.save(nil)
-        api.searchFor(.Articles, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+        do {
+            try articlesManagedObjectContext.save()
+        } catch _ {
+        }
+        api.searchFor(.Articles, completionHandler: { (json: JSON) -> Void in
             var articlesResult: [Article] = []
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 for index in 0 ..< data.count {
@@ -56,7 +60,10 @@ class DataManager {
                     }
                 }
             }
-            articlesManagedObjectContext.save(nil)
+            do {
+                try articlesManagedObjectContext.save()
+            } catch _ {
+            }
         })
     }
     
@@ -65,7 +72,7 @@ class DataManager {
         var publishers = [Publisher]()
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        let results = try? managedObjectContext?.executeFetchRequest(fetchRequest)
         publishers = results as! [Publisher]
         if let publIndex = publisherIndex {
             for publisher in publishers {
@@ -75,18 +82,21 @@ class DataManager {
                 }
             }
         } else {
-            api.searchFor(.Publishers, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+            api.searchFor(.Publishers, completionHandler: { (json: JSON) -> Void in
                 if publishers.count == 0 {
-                    if let data = JSONDictionary["data"] as? [AnyObject] {
+                    if let data = json["data"].array {
                         let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
                         publishersManagedObjectContext.parentContext = self.managedObjectContext
                             for index in 0 ..< data.count {
-                                if let publisherData = data[index] as? NSDictionary{
+                                if let publisherData = data[index].dictionary {
                                     let restPublisher = RestPublisher(publisherData: publisherData)
-                                    let publisher = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
+                                    _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
                                 }
                             }
-                            publishersManagedObjectContext.save(nil)
+                            do {
+                                try publishersManagedObjectContext.save()
+                            } catch _ {
+                            }
                     }
                 } else {
                     
@@ -99,7 +109,7 @@ class DataManager {
         let entityDescription =
         NSEntityDescription.entityForName("Banner",
             inManagedObjectContext: managedObjectContext!)
-        api.searchFor(.Banners, completionHandler: { ( JSONDictionary: NSDictionary) -> Void in
+        api.searchFor(.Banners, completionHandler: { (json: JSON) -> Void in
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 if data.count == 0 {
                     completitionHandler(image: UIImage(named: "launch_background.png")!)
@@ -107,10 +117,13 @@ class DataManager {
                     for index in 0 ..< data.count {
                         if let bannerData = data[index] as? NSDictionary {
                             let restBanner = RestBanner(bannerData: bannerData)
-                            let banner = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+                            _ = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                         }
                     }
-                    self.managedObjectContext?.save(nil)
+                    do {
+                        try self.managedObjectContext?.save()
+                    } catch _ {
+                    }
                 }
             }
         })
@@ -122,7 +135,7 @@ class DataManager {
             inManagedObjectContext: managedObjectContext!)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let results = managedObjectContext?.executeFetchRequest(fetchRequest, error: nil)
+        let results = try? managedObjectContext?.executeFetchRequest(fetchRequest)
         let categories = results as! [Category]
         if let categIndex = categoryIndex {
             for category in categories {
@@ -132,12 +145,12 @@ class DataManager {
                 }
             }
         } else {
-        api.searchFor(.Categories, completionHandler: { (JSONDictionary: NSDictionary) -> Void in
+        api.searchFor(.Categories, completionHandler: { (json: JSON) -> Void in
             if let data = JSONDictionary["data"] as? [AnyObject] {
                 for index in 0 ..< data.count {
                 if let categoryData = data[index] as? NSDictionary {
                     let restCategory = RestCategory(categoryData: categoryData)
-                    let category = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+                    _ = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                 }
                 }
             }

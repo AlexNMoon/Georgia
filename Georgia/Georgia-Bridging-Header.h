@@ -9,6 +9,6 @@
 #ifndef Georgia_Georgia_Bridging_Header_h
 #define Georgia_Georgia_Bridging_Header_h
 
-#import <UIImageView+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif
