@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class RestBanner {
     
@@ -15,23 +16,23 @@ class RestBanner {
     let link: String?
     let title: String?
     
-    init(bannerData: NSDictionary) {
-        if let id = bannerData["id"] as? Int {
+    init(bannerData: JSON) {
+        if let id = bannerData["id"].int {
             self.bannerId = id
         } else {
            self.bannerId = nil
         }
-        if let image = bannerData["image"] as? String {
+        if let image = bannerData["image"].string {
             self.image = image
         } else {
             self.image = nil
         }
-        if let link = bannerData["link"] as? String {
+        if let link = bannerData["link"].string {
             self.link = link
         } else {
             self.link = nil
         }
-        if let title = bannerData["title"] as? String {
+        if let title = bannerData["title"].string {
             self.title = title
         } else {
             self.title = nil

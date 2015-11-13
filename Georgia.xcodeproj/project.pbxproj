@@ -21,7 +21,9 @@
 		9E52D39A1BE1222800F5A0D3 /* StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3991BE1222800F5A0D3 /* StringEncoding.swift */; };
 		9E5560611BBEB4650065B5EC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5560601BBEB4650065B5EC /* API.swift */; };
 		9E5560631BBEB6040065B5EC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5560621BBEB6040065B5EC /* DataManager.swift */; };
-		9E6BF8C21BF4E1B400ECD73A /* ArticleDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6BF8C11BF4E1B400ECD73A /* ArticleDataSource.swift */; };
+		9E71FB151BF61D5600C10E68 /* ArticlesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */; };
+		9E71FB171BF61D6F00C10E68 /* PublishersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */; };
+		9E71FB191BF61D9000C10E68 /* FiltersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */; };
 		9EB784031BC6A8BA007F963A /* ArticlesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB784021BC6A8BA007F963A /* ArticlesCell.swift */; };
 		9EBC83961BCD26CC005A671C /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBC83951BCD26CC005A671C /* ArticleViewController.swift */; };
 		9EC30D3C1BCFE3C100C0B218 /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC30D3B1BCFE3C100C0B218 /* ArticlesViewController.swift */; };
@@ -65,7 +67,9 @@
 		9E55605F1BBEAE520065B5EC /* Georgia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Georgia-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E5560601BBEB4650065B5EC /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9E5560621BBEB6040065B5EC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		9E6BF8C11BF4E1B400ECD73A /* ArticleDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleDataSource.swift; sourceTree = "<group>"; };
+		9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesDataSource.swift; sourceTree = "<group>"; };
+		9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersDataSource.swift; sourceTree = "<group>"; };
+		9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersDataSource.swift; sourceTree = "<group>"; };
 		9EB784021BC6A8BA007F963A /* ArticlesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesCell.swift; sourceTree = "<group>"; };
 		9EBC83951BCD26CC005A671C /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		9EC30D3B1BCFE3C100C0B218 /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
@@ -194,7 +198,9 @@
 				9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */,
 				9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */,
 				9E52D3991BE1222800F5A0D3 /* StringEncoding.swift */,
-				9E6BF8C11BF4E1B400ECD73A /* ArticleDataSource.swift */,
+				9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */,
+				9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */,
+				9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -383,17 +389,19 @@
 				9E5560631BBEB6040065B5EC /* DataManager.swift in Sources */,
 				9E52D38C1BE1193100F5A0D3 /* Category.swift in Sources */,
 				9ECC9F831BC412BF004400C9 /* PublisherViewController.swift in Sources */,
+				9E71FB151BF61D5600C10E68 /* ArticlesDataSource.swift in Sources */,
+				9E71FB191BF61D9000C10E68 /* FiltersDataSource.swift in Sources */,
 				9EB784031BC6A8BA007F963A /* ArticlesCell.swift in Sources */,
 				9EC30D3C1BCFE3C100C0B218 /* ArticlesViewController.swift in Sources */,
 				9E52D3981BE11A2E00F5A0D3 /* RestBanner.swift in Sources */,
 				9E52D3961BE11A1C00F5A0D3 /* RestCategory.swift in Sources */,
+				9E71FB171BF61D6F00C10E68 /* PublishersDataSource.swift in Sources */,
 				9EEECD2B1BE8EEEF00BA90B8 /* FiltersCell.swift in Sources */,
 				9ED9EC0C1BBC3104007DEE61 /* PublishersViewController.swift in Sources */,
 				9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */,
 				9ED9EBEC1BBC24AA007DEE61 /* Georgia.xcdatamodeld in Sources */,
 				9E5560611BBEB4650065B5EC /* API.swift in Sources */,
 				9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */,
-				9E6BF8C21BF4E1B400ECD73A /* ArticleDataSource.swift in Sources */,
 				9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */,
 				9EBC83961BCD26CC005A671C /* ArticleViewController.swift in Sources */,
 				9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */,

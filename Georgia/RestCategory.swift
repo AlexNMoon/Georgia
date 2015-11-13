@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class RestCategory {
     
@@ -16,18 +17,18 @@ class RestCategory {
     let categoriesId: Int?
     let title: String?
     
-    init(categoryData: NSDictionary) {
-        if let isDeleted = categoryData["is_deleted"] as? Int {
+    init(categoryData: JSON) {
+        if let isDeleted = categoryData["is_deleted"].int {
             self.categIsDeleted = isDeleted
         } else {
             self.categIsDeleted =  nil
         }
-        if let id = categoryData["id"] as? Int {
+        if let id = categoryData["id"].int {
             self.categoriesId = id
         } else {
             self.categoriesId = nil
         }
-        if let title = categoryData["title"] as? String {
+        if let title = categoryData["title"].string {
             self.title = self.stringEncoding.encoding(title)
         } else {
             self.title = nil

@@ -13,6 +13,8 @@ class ArticlesCell: UITableViewCell {
     
     let dataManager = DataManager()
     
+    
+    
     @IBOutlet weak var publisher: UILabel!
     
     @IBOutlet weak var title: UILabel!
@@ -34,6 +36,7 @@ class ArticlesCell: UITableViewCell {
         } else {
             self.articleImage.image = nil
         }
+        
     }
     
 }

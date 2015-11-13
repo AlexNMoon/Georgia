@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class RestArticle {
     
@@ -26,44 +27,44 @@ class RestArticle {
     var category: Category? = nil
     var publisher: Publisher? = nil
     
-    init(articleData: NSDictionary) {
-        if let id = articleData["id"] as? Int {
+    init(articleData: JSON) {
+        if let id = articleData["id"].int {
             self.articleId = id
             self.text = self.dataManager.getText(id)
         }
-        if let isDeleted = articleData["is_deleted"] as? Int {
+        if let isDeleted = articleData["is_deleted"].int {
             self.articleIsDeleted = isDeleted
         }
-        if let createdAt = articleData["created_at"] as? Int {
+        if let createdAt = articleData["created_at"].int {
             self.createdAt = createdAt
         }
-        if let title = articleData["title"] as? String {
+        if let title = articleData["title"].string {
             self.title = title
         }
-        if let publisherId = articleData["publisher_id"] as? Int {
+        if let publisherId = articleData["publisher_id"].int {
             self.dataManager.getPublishers(publisherId, completionHandler: {(publisherForArticle: Publisher) -> Void in
                 self.publisher = publisherForArticle
             })
         }
-        if let publisherTime = articleData["publisher_time"] as? Int {
+        if let publisherTime = articleData["publisher_time"].int {
             self.publisherTime = publisherTime
         }
-        if let status = articleData["status"] as? Int {
+        if let status = articleData["status"].int {
             self.status = status
         }
-        if let image = articleData["image"] as? String {
+        if let image = articleData["image"].string {
             self.image = image
         }
-        if let link = articleData["link"] as? String {
+        if let link = articleData["link"].string {
             self.link = link
         }
-        if let updatedAt = articleData["updated_at"] as? Int {
+        if let updatedAt = articleData["updated_at"].int {
             self.updatedAt = updatedAt
         }
-        if let video = articleData["video"] as? String {
+        if let video = articleData["video"].string {
             self.video = video
         }
-        if let categoryId = articleData["category_id"] as? Int {
+        if let categoryId = articleData["category_id"].int {
             self.dataManager.getCategories(categoryId, completionHandler: {(categoryForArticle: Category) -> Void in
                 self.category = categoryForArticle
             })

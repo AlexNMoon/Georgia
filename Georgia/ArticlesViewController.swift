@@ -9,37 +9,11 @@
 import UIKit
 import CoreData
 
-class ArticlesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
+class ArticlesViewController: UIViewController {
     
     let dataManager = DataManager()
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
-    var fetchedResultsController: NSFetchedResultsController {
-        if self.restFetchedResultsController != nil {
-            return self.restFetchedResultsController!
-        }
-        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: self.managedObjectContext!)
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = entityDescription
-        let sort = NSSortDescriptor(key: "title", ascending: true)
-        fetchRequest.sortDescriptors = [sort]
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
-        aFetchedResultsController.delegate = self
-        self.restFetchedResultsController = aFetchedResultsController
-        var e: NSError?
-        do {
-            try self.restFetchedResultsController!.performFetch()
-        } catch let error as NSError {
-            e = error
-            print("fetch error: \(e!.localizedDescription)")
-            abort();
-        }
-        
-        return self.restFetchedResultsController!
-    }
-    
-    var restFetchedResultsController: NSFetchedResultsController?
+    var articlesDataSource: ArticlesDataSource!
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -49,10 +23,11 @@ class ArticlesViewController: UIViewController, UITableViewDelegate, UITableView
    
     @IBOutlet var settings: UIBarButtonItem!
     
-    var cellQuantity: Int = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.articlesDataSource = ArticlesDataSource(tableView: self.tableView)
+        self.tableView.dataSource = self.articlesDataSource
+        self.tableView.delegate = self.articlesDataSource
         self.navigationItem.rightBarButtonItems = [self.filters, self.settings]
         self.navigationItem.title = "News Feed"
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
@@ -65,10 +40,10 @@ class ArticlesViewController: UIViewController, UITableViewDelegate, UITableView
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    let entityDescription = NSEntityDescription.entityForName("Banner", inManagedObjectContext: self.managedObjectContext!)
+                    let entityDescription = NSEntityDescription.entityForName("Banner", inManagedObjectContext: self.articlesDataSource.managedObjectContext!)
                     let fetchRequest = NSFetchRequest()
                     fetchRequest.entity = entityDescription
-                    let results = try? self.managedObjectContext!.executeFetchRequest(fetchRequest)
+                    let results = try? self.articlesDataSource.managedObjectContext!.executeFetchRequest(fetchRequest)
                     let banners = results as! [Banner]
                     let bannerLogo = UIImage(named: banners[0].image)
                     self.bannerButton.setBackgroundImage(bannerLogo, forState: UIControlState.Normal)
@@ -82,23 +57,6 @@ class ArticlesViewController: UIViewController, UITableViewDelegate, UITableView
         super.didReceiveMemoryWarning()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let info = self.fetchedResultsController.sections![section] 
-        self.cellQuantity = info.numberOfObjects
-        return self.cellQuantity
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
-        let article = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Article
-        cell.setParametrs(article)
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 109.0
-    }
-    
     func closeView() {
         self.navigationController?.popViewControllerAnimated(true)
     }
@@ -107,38 +65,6 @@ class ArticlesViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         self.dataManager.getArticles()
-        self.tableView!.reloadData()
     }
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-        case .Insert:
-            print("insert")
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Update:
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! ArticlesCell
-            let article = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Article
-            print("update")
-            cell.setParametrs(article)
-            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Move:
-            print("move")
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Delete:
-            print("delete")
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-       }
-
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
-    }
-
     
 }

@@ -477,10 +477,6 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="YNj-bu-4Fu" id="TYJ-X1-BBD"/>
-                                    <outlet property="delegate" destination="YNj-bu-4Fu" id="5UM-zw-XIX"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>

@@ -23,10 +23,9 @@ class DataManager {
     func getText(id: Int) -> String? {
         var text: String? = nil
         api.searchFor(.Text, completionHandler: { (json: JSON) -> Void in
-            if let data = JSONDictionary["data"] as? NSDictionary {
-                if let textData = data["full_description"] as? String {
+            let data = json["data"]
+                if let textData = data["full_description"].string {
                      text = self.stringEncoding.encoding(textData)
-                }
             }
         })
         return text
@@ -50,14 +49,11 @@ class DataManager {
         } catch _ {
         }
         api.searchFor(.Articles, completionHandler: { (json: JSON) -> Void in
-            var articlesResult: [Article] = []
-            if let data = JSONDictionary["data"] as? [AnyObject] {
+            if let data = json["data"].array {
                 for index in 0 ..< data.count {
-                    if let articleData = data[index] as? NSDictionary {
+                    let articleData = data[index]
                         let restArticle = RestArticle(articleData: articleData)
-                        let article = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: articlesManagedObjectContext)
-                        articlesResult.append(article)
-                    }
+                        _ = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: articlesManagedObjectContext)
                 }
             }
             do {
@@ -87,16 +83,15 @@ class DataManager {
                     if let data = json["data"].array {
                         let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
                         publishersManagedObjectContext.parentContext = self.managedObjectContext
-                            for index in 0 ..< data.count {
-                                if let publisherData = data[index].dictionary {
-                                    let restPublisher = RestPublisher(publisherData: publisherData)
-                                    _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
-                                }
-                            }
+                        for index in 0 ..< data.count {
+                            let publisherData = data[index]
+                            let restPublisher = RestPublisher(publisherData: publisherData)
+                            _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
                             do {
                                 try publishersManagedObjectContext.save()
                             } catch _ {
                             }
+                        }
                     }
                 } else {
                     
@@ -110,15 +105,14 @@ class DataManager {
         NSEntityDescription.entityForName("Banner",
             inManagedObjectContext: managedObjectContext!)
         api.searchFor(.Banners, completionHandler: { (json: JSON) -> Void in
-            if let data = JSONDictionary["data"] as? [AnyObject] {
+            if let data = json["data"].array {
                 if data.count == 0 {
                     completitionHandler(image: UIImage(named: "launch_background.png")!)
                 } else {
                     for index in 0 ..< data.count {
-                        if let bannerData = data[index] as? NSDictionary {
-                            let restBanner = RestBanner(bannerData: bannerData)
-                            _ = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
-                        }
+                        let bannerData = data[index]
+                        let restBanner = RestBanner(bannerData: bannerData)
+                        _ = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
                     }
                     do {
                         try self.managedObjectContext?.save()
@@ -145,16 +139,15 @@ class DataManager {
                 }
             }
         } else {
-        api.searchFor(.Categories, completionHandler: { (json: JSON) -> Void in
-            if let data = JSONDictionary["data"] as? [AnyObject] {
-                for index in 0 ..< data.count {
-                if let categoryData = data[index] as? NSDictionary {
-                    let restCategory = RestCategory(categoryData: categoryData)
-                    _ = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+            api.searchFor(.Categories, completionHandler: { (json: JSON) -> Void in
+                if let data = json["data"].array {
+                    for index in 0 ..< data.count {
+                        let categoryData = data[index]
+                        let restCategory = RestCategory(categoryData: categoryData)
+                        _ = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: self.managedObjectContext)
+                    }
                 }
-                }
-            }
-        })
+            })
         }
     }
     
