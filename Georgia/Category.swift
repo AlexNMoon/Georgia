@@ -13,11 +13,11 @@ import CoreData
 
 class Category: NSManagedObject {
 
-    @NSManaged var categIsDeleted: NSNumber
+    @NSManaged var categIsDeleted: NSNumber?
     @NSManaged var categoriesId: NSNumber
-    @NSManaged var isSelected: NSNumber
-    @NSManaged var title: String
-    @NSManaged var catArticles: NSSet
+    @NSManaged var isSelected: NSNumber?
+    @NSManaged var title: String?
+    @NSManaged var catArticles: NSSet?
 
 }
 

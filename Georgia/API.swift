@@ -40,8 +40,9 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         let url = NSURL(string: searchTerm)
         let request1: NSURLRequest = NSURLRequest(URL: url!)
         NSURLConnection.sendAsynchronousRequest(request1, queue: self.queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
-                let json = JSON(data!)
+            let json = JSON(data: data!)
                 completionHandler(json: json)
+            print("\(json.dictionary)")
         })
     }
 

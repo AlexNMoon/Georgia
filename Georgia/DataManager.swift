@@ -64,11 +64,13 @@ class DataManager {
     }
     
     func getPublishers(publisherIndex: Int?, completionHandler: (publisherForArticle: Publisher) -> Void) {
-        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: managedObjectContext!)
+        let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+        publishersManagedObjectContext.parentContext = self.managedObjectContext
+        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: publishersManagedObjectContext)
         var publishers = [Publisher]()
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let results = try? managedObjectContext?.executeFetchRequest(fetchRequest)
+        let results = try? publishersManagedObjectContext.executeFetchRequest(fetchRequest)
         publishers = results as! [Publisher]
         if let publIndex = publisherIndex {
             for publisher in publishers {
@@ -81,8 +83,6 @@ class DataManager {
             api.searchFor(.Publishers, completionHandler: { (json: JSON) -> Void in
                 if publishers.count == 0 {
                     if let data = json["data"].array {
-                        let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-                        publishersManagedObjectContext.parentContext = self.managedObjectContext
                         for index in 0 ..< data.count {
                             let publisherData = data[index]
                             let restPublisher = RestPublisher(publisherData: publisherData)
@@ -94,7 +94,24 @@ class DataManager {
                         }
                     }
                 } else {
-                    
+                    if let data = json["data"].array {
+                        for index in 0 ..< data.count {
+                            var number: Int = 0
+                            for publisher in publishers {
+                                if publisher.publidherId == data[index]["id"].int {
+                                    number++
+                                }
+                            }
+                            if number == 0 {
+                                let restPublisher = RestPublisher(publisherData: data[index])
+                                _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
+                                do {
+                                    try publishersManagedObjectContext.save()
+                                } catch _ {
+                                }
+                            }
+                        }
+                    }
                 }
             })
         }

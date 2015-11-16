@@ -473,7 +473,7 @@
                                             <outlet property="articleImage" destination="p7Q-cE-WGP" id="Ev3-gf-bCe"/>
                                             <outlet property="publisher" destination="Byw-lB-QN5" id="wjV-eX-IUu"/>
                                             <outlet property="title" destination="wOP-Ev-WP7" id="EzE-Ne-rco"/>
-                                            <segue destination="Xoc-jT-Dj7" kind="show" id="t1S-NV-0rl"/>
+                                            <segue destination="Xoc-jT-Dj7" kind="show" identifier="segueArticle" id="t1S-NV-0rl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -623,10 +623,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hgf-S0-q0y">
-                        <barButtonItem key="rightBarButtonItem" image="article_share_icon@3x.png" id="SyN-7R-UeN"/>
+                        <barButtonItem key="rightBarButtonItem" image="article_share_icon" id="SyN-7R-UeN"/>
                     </navigationItem>
                     <connections>
                         <outlet property="articleText" destination="vwe-gJ-56h" id="3Ri-AS-SWq"/>
+                        <outlet property="articleTitle" destination="0Ek-KE-agX" id="eOJ-GI-6di"/>
+                        <outlet property="date" destination="Uyb-CB-bXz" id="jc9-x1-IW1"/>
+                        <outlet property="image" destination="fU1-6q-dsR" id="29J-Xt-HAj"/>
+                        <outlet property="publishersLogo" destination="BYs-66-NKX" id="n5O-Kl-Kc3"/>
+                        <outlet property="publishersName" destination="I2x-Ng-fKS" id="ZOQ-22-Kjf"/>
                         <outlet property="textHeightConstraint" destination="ZbM-bo-Aed" id="vL5-Z6-d15"/>
                     </connections>
                 </viewController>
@@ -689,7 +694,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="article_share_icon@3x.png" width="53" height="53"/>
+        <image name="article_share_icon" width="17" height="17"/>
         <image name="feed_filter_icon" width="18" height="18"/>
         <image name="launch_background" width="1565" height="2253"/>
         <image name="publisher_location_icon" width="28" height="23"/>

@@ -78,12 +78,7 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
         case .Insert:
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Update:
-            if indexPath != nil {
-                let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! PublishersCell
-                let publisher = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Publisher
-                cell.setParametrs(publisher, fetchedResultsController: self.fetchedResultsController)
-                self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            }
+            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Move:
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)

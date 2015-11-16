@@ -11,7 +11,7 @@ import CoreData
 
 class PublisherViewController: UIViewController {
     
-    var publisher: NSManagedObject!
+    var publisher: Publisher!
    
     @IBOutlet weak var name: UILabel!
     
@@ -40,26 +40,26 @@ class PublisherViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        if let logoUrl = publisher.valueForKey("logo") as? String {
+        if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
         }
-        if let name = publisher.valueForKey("name") as? String {
+        if let name = publisher.name {
             
             self.name.text = name
             self.navigationItem.title = name
         }
-        if let text = publisher.valueForKey("publDescription") as? String {
+        if let text = publisher.publDescription {
             self.text.text = text
             let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
             self.textHeightConstraint.constant = size.height
         }
-        if let address = publisher.valueForKey("address") as? String {
+        if let address = publisher.address {
             self.address.text = address
         }
-        if let mail = publisher.valueForKey("email") as? String {
+        if let mail = publisher.email {
             self.mail.text = mail
         }
-        if let phone = publisher.valueForKey("telephone") as? String {
+        if let phone = publisher.telephone {
             self.phone.text = phone
         }
     }
@@ -79,7 +79,7 @@ class PublisherViewController: UIViewController {
     }
     
     @IBAction func tapPhone(sender: AnyObject) {
-        if let phone = self.publisher.valueForKey("telephone") as? String {
+        if let phone = self.publisher.telephone {
             let url = "tel://" + phone.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }

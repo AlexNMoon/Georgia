@@ -10,21 +10,24 @@ import UIKit
 
 class ArticleViewController: UIViewController {
     
-    let dataManager = DataManager()
+    var article: Article!
     
     @IBOutlet weak var articleText: UITextView!
     
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var image: UIImageView!
+    
+    @IBOutlet weak var publishersLogo: UIImageView!
+    
+    @IBOutlet weak var publishersName: UILabel!
+    
+    @IBOutlet weak var date: UILabel!
+    
+    @IBOutlet weak var articleTitle: UILabel!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-       /* dataManager.getText({ (text: String) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.articleText.text = text
-                let size = self.articleText.sizeThatFits(CGSize(width: self.articleText.frame.size.width, height: CGFloat.max))
-                self.textHeightConstraint.constant = size.height
-            })
-        })*/
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
@@ -33,6 +36,18 @@ class ArticleViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        if let text = self.article.text {
+            self.articleText.text = text
+        }
+        if let logo = self.article.publisher.logo {
+            self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))
+        }
+        if let name = self.article.publisher.name {
+            self.publishersName.text = name
+        }
+        if let title = self.article.title {
+            self.articleTitle.text = title
+        }
     }
     
     func closeView() {

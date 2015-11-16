@@ -24,8 +24,8 @@ class PublishersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.publishersDataSource = PublishersDataSource(selectAll: self.selectAll, tableView: self.tableView)
-        self.tableView.delegate = publishersDataSource
-        self.tableView.dataSource = publishersDataSource
+        self.tableView.delegate = self.publishersDataSource
+        self.tableView.dataSource = self.publishersDataSource
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.dataManager.getPublishers(nil, completionHandler: {(publisherForArticle) -> Void in
@@ -73,4 +73,9 @@ class PublishersViewController: UITableViewController {
         }
     }
     
+    @IBAction func tapViewSelected(sender: AnyObject) {
+        if self.selectAll.title == "Select All" {
+            
+        }
+    }
 }

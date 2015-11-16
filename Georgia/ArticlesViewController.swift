@@ -33,24 +33,14 @@ class ArticlesViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
+       // self.dataManager.getArticles()
         self.dataManager.getBanners({(image: UIImage?) -> Void in
             if (image != nil) {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
                     self.bannerButton.setBackgroundImage(image, forState: UIControlState.Normal)
                 })
-            } else {
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    let entityDescription = NSEntityDescription.entityForName("Banner", inManagedObjectContext: self.articlesDataSource.managedObjectContext!)
-                    let fetchRequest = NSFetchRequest()
-                    fetchRequest.entity = entityDescription
-                    let results = try? self.articlesDataSource.managedObjectContext!.executeFetchRequest(fetchRequest)
-                    let banners = results as! [Banner]
-                    let bannerLogo = UIImage(named: banners[0].image)
-                    self.bannerButton.setBackgroundImage(bannerLogo, forState: UIControlState.Normal)
-                })
             }
         })
-        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +55,14 @@ class ArticlesViewController: UIViewController {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         self.dataManager.getArticles()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "segueArticle" {
+            let articleView = segue.destinationViewController as! ArticleViewController
+            let article = self.articlesDataSource.fetchedResultsController.objectAtIndexPath(self.articlesDataSource.indexOfSelectedCell) as! Article
+            articleView.article = article
+        }
     }
     
 }

@@ -11,6 +11,8 @@ import CoreData
 
 class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate  {
     
+    var indexOfSelectedCell: NSIndexPath!
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var fetchedResultsController: NSFetchedResultsController {
@@ -61,6 +63,11 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
         return 109.0
     }
     
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        indexOfSelectedCell = indexPath
+        return indexPath
+    }
+    
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -71,10 +78,7 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
             print("insert")
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Update:
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! ArticlesCell
-            let article = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Article
             print("update")
-            cell.setParametrs(article)
             self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Move:
             print("move")
@@ -93,61 +97,3 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
 
 
 }
-
-/*class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
-    
-    var cellQuantity: Int = 0
-    
-    init(fetchedResultsController: NSFetchedResultsController) {
-        self.fetchedResultsController = fetchedResultsController
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let info = self.fetchedResultsController.sections![section]
-        self.cellQuantity = info.numberOfObjects
-        return self.cellQuantity
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
-        let article = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Article
-        cell.setParametrs(article)
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 109.0
-    }
-    
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-    
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-        case .Insert:
-            print("insert")
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Update:
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as! ArticlesCell
-            let article = self.fetchedResultsController.objectAtIndexPath(indexPath!) as! Article
-            print("update")
-            cell.setParametrs(article)
-            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Move:
-            print("move")
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Delete:
-            print("delete")
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-        
-    }
-    
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
-    }
-
-    
-}*/

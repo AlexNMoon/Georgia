@@ -5,6 +5,7 @@ target 'Georgia' do
 
 pod 'SDWebImage', '~> 3.7'
 pod 'SwiftyJSON', '~> 2.3'
+
 use_frameworks!
 end
 
