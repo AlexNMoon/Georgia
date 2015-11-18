@@ -28,12 +28,13 @@ class ArticlesViewController: UIViewController {
         self.articlesDataSource = ArticlesDataSource(tableView: self.tableView)
         self.tableView.dataSource = self.articlesDataSource
         self.tableView.delegate = self.articlesDataSource
-        self.navigationItem.rightBarButtonItems = [self.filters, self.settings]
+        let font = UIFont.systemFontOfSize(22);
+        self.settings.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        self.navigationItem.rightBarButtonItems = [self.settings, self.filters]
         self.navigationItem.title = "News Feed"
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
-       // self.dataManager.getArticles()
         self.dataManager.getBanners({(image: UIImage?) -> Void in
             if (image != nil) {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in

@@ -38,6 +38,8 @@ class ArticleViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         if let text = self.article.text {
             self.articleText.text = text
+            let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
+            self.textHeightConstraint.constant = size.height
         }
         if let logo = self.article.publisher.logo {
             self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))

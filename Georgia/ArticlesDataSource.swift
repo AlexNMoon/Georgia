@@ -55,7 +55,7 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
         let article = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Article
-        cell.setParametrs(article)
+        cell.setParameters(article)
         return cell
     }
     

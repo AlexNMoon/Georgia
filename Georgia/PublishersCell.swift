@@ -33,39 +33,21 @@ class PublishersCell: UITableViewCell {
 
     @IBAction func tapAddPublisherButton(sender: AnyObject) {
         if publisher.isSelected == 1 {
-            self.publiserIsUnselected()
             self.publisherUnselectedCoreData()
-            if self.selectAll.title != "Select All" {
-                let info = self.fetchedResultsController.sections![0] 
-                let cellQuantity = info.numberOfObjects
-                var selected: Int = 0
-                for index in 0 ..< cellQuantity {
-                    let publisher = self.fetchedResultsController.objectAtIndexPath(NSIndexPath(forRow: index, inSection: 0)) as! Publisher
-                    if publisher.isSelected != 1 {
-                        selected++
-                    }
-                }
-                if selected == cellQuantity {
-                    self.selectAll.title = "Select All"
-                }
-            }
         } else {
-            self.publisherIsSelected()
             self.publisherSelectedCoreData()
-            if self.selectAll.title == "Select All" {
-                self.selectAll.title = "Unselect All"
-            }
         }
     }
     
-    func setParametrs(publisher: Publisher, fetchedResultsController: NSFetchedResultsController) {
+    func setParameters(publisher: Publisher, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {
         self.publisher = publisher
         self.fetchedResultsController = fetchedResultsController
-        if publisher.isSelected == 0 {
-            self.publiserIsUnselected()
+        self.selectAll = selectAll
+        if publisher.isSelected == 1 {
+            self.publisherIsSelected()
         } else {
-            if publisher.isSelected == 1 {
-                self.publisherIsSelected()
+            if publisher.isSelected == 0 {
+                self.publiserIsUnselected()
             }
         }
         if let logoUrl = publisher.logo {

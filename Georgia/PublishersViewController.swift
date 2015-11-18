@@ -28,9 +28,12 @@ class PublishersViewController: UITableViewController {
         self.tableView.dataSource = self.publishersDataSource
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        let font = UIFont.systemFontOfSize(14);
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
         self.dataManager.getPublishers(nil, completionHandler: {(publisherForArticle) -> Void in
         })
-        
+        self.dataManager.getCategories(nil, completionHandler: {(categoryForArticle: Category) -> Void in})
         self.publishersDataSource.setSelectAll()
     }
     
@@ -58,14 +61,12 @@ class PublishersViewController: UITableViewController {
                     publisher.isSelected = 1
                 }
             }
-            self.selectAll.title = "Unselect All"
         } else {
             for publisher in self.publishersDataSource.fetchedResultsController.fetchedObjects! as! [Publisher] {
                 if publisher.isSelected == 1 {
                     publisher.isSelected = 0
                 }
             }
-            self.selectAll.title = "Select All"
         }
         do {
             try self.publishersDataSource.managedObjectContext?.save()

@@ -58,8 +58,7 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Publishers cell", forIndexPath: indexPath) as! PublishersCell
         let publisher = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Publisher
-        cell.setParametrs(publisher, fetchedResultsController: self.fetchedResultsController)
-        cell.selectAll = self.selectAll
+        cell.setParameters(publisher, fetchedResultsController: self.fetchedResultsController, selectAll: self.selectAll)
         return cell
     }
     
@@ -94,10 +93,23 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
     
     func setSelectAll() {
         if self.fetchedResultsController.fetchedObjects != nil {
-            for publisher in self.fetchedResultsController.fetchedObjects! as! [Publisher] {
-                if publisher.isSelected == 1 {
-                    self.selectAll.title = "Unselect All"
-                    break
+            if self.selectAll.title == "Select All" {
+                for publisher in self.fetchedResultsController.fetchedObjects! as! [Publisher] {
+                    if publisher.isSelected == 1 {
+                        self.selectAll.title = "Unselect All"
+                        break
+                    }
+                }
+                
+            } else {
+                var selected: Int = 0
+                for publisher in self.fetchedResultsController.fetchedObjects! as! [Publisher] {
+                    if publisher.isSelected == 1 {
+                        selected++
+                    }
+                }
+                if selected == 0 {
+                    self.selectAll.title = "Select All"
                 }
             }
         }

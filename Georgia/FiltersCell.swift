@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class FiltersCell: UITableViewCell {
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    var fetchedResultsController: NSFetchedResultsController!
     
     @IBOutlet weak var addCategory: UIButton!
     
@@ -18,17 +23,57 @@ class FiltersCell: UITableViewCell {
     
     let added = UIImage(named: "publishers_added_icon")
     
-    var addedCategory: Bool = false
+    var category: Category!
+    
+    var selectAll: UIBarButtonItem!
+    
+    func setParameters(category: Category, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {
+        self.category = category
+        self.fetchedResultsController = fetchedResultsController
+        self.selectAll = selectAll
+        if let name = category.title {
+            self.categoryName.text = name
+        }
+        if category.isSelected == 1 {
+            self.categoryIsSelected()
+        } else {
+            self.categoryIsUnselected()
+        }
+
+    }
     
     @IBAction func tapAddCategory(sender: AnyObject) {
-        if addedCategory {
-            addCategory.setImage(add, forState: UIControlState.Normal)
-            addCategory.tintColor = UIColor.grayColor()
-            addedCategory = false
+        if category.isSelected == 1 {
+            self.categoryUnselectedCoreData()
         } else {
-            addCategory.setImage(added, forState: UIControlState.Normal)
-            addCategory.tintColor = UIColor.cyanColor()
-            addedCategory = true
+            self.categorySelectedCoreData()
         }
     }
+    
+    func categoryIsSelected() {
+        addCategory.setImage(added, forState: UIControlState.Normal)
+        addCategory.tintColor = UIColor.grayColor()
+    }
+    
+    func categoryIsUnselected() {
+        addCategory.setImage(add, forState: UIControlState.Normal)
+        addCategory.tintColor = UIColor.cyanColor()
+    }
+    
+    func categorySelectedCoreData() {
+        category.isSelected = 1
+        do {
+            try managedObjectContext?.save()
+        } catch _ {
+        }
+    }
+    
+    func categoryUnselectedCoreData() {
+        category.isSelected = 0
+        do {
+            try managedObjectContext?.save()
+        } catch _ {
+        }
+    }
+
 }

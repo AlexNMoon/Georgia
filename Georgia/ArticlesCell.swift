@@ -21,7 +21,7 @@ class ArticlesCell: UITableViewCell {
     
     @IBOutlet weak var articleImage: UIImageView!
     
-    func setParametrs(article: Article) {
+    func setParameters(article: Article) {
         self.publisher.textColor = UIColor.cyanColor()
         if let articlesPublisher = article.valueForKey("publisher") as? Publisher {
             if let name = articlesPublisher.valueForKey("name") as? String {

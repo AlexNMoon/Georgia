@@ -13,6 +13,8 @@ class RestArticle {
     
     let dataManager = DataManager()
     
+    let stringEncoding = StringEncoding()
+    
     var articleId: Int? = nil
     var articleIsDeleted: Int? = nil
     var createdAt: Int? = nil
@@ -30,7 +32,9 @@ class RestArticle {
     init(articleData: JSON) {
         if let id = articleData["id"].int {
             self.articleId = id
-            self.text = self.dataManager.getText(id)
+            if let textData = self.dataManager.getText(id){
+                self.text = self.stringEncoding.encoding(textData["data"]["full_description"].string!)
+            }
         }
         if let isDeleted = articleData["is_deleted"].int {
             self.articleIsDeleted = isDeleted
@@ -69,6 +73,6 @@ class RestArticle {
                 self.category = categoryForArticle
             })
         }
-    }
+            }
 
 }
