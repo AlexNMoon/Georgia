@@ -25,6 +25,7 @@ class Publisher: NSManagedObject {
     @NSManaged var site: String?
     @NSManaged var telephone: String?
     @NSManaged var updatedAt: NSNumber?
+    @NSManaged var stream: String?
     @NSManaged var pubArticles: NSSet
 
 }
@@ -65,6 +66,9 @@ extension Publisher {
         }
         if let updatedAt = publisher.updatedAt {
             self.updatedAt = updatedAt
+        }
+        if let stream = publisher.stream {
+            self.stream = stream
         }
     }
 }

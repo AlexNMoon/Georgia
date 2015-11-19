@@ -25,7 +25,15 @@ class PublisherViewController: UIViewController {
     
     @IBOutlet weak var text: UITextView!
     
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var liveButton: UIButton!
+    
+    @IBOutlet weak var siteButton: UIButton!
+    
+    @IBOutlet weak var feedbackButton: UIButton!
     
     override func viewDidLoad() {
         let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .Plain, target: self, action: "closeView")
@@ -42,25 +50,46 @@ class PublisherViewController: UIViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+            let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
+            self.text.textContainer.exclusionPaths = [imageRect]
+            self.text.addSubview(self.logo)
         }
         if let name = publisher.name {
-            
             self.name.text = name
             self.navigationItem.title = name
         }
         if let text = publisher.publDescription {
             self.text.text = text
             let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
-            self.textHeightConstraint.constant = size.height
+            if size.height > CGFloat(120) {
+                self.textHeightConstraint.constant = size.height
+            } else {
+                self.textHeightConstraint.constant = CGFloat(120)
+            }
         }
         if let address = publisher.address {
             self.address.text = address
         }
         if let mail = publisher.email {
             self.mail.text = mail
+        } else {
+            self.feedbackButton.enabled = false
         }
         if let phone = publisher.telephone {
             self.phone.text = phone
+        }
+        if self.publisher.site == nil {
+            self.siteButton.enabled = false
+        }
+        if self.publisher.stream == nil {
+            self.liveButton.enabled = false
+        }
+        if self.feedbackButton.enabled == false {
+            if (self.siteButton.enabled == false) && (self.liveButton.enabled == false) {
+                self.scrollViewHeightConstraint.constant += CGFloat(64)
+            } else {
+                self.scrollViewHeightConstraint.constant += CGFloat(32)
+            }
         }
     }
     
@@ -72,7 +101,10 @@ class PublisherViewController: UIViewController {
         }
     }
     
-    @IBAction func tapAddress(sender: AnyObject) {
+    @IBAction func tapFeedback(sender: AnyObject) {
+    }
+    
+    @IBAction func tapLive(sender: AnyObject) {
     }
     
     @IBAction func tapMail(sender: AnyObject) {

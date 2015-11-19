@@ -23,6 +23,7 @@ class RestPublisher {
     let publIsDeleted: Int?
     let site: String?
     let telephone: String?
+    let stream: String?
     let updatedAt: Int?
     
     init(publisherData: JSON) {
@@ -80,6 +81,11 @@ class RestPublisher {
             self.updatedAt = updatedAt
         } else {
             self.updatedAt = nil
+        }
+        if let stream = publisherData["stream"].string {
+            self.stream = stream
+        } else {
+            self.stream = nil
         }
     }
     

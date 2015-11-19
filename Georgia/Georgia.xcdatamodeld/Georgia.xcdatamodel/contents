@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
     <entity name="Article" representedClassName="Article" syncable="YES">
         <attribute name="articleId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="articleIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -40,6 +40,7 @@
         <attribute name="publidherId" attributeType="Integer 16" syncable="YES"/>
         <attribute name="publIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stream" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Integer 16" syncable="YES"/>
         <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="publisher" inverseEntity="Article" syncable="YES"/>
@@ -48,6 +49,6 @@
         <element name="Article" positionX="142" positionY="-9" width="128" height="240"/>
         <element name="Banner" positionX="142" positionY="285" width="128" height="118"/>
         <element name="Category" positionX="-65" positionY="-9" width="128" height="118"/>
-        <element name="Publisher" positionX="-65" positionY="131" width="128" height="238"/>
+        <element name="Publisher" positionX="-65" positionY="131" width="128" height="255"/>
     </elements>
 </model>
