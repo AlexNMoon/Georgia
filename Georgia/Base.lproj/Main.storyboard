@@ -113,6 +113,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="rdb-iB-zVb"/>
                                     <constraint firstAttribute="width" constant="301" id="wLb-sE-gaz"/>
                                 </constraints>
                                 <state key="normal" title="GO TO WEB-SITE">
@@ -121,21 +122,6 @@
                                 </state>
                                 <connections>
                                     <action selector="tapGoToWebSiteButton:" destination="bGa-oY-MiU" eventType="touchUpInside" id="143-Ig-pSm"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-ce-oNy">
-                                <rect key="frame" x="300" y="568" width="300" height="32"/>
-                                <animations/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="yMp-4G-fFF"/>
-                                </constraints>
-                                <state key="normal" title="LIVE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="tapLive:" destination="bGa-oY-MiU" eventType="touchUpInside" id="yBH-6d-VPk"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Edq-ml-g0Z">
@@ -291,6 +277,22 @@
                                     <constraint firstItem="XPV-Cc-H9D" firstAttribute="leading" secondItem="bh3-1f-V2l" secondAttribute="leading" id="xet-df-fMg"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-ce-oNy">
+                                <rect key="frame" x="280" y="568" width="320" height="32"/>
+                                <animations/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="UUE-Iu-z4w"/>
+                                    <constraint firstAttribute="width" constant="320" id="yMp-4G-fFF"/>
+                                </constraints>
+                                <state key="normal" title="LIVE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapLive:" destination="bGa-oY-MiU" eventType="touchUpInside" id="yBH-6d-VPk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -314,12 +316,16 @@
                         <outlet property="address" destination="bh3-1f-V2l" id="VZp-42-b2g"/>
                         <outlet property="feedbackButton" destination="0XY-Vt-luZ" id="oQL-Te-PXa"/>
                         <outlet property="liveButton" destination="Wnz-ce-oNy" id="CVf-ka-PM3"/>
+                        <outlet property="liveButtonHeightConstraint" destination="UUE-Iu-z4w" id="pYY-sF-ANs"/>
+                        <outlet property="liveButtonWidthConstraint" destination="yMp-4G-fFF" id="FUN-Mn-Bho"/>
                         <outlet property="logo" destination="00g-UV-qXZ" id="953-dX-vDm"/>
                         <outlet property="mail" destination="XPV-Cc-H9D" id="4w8-5v-3Pp"/>
                         <outlet property="name" destination="2sx-4v-Gol" id="lj8-QY-iHF"/>
                         <outlet property="phone" destination="uvA-AI-U2x" id="TeW-SN-uH7"/>
                         <outlet property="scrollViewHeightConstraint" destination="qb3-xQ-4VZ" id="cID-vY-QoE"/>
                         <outlet property="siteButton" destination="5ix-d2-ZgG" id="hJB-NE-1qa"/>
+                        <outlet property="siteButtonHeightConstraint" destination="rdb-iB-zVb" id="nMv-8g-1qd"/>
+                        <outlet property="siteButtonWidthConstraint" destination="wLb-sE-gaz" id="OPB-X6-eph"/>
                         <outlet property="text" destination="GuH-BA-N4l" id="TI5-k0-k64"/>
                         <outlet property="textHeightConstraint" destination="pFG-Od-VIE" id="BVE-MB-eTP"/>
                     </connections>
@@ -412,12 +418,13 @@
                         <barButtonItem key="rightBarButtonItem" title="View Selected" id="TNj-zz-VGo">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="YNj-bu-4Fu" kind="show" id="c2W-5u-Vxg"/>
+                                <action selector="tapViewSelected:" destination="awb-3e-BlY" id="DL6-Rx-uSX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="selectAll" destination="gHz-DM-LZX" id="jg4-jr-E6y"/>
+                        <segue destination="YNj-bu-4Fu" kind="show" id="VfR-Xz-u3R"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNF-4r-hH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -522,6 +529,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="feR-q8-cXc" secondAttribute="trailing" constant="-20" id="sh6-9C-gcw"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="zbJ-tj-366"/>
                     <connections>
                         <outlet property="bannerButton" destination="feR-q8-cXc" id="Cbw-gC-N5x"/>
                         <outlet property="filters" destination="pwO-qh-KHb" id="Xml-Kh-BRk"/>

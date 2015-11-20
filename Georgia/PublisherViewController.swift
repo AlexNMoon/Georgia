@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreData
+import MessageUI
 
-class PublisherViewController: UIViewController {
+class PublisherViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     var publisher: Publisher!
    
@@ -28,6 +29,14 @@ class PublisherViewController: UIViewController {
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var siteButtonWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var liveButtonWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var siteButtonHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var liveButtonHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var liveButton: UIButton!
     
@@ -72,42 +81,60 @@ class PublisherViewController: UIViewController {
         }
         if let mail = publisher.email {
             self.mail.text = mail
-        } else {
-            self.feedbackButton.enabled = false
         }
         if let phone = publisher.telephone {
             self.phone.text = phone
         }
         if self.publisher.site == nil {
             self.siteButton.enabled = false
+            self.siteButtonWidthConstraint.constant = CGFloat(0)
+            self.liveButtonWidthConstraint.constant = self.view.frame.width + 20.0
         }
         if self.publisher.stream == nil {
             self.liveButton.enabled = false
+            self.liveButtonWidthConstraint.constant = CGFloat(0)
+            self.siteButtonWidthConstraint.constant = self.view.frame.width + 20.0
         }
-        if self.feedbackButton.enabled == false {
-            if (self.siteButton.enabled == false) && (self.liveButton.enabled == false) {
-                self.scrollViewHeightConstraint.constant += CGFloat(64)
-            } else {
-                self.scrollViewHeightConstraint.constant += CGFloat(32)
+        if (self.siteButton.enabled == false) && (self.liveButton.enabled == false) {
+            self.liveButtonHeightConstraint.constant = CGFloat(0)
+            self.siteButtonHeightConstraint.constant = CGFloat(0)
+        } else {
+            if (self.siteButton.enabled == true) && (self.liveButton.enabled == true) {
+                self.liveButtonWidthConstraint.constant = self.view.frame.width / 2.0 + 10.0
+                self.siteButtonWidthConstraint.constant = self.liveButtonWidthConstraint.constant
             }
         }
     }
     
     @IBAction func tapGoToWebSiteButton(sender: AnyObject) {
-        if let url = self.publisher.valueForKey("site") as? String {
+        if let url = self.publisher.site {
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
-        } else {
-            print("there is no web site")
         }
     }
     
     @IBAction func tapFeedback(sender: AnyObject) {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
     }
     
     @IBAction func tapLive(sender: AnyObject) {
+        if let url = self.publisher.stream {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
     }
     
     @IBAction func tapMail(sender: AnyObject) {
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+        mailComposeViewController.setToRecipients([self.publisher.email!])
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
     }
     
     @IBAction func tapPhone(sender: AnyObject) {
@@ -115,6 +142,22 @@ class PublisherViewController: UIViewController {
             let url = "tel://" + phone.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
             UIApplication.sharedApplication().openURL(NSURL(string: url)!)
         }
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients(["blabla@gmail.com"])
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

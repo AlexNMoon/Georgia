@@ -56,11 +56,7 @@ class PublishersViewController: UITableViewController {
     
     @IBAction func tapSelectAll(sender: AnyObject) {
         if selectAll.title == "Select All" {
-            for  publisher in self.publishersDataSource.fetchedResultsController.fetchedObjects! as! [Publisher] {
-                if publisher.isSelected != 1 {
-                    publisher.isSelected = 1
-                }
-            }
+            self.selectAllPublishers()
         } else {
             for publisher in self.publishersDataSource.fetchedResultsController.fetchedObjects! as! [Publisher] {
                 if publisher.isSelected == 1 {
@@ -74,9 +70,24 @@ class PublishersViewController: UITableViewController {
         }
     }
     
+    func selectAllPublishers() {
+        for  publisher in self.publishersDataSource.fetchedResultsController.fetchedObjects! as! [Publisher] {
+            if publisher.isSelected != 1 {
+                publisher.isSelected = 1
+            }
+        }
+    }
+    
     @IBAction func tapViewSelected(sender: AnyObject) {
         if self.selectAll.title == "Select All" {
-            
+            let alertController = UIAlertController(title: "You have not selected any publisher", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Return to selection", style: UIAlertActionStyle.Default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Select all", style: UIAlertActionStyle.Default ,handler: { alertAction in
+                self.selectAllPublishers()
+                //let articlesView = self.storyboard!.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController
+                //self.presentViewController(articlesView, animated: true, completion: nil)
+            }))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 }
