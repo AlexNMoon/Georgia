@@ -16,6 +16,10 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var publishersLogoWidthConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var image: UIImageView!
     
     @IBOutlet weak var publishersLogo: UIImageView!
@@ -43,6 +47,8 @@ class ArticleViewController: UIViewController {
         }
         if let logo = self.article.publisher.logo {
             self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))
+        } else {
+            self.publishersLogoWidthConstraint.constant = 0.0
         }
         if let name = self.article.publisher.name {
             self.publishersName.text = name
@@ -50,11 +56,25 @@ class ArticleViewController: UIViewController {
         if let title = self.article.title {
             self.articleTitle.text = title
         }
+        if let videoUrl = self.article.video {
+            
+        } else {
+            if let imageUrl = self.article.image {
+                self.image.sd_setImageWithURL(NSURL(string: imageUrl))
+            } else {
+                self.imageHeightConstraint.constant = 0.0
+            }
+        }
     }
     
     func closeView() {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func tapGoTOWebSite(sender: AnyObject) {
+        if let url = self.article.link {
+            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+        }
+    }
     
 }

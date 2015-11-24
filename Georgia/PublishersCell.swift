@@ -52,8 +52,6 @@ class PublishersCell: UITableViewCell {
         }
         if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
-        } else {
-            self.logo.image = nil
         }
         if let name = publisher.name {
             self.name.text = name

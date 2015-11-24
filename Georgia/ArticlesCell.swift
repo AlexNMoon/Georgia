@@ -13,8 +13,6 @@ class ArticlesCell: UITableViewCell {
     
     let dataManager = DataManager()
     
-    
-    
     @IBOutlet weak var publisher: UILabel!
     
     @IBOutlet weak var title: UILabel!
@@ -23,20 +21,15 @@ class ArticlesCell: UITableViewCell {
     
     func setParameters(article: Article) {
         self.publisher.textColor = UIColor.cyanColor()
-        if let articlesPublisher = article.valueForKey("publisher") as? Publisher {
-            if let name = articlesPublisher.valueForKey("name") as? String {
-                self.publisher.text = name
-            }
+        if let publisherName = article.publisher.name {
+                self.publisher.text = publisherName
         }
-        if let articleTitle = article.valueForKey("title") as? String {
+        if let articleTitle = article.title {
             self.title.text = articleTitle
         }
-        if let image = article.valueForKey("image") as? String {
+        if let image = article.publisher.logo {
             self.articleImage.sd_setImageWithURL(NSURL(string: image))
-        } else {
-            self.articleImage.image = nil
         }
-        
     }
     
 }

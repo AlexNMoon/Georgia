@@ -29,9 +29,9 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         var searchTerm: String
         switch urltipe {
         case .Text:
-            searchTerm = "http://188.166.95.235/v1/articles/text/\(articleId!)"
+            searchTerm = "http://46.101.211.105/v1/articles/text/\(articleId!)"
         case .Articles:
-            searchTerm = "http://188.166.95.235/v1/articles?"
+            searchTerm = "http://46.101.211.105/v1/articles?"
             var commas: Bool
             let categoryEntityDescription =
             NSEntityDescription.entityForName("Category",
@@ -79,11 +79,11 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             }
             searchTerm += "&limit=1000"
         case .Publishers:
-           searchTerm = "http://188.166.95.235/v1/publishers"
+           searchTerm = "http://46.101.211.105/v1/publishers"
         case .Banners:
-            searchTerm = "http://188.166.95.235/v1/banners"
+            searchTerm = "http://46.101.211.105/v1/banners"
         case .Categories:
-            searchTerm = "http://188.166.95.235/v1/categories"
+            searchTerm = "http://46.101.211.105/v1/categories"
         }
         let url = NSURL(string: searchTerm)
         let request1: NSURLRequest = NSURLRequest(URL: url!)

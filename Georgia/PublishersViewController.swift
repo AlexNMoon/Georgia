@@ -63,10 +63,10 @@ class PublishersViewController: UITableViewController {
                     publisher.isSelected = 0
                 }
             }
-        }
-        do {
-            try self.publishersDataSource.managedObjectContext?.save()
-        } catch _ {
+            do {
+                try self.publishersDataSource.managedObjectContext?.save()
+            } catch _ {
+            }
         }
     }
     
@@ -76,6 +76,10 @@ class PublishersViewController: UITableViewController {
                 publisher.isSelected = 1
             }
         }
+        do {
+            try self.publishersDataSource.managedObjectContext?.save()
+        } catch _ {
+        }
     }
     
     @IBAction func tapViewSelected(sender: AnyObject) {
@@ -84,10 +88,11 @@ class PublishersViewController: UITableViewController {
             alertController.addAction(UIAlertAction(title: "Return to selection", style: UIAlertActionStyle.Default,handler: nil))
             alertController.addAction(UIAlertAction(title: "Select all", style: UIAlertActionStyle.Default ,handler: { alertAction in
                 self.selectAllPublishers()
-                //let articlesView = self.storyboard!.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController
-                //self.presentViewController(articlesView, animated: true, completion: nil)
+                self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController, animated: true)
             }))
             self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController, animated: true)
         }
     }
 }

@@ -351,7 +351,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Xy-c5-o4N">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_logo" translatesAutoresizingMaskIntoConstraints="NO" id="7Xy-c5-o4N">
                                             <rect key="frame" x="8" y="8" width="66" height="66"/>
                                             <animations/>
                                             <constraints>
@@ -424,7 +424,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="selectAll" destination="gHz-DM-LZX" id="jg4-jr-E6y"/>
-                        <segue destination="YNj-bu-4Fu" kind="show" id="VfR-Xz-u3R"/>
+                        <segue destination="YNj-bu-4Fu" kind="show" id="hfW-Mg-Bjo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dNF-4r-hH6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -434,7 +434,7 @@
         <!--Articles View Controller-->
         <scene sceneID="nbL-Y5-HYZ">
             <objects>
-                <viewController id="YNj-bu-4Fu" customClass="ArticlesViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Articles View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YNj-bu-4Fu" customClass="ArticlesViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eh1-WF-zau"/>
                         <viewControllerLayoutGuide type="bottom" id="rQx-hb-XoA"/>
@@ -465,7 +465,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_background" translatesAutoresizingMaskIntoConstraints="NO" id="p7Q-cE-WGP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_logo" translatesAutoresizingMaskIntoConstraints="NO" id="p7Q-cE-WGP">
                                                     <rect key="frame" x="8" y="8" width="92" height="92"/>
                                                     <animations/>
                                                     <constraints>
@@ -646,6 +646,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="tapGoTOWebSite:" destination="Xoc-jT-Dj7" eventType="touchUpInside" id="E8o-il-Mx1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <animations/>
@@ -669,7 +672,9 @@
                         <outlet property="articleTitle" destination="0Ek-KE-agX" id="eOJ-GI-6di"/>
                         <outlet property="date" destination="Uyb-CB-bXz" id="jc9-x1-IW1"/>
                         <outlet property="image" destination="fU1-6q-dsR" id="29J-Xt-HAj"/>
+                        <outlet property="imageHeightConstraint" destination="pkP-kR-xj2" id="fti-ag-b2S"/>
                         <outlet property="publishersLogo" destination="BYs-66-NKX" id="n5O-Kl-Kc3"/>
+                        <outlet property="publishersLogoWidthConstraint" destination="3Pq-y4-2xF" id="pvP-GC-Rb3"/>
                         <outlet property="publishersName" destination="I2x-Ng-fKS" id="ZOQ-22-Kjf"/>
                         <outlet property="textHeightConstraint" destination="ZbM-bo-Aed" id="vL5-Z6-d15"/>
                     </connections>
@@ -736,6 +741,7 @@
         <image name="article_share_icon" width="17" height="17"/>
         <image name="feed_filter_icon" width="18" height="18"/>
         <image name="launch_background" width="1565" height="2253"/>
+        <image name="launch_logo" width="158" height="163"/>
         <image name="publisher_location_icon" width="28" height="23"/>
         <image name="publisher_mail_icon" width="30" height="22"/>
         <image name="publisher_phone_icon" width="14" height="24"/>
