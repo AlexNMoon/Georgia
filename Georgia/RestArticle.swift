@@ -32,9 +32,6 @@ class RestArticle {
     init(articleData: JSON) {
         if let id = articleData["id"].int {
             self.articleId = id
-            if let textData = self.dataManager.getText(id){
-                self.text = self.stringEncoding.encoding(textData["data"]["full_description"].string!)
-            }
         }
         if let isDeleted = articleData["is_deleted"].int {
             self.articleIsDeleted = isDeleted
@@ -46,9 +43,7 @@ class RestArticle {
             self.title = title
         }
         if let publisherId = articleData["publisher_id"].int {
-            self.dataManager.getPublishers(publisherId, completionHandler: {(publisherForArticle: Publisher) -> Void in
-                self.publisher = publisherForArticle
-            })
+            self.getPublisher(publisherId)
         }
         if let publisherTime = articleData["publisher_time"].int {
             self.publisherTime = publisherTime
@@ -69,10 +64,24 @@ class RestArticle {
             self.video = video
         }
         if let categoryId = articleData["category_id"].int {
-            self.dataManager.getCategories(categoryId, completionHandler: {(categoryForArticle: Category) -> Void in
+            self.getCategory(categoryId)
+        }
+    }
+    
+    func getCategory(categoryId: Int) {
+        self.dataManager.getCategories(categoryId, completionHandler: {(categoryForArticle: Category) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {() -> Void in
                 self.category = categoryForArticle
             })
-        }
-            }
+        })
+    }
+    
+    func getPublisher(publisherId: Int) {
+        self.dataManager.getPublishers(publisherId, completionHandler: {(publisherForArticle: Publisher) -> Void in
+            dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                self.publisher = publisherForArticle
+            })
+        })
+    }
 
 }

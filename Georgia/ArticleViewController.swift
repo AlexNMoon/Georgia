@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ArticleViewController: UIViewController {
     
     var article: Article!
+    
+    let dataManager = DataManager()
+    
+    let stringEncoding = StringEncoding()
+    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet weak var articleText: UITextView!
     
@@ -65,6 +72,20 @@ class ArticleViewController: UIViewController {
                 self.imageHeightConstraint.constant = 0.0
             }
         }
+        self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
+            if let text = data!["full_description"].string {
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    self.article.text = self.stringEncoding.encoding(text)
+                    do {
+                        try self.managedObjectContext?.save()
+                    } catch _ {
+                    }
+                    self.articleText.text = self.article.text!
+                    let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
+                    self.textHeightConstraint.constant = size.height
+                })
+            }
+        })
     }
     
     func closeView() {

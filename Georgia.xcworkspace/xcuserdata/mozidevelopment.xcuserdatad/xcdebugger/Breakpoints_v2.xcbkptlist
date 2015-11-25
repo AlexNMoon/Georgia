@@ -20,12 +20,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Georgia/RestArticle.swift"
-            timestampString = "469550202.442327"
+            timestampString = "470159449.667469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "init(articleData:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "getCategory(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -19,12 +19,10 @@ class DataManager {
     
     
     
-    func getText(id: Int) -> JSON? {
-        var data: JSON? = nil
+    func getText(id: Int, completionHandler: (data: JSON?) -> Void) {
         api.searchFor(.Text, articleId: id, completionHandler: { (json: JSON) -> Void in
-            data = json["data"]
+            completionHandler(data: json["data"])
         })
-         return data
     }
     
     func getArticles() {
