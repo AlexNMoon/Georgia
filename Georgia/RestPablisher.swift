@@ -20,7 +20,7 @@ class RestPublisher {
     let name: String?
     let publDescription: String?
     let publisherId: Int?
-    let publIsDeleted: Int?
+    let publIsDeleted: Bool?
     let site: String?
     let telephone: String?
     let stream: String?
@@ -47,7 +47,7 @@ class RestPublisher {
         } else {
             self.publisherId = nil
         }
-        if let isDeleted = publisherData["is_deleted"].int{
+        if let isDeleted = publisherData["is_deleted"].bool{
             self.publIsDeleted = isDeleted
         } else {
             self.publIsDeleted = nil

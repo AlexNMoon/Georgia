@@ -17,11 +17,11 @@ class ArticlesViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    @IBOutlet weak var bannerButton: UIButton!
-    
     @IBOutlet var filters: UIBarButtonItem!
    
     @IBOutlet var settings: UIBarButtonItem!
+    
+    @IBOutlet weak var bannerButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()

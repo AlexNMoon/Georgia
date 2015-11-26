@@ -85,13 +85,15 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case .Categories:
             searchTerm = "http://46.101.211.105/v1/categories"
         }
+        let session = NSURLSession.sharedSession()
         let url = NSURL(string: searchTerm)
-        let request1: NSURLRequest = NSURLRequest(URL: url!)
-        NSURLConnection.sendAsynchronousRequest(request1, queue: self.queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+        let request = NSURLRequest(URL: url!)
+        let dataTask = session.dataTaskWithRequest(request) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
             let json = JSON(data: data!)
-                completionHandler(json: json)
+            completionHandler(json: json)
             print("\(json.dictionary)")
-        })
+        }
+        dataTask.resume()
     }
 
 }

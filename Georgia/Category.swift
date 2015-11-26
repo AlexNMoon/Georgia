@@ -25,7 +25,7 @@ extension Category {
     convenience init(category: RestCategory, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
         self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
         if let isDeleted = category.categIsDeleted {
-            self.categIsDeleted = isDeleted
+            self.categIsDeleted = NSNumber(bool: isDeleted) 
         }
         if let id = category.categoriesId {
             self.categoriesId = id

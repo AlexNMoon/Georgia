@@ -13,12 +13,12 @@ class RestCategory {
     
     let stringEncoding = StringEncoding()
     
-    let categIsDeleted: Int?
+    let categIsDeleted: Bool?
     let categoriesId: Int?
     let title: String?
     
     init(categoryData: JSON) {
-        if let isDeleted = categoryData["is_deleted"].int {
+        if let isDeleted = categoryData["is_deleted"].bool {
             self.categIsDeleted = isDeleted
         } else {
             self.categIsDeleted =  nil

@@ -16,12 +16,12 @@ class RestArticle {
     let stringEncoding = StringEncoding()
     
     var articleId: Int? = nil
-    var articleIsDeleted: Int? = nil
+    var articleIsDeleted: Bool? = nil
     var createdAt: Int? = nil
     var image: String? = nil
     var link: String? = nil
     var publisherTime: Int? = nil
-    var status: Int? = nil
+    var status: Bool? = nil
     var text: String? = nil
     var title: String? = nil
     var updatedAt: Int? = nil
@@ -33,7 +33,7 @@ class RestArticle {
         if let id = articleData["id"].int {
             self.articleId = id
         }
-        if let isDeleted = articleData["is_deleted"].int {
+        if let isDeleted = articleData["is_deleted"].bool {
             self.articleIsDeleted = isDeleted
         }
         if let createdAt = articleData["created_at"].int {
@@ -48,7 +48,7 @@ class RestArticle {
         if let publisherTime = articleData["publisher_time"].int {
             self.publisherTime = publisherTime
         }
-        if let status = articleData["status"].int {
+        if let status = articleData["status"].bool {
             self.status = status
         }
         if let image = articleData["image"].string {
@@ -63,7 +63,7 @@ class RestArticle {
         if let video = articleData["video"].string {
             self.video = video
         }
-        if let categoryId = articleData["category_id"].int {
+        if let categoryId = articleData["category"]["id"].int {
             self.getCategory(categoryId)
         }
     }

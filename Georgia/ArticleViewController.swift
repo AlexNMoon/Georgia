@@ -37,6 +37,8 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var articleTitle: UILabel!
    
+    @IBOutlet weak var goToWebsiteButtonHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
@@ -86,6 +88,9 @@ class ArticleViewController: UIViewController {
                 })
             }
         })
+        if (self.article.link == nil) || (self.article.link == "") {
+            self.goToWebsiteButtonHeightConstraint.constant = 0.0
+        }
     }
     
     func closeView() {

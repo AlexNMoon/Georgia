@@ -32,6 +32,7 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     
     @IBOutlet weak var siteButtonWidthConstraint: NSLayoutConstraint!
     
+    
     @IBOutlet weak var liveButtonWidthConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var siteButtonHeightConstraint: NSLayoutConstraint!
@@ -59,8 +60,10 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
-            let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
-            self.text.textContainer.exclusionPaths = [imageRect]
+            if self.logo.image != nil {
+                let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
+                self.text.textContainer.exclusionPaths = [imageRect]
+            }
             self.text.addSubview(self.logo)
         }
         if let name = publisher.name {
@@ -70,10 +73,18 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         if let text = publisher.publDescription {
             self.text.text = text
             let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
-            if size.height > CGFloat(120) {
-                self.textHeightConstraint.constant = size.height
+            if self.logo.image != nil {
+                if size.height > 125.0 {
+                    self.textHeightConstraint.constant = size.height
+                } else {
+                    self.textHeightConstraint.constant = 125.0
+                }
             } else {
-                self.textHeightConstraint.constant = CGFloat(120)
+                if self.publisher.publDescription == "" {
+                    self.textHeightConstraint.constant = 0.0
+                } else {
+                    self.textHeightConstraint.constant = size.height
+                }
             }
         }
         if let address = publisher.address {
@@ -85,23 +96,27 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         if let phone = publisher.telephone {
             self.phone.text = phone
         }
-        if self.publisher.site == nil {
+        if (self.publisher.site == nil) || (self.publisher.site == "") {
             self.siteButton.enabled = false
-            self.siteButtonWidthConstraint.constant = CGFloat(0)
-            self.liveButtonWidthConstraint.constant = self.view.frame.width + 20.0
         }
-        if self.publisher.stream == nil {
+        if (self.publisher.stream == nil) || (self.publisher.stream == "") {
             self.liveButton.enabled = false
-            self.liveButtonWidthConstraint.constant = CGFloat(0)
-            self.siteButtonWidthConstraint.constant = self.view.frame.width + 20.0
         }
-        if (self.siteButton.enabled == false) && (self.liveButton.enabled == false) {
-            self.liveButtonHeightConstraint.constant = CGFloat(0)
-            self.siteButtonHeightConstraint.constant = CGFloat(0)
+        if (!self.siteButton.enabled) && (!self.liveButton.enabled) {
+            self.liveButtonHeightConstraint.constant = 0.0
+            self.siteButtonHeightConstraint.constant = 0.0
         } else {
-            if (self.siteButton.enabled == true) && (self.liveButton.enabled == true) {
+            if (self.siteButton.enabled) && (self.liveButton.enabled) {
                 self.liveButtonWidthConstraint.constant = self.view.frame.width / 2.0 + 10.0
                 self.siteButtonWidthConstraint.constant = self.liveButtonWidthConstraint.constant
+            } else {
+                if self.siteButton.enabled {
+                    self.liveButtonWidthConstraint.constant = 0.0
+                    self.siteButtonWidthConstraint.constant = self.view.frame.width + 20.0
+                } else {
+                    self.siteButtonWidthConstraint.constant = 0.0
+                    self.liveButtonWidthConstraint.constant = self.view.frame.width + 20.0
+                }
             }
         }
     }
@@ -152,8 +167,8 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     }
     
     func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
-        sendMailErrorAlert.show()
+        let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.Alert)
+        self.presentViewController(sendMailErrorAlert, animated: true, completion: nil)
     }
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

@@ -19,8 +19,11 @@ class ArticlesCell: UITableViewCell {
     
     @IBOutlet weak var articleImage: UIImageView!
     
+    @IBOutlet weak var publisherTime: UILabel!
+   
     func setParameters(article: Article) {
         self.publisher.textColor = UIColor.cyanColor()
+        self.publisherTime.textColor = UIColor.lightGrayColor()
         if let publisherName = article.publisher.name {
                 self.publisher.text = publisherName
         }
@@ -29,6 +32,9 @@ class ArticlesCell: UITableViewCell {
         }
         if let image = article.publisher.logo {
             self.articleImage.sd_setImageWithURL(NSURL(string: image))
+        }
+        if let publisherTime = article.publisherTime {
+            //self.publisherTime.text =
         }
     }
     

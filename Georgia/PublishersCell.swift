@@ -25,7 +25,7 @@ class PublishersCell: UITableViewCell {
     
     let added = UIImage(named: "publishers_added_icon")
     
-    let new = UIImage(named: "publishers_new_icon")
+    let defoultImage = UIImage(named: "launch_logo")
     
     var publisher: Publisher!
     
@@ -52,6 +52,9 @@ class PublishersCell: UITableViewCell {
         }
         if let logoUrl = publisher.logo {
             self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+            if self.logo.image == nil {
+                self.logo.image = self.defoultImage
+            }
         }
         if let name = publisher.name {
             self.name.text = name

@@ -56,7 +56,7 @@ extension Publisher {
             self.publidherId = id
         }
         if let isDeleted = publisher.publIsDeleted {
-            self.publIsDeleted = isDeleted
+            self.publIsDeleted = NSNumber(bool: isDeleted)
         }
         if let site = publisher.site {
             self.site = site

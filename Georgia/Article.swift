@@ -36,7 +36,7 @@ extension Article {
             self.articleId = id
         }
         if let isDeleted = article.articleIsDeleted {
-            self.articleIsDeleted = isDeleted
+            self.articleIsDeleted = NSNumber(bool: isDeleted)
         }
         if let createdAt = article.createdAt {
             self.createdAt = createdAt
@@ -51,7 +51,7 @@ extension Article {
             self.publisherTime = publisherTime
         }
         if let status = article.status {
-            self.status = status
+            self.status = NSNumber(bool: status)
         }
         if let text = article.text {
             self.text = text
