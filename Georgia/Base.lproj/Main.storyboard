@@ -562,7 +562,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I2x-Ng-fKS">
-                                        <rect key="frame" x="88" y="242" width="472" height="18"/>
+                                        <rect key="frame" x="88" y="258" width="472" height="18"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -593,7 +593,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uyb-CB-bXz">
-                                        <rect key="frame" x="88" y="289" width="224" height="18"/>
+                                        <rect key="frame" x="88" y="284" width="224" height="18"/>
                                         <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="224" id="IG2-KJ-cuK"/>
@@ -606,11 +606,11 @@
                                 <animations/>
                                 <constraints>
                                     <constraint firstItem="0Ek-KE-agX" firstAttribute="trailing" secondItem="vwe-gJ-56h" secondAttribute="trailing" id="1JX-6Q-Kks"/>
-                                    <constraint firstItem="I2x-Ng-fKS" firstAttribute="top" secondItem="BYs-66-NKX" secondAttribute="top" id="7Z5-0W-dve"/>
+                                    <constraint firstItem="I2x-Ng-fKS" firstAttribute="top" secondItem="BYs-66-NKX" secondAttribute="top" constant="16" id="7Z5-0W-dve"/>
                                     <constraint firstAttribute="bottom" secondItem="vwe-gJ-56h" secondAttribute="bottom" id="8bU-Yd-AOx"/>
-                                    <constraint firstItem="0Ek-KE-agX" firstAttribute="top" secondItem="Uyb-CB-bXz" secondAttribute="bottom" constant="15" id="95G-dl-xPS"/>
+                                    <constraint firstItem="0Ek-KE-agX" firstAttribute="top" secondItem="Uyb-CB-bXz" secondAttribute="bottom" constant="20" id="95G-dl-xPS"/>
                                     <constraint firstItem="vwe-gJ-56h" firstAttribute="centerX" secondItem="fU1-6q-dsR" secondAttribute="centerX" id="Cr1-9N-k0u"/>
-                                    <constraint firstItem="Uyb-CB-bXz" firstAttribute="top" secondItem="I2x-Ng-fKS" secondAttribute="bottom" constant="29" id="Hvo-fh-lWQ"/>
+                                    <constraint firstItem="Uyb-CB-bXz" firstAttribute="top" secondItem="I2x-Ng-fKS" secondAttribute="bottom" constant="8" id="Hvo-fh-lWQ"/>
                                     <constraint firstItem="fU1-6q-dsR" firstAttribute="top" secondItem="isc-Vc-lMo" secondAttribute="top" id="TgA-qh-vw9"/>
                                     <constraint firstItem="Uyb-CB-bXz" firstAttribute="leading" secondItem="I2x-Ng-fKS" secondAttribute="leading" id="U1J-YI-W9W"/>
                                     <constraint firstItem="vwe-gJ-56h" firstAttribute="leading" secondItem="isc-Vc-lMo" secondAttribute="leadingMargin" id="Wqu-A1-rOa"/>
@@ -631,7 +631,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="vN4-Ym-Jze"/>
+                                    <constraint firstAttribute="height" constant="32" id="HnA-wV-ulK"/>
                                 </constraints>
                                 <state key="normal" title="GO TO WEB-SITE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -645,14 +645,13 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="WFM-hM-f5I" firstAttribute="leading" secondItem="isc-Vc-lMo" secondAttribute="leading" id="8sA-Pj-Yhi"/>
-                            <constraint firstItem="WFM-hM-f5I" firstAttribute="trailing" secondItem="isc-Vc-lMo" secondAttribute="trailing" id="AqB-GW-WKH"/>
-                            <constraint firstItem="WFM-hM-f5I" firstAttribute="top" secondItem="isc-Vc-lMo" secondAttribute="bottom" constant="8" symbolic="YES" id="Ge5-8M-5E0"/>
+                            <constraint firstItem="WFM-hM-f5I" firstAttribute="top" secondItem="isc-Vc-lMo" secondAttribute="bottom" constant="8" symbolic="YES" id="3Xy-sr-FKB"/>
+                            <constraint firstItem="WFM-hM-f5I" firstAttribute="trailing" secondItem="isc-Vc-lMo" secondAttribute="trailing" id="CUx-iP-zFs"/>
                             <constraint firstItem="isc-Vc-lMo" firstAttribute="bottom" secondItem="yO2-3B-DgG" secondAttribute="top" constant="-40" id="QnF-89-EJh"/>
                             <constraint firstItem="isc-Vc-lMo" firstAttribute="trailing" secondItem="rxe-xU-fRv" secondAttribute="trailingMargin" constant="20" id="V7b-gs-WWX"/>
                             <constraint firstItem="isc-Vc-lMo" firstAttribute="leading" secondItem="rxe-xU-fRv" secondAttribute="leadingMargin" constant="-20" id="XIr-U8-xwF"/>
-                            <constraint firstItem="WFM-hM-f5I" firstAttribute="bottom" secondItem="yO2-3B-DgG" secondAttribute="top" id="baa-yU-OCs"/>
                             <constraint firstItem="isc-Vc-lMo" firstAttribute="top" secondItem="rxe-xU-fRv" secondAttribute="top" id="lPY-Oy-k5u"/>
+                            <constraint firstItem="WFM-hM-f5I" firstAttribute="leading" secondItem="isc-Vc-lMo" secondAttribute="leading" id="ohs-zU-bLt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hgf-S0-q0y">
@@ -662,18 +661,27 @@
                         <outlet property="articleText" destination="vwe-gJ-56h" id="3Ri-AS-SWq"/>
                         <outlet property="articleTitle" destination="0Ek-KE-agX" id="eOJ-GI-6di"/>
                         <outlet property="date" destination="Uyb-CB-bXz" id="jc9-x1-IW1"/>
-                        <outlet property="goToWebsiteButtonHeightConstraint" destination="vN4-Ym-Jze" id="eUu-sZ-Yr1"/>
+                        <outlet property="goToWebsiteButtonHeightConstraint" destination="HnA-wV-ulK" id="PEg-j5-FEP"/>
                         <outlet property="image" destination="fU1-6q-dsR" id="29J-Xt-HAj"/>
                         <outlet property="imageHeightConstraint" destination="pkP-kR-xj2" id="fti-ag-b2S"/>
                         <outlet property="publishersLogo" destination="BYs-66-NKX" id="n5O-Kl-Kc3"/>
                         <outlet property="publishersLogoWidthConstraint" destination="3Pq-y4-2xF" id="pvP-GC-Rb3"/>
                         <outlet property="publishersName" destination="I2x-Ng-fKS" id="ZOQ-22-Kjf"/>
                         <outlet property="textHeightConstraint" destination="ZbM-bo-Aed" id="vL5-Z6-d15"/>
+                        <segue destination="iPn-u8-Yo7" kind="show" id="MHy-JX-bcN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzn-9V-j02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="243"/>
+            <point key="canvasLocation" x="2124" y="252"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="jcO-fx-ylI">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="iPn-u8-Yo7" customClass="VideoViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UUK-iE-nQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2831" y="243"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="c0x-Nf-eqQ">

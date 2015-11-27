@@ -30,6 +30,8 @@ class PublishersCell: UITableViewCell {
     var publisher: Publisher!
     
     var fetchedResultsController: NSFetchedResultsController!
+    
+    let dataManager = DataManager()
 
     @IBAction func tapAddPublisherButton(sender: AnyObject) {
         if publisher.isSelected == 1 {
@@ -37,6 +39,7 @@ class PublishersCell: UITableViewCell {
         } else {
             self.publisherSelectedCoreData()
         }
+        self.dataManager.getArticles()
     }
     
     func setParameters(publisher: Publisher, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {

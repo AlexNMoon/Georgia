@@ -22,7 +22,6 @@ class RestArticle {
     var link: String? = nil
     var publisherTime: Int? = nil
     var status: Bool? = nil
-    var text: String? = nil
     var title: String? = nil
     var updatedAt: Int? = nil
     var video: String? = nil

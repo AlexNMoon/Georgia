@@ -67,6 +67,7 @@ class PublishersViewController: UITableViewController {
                 try self.publishersDataSource.managedObjectContext?.save()
             } catch _ {
             }
+            self.dataManager.getArticles()
         }
     }
     
@@ -80,6 +81,7 @@ class PublishersViewController: UITableViewController {
             try self.publishersDataSource.managedObjectContext?.save()
         } catch _ {
         }
+        self.dataManager.getArticles()
     }
     
     @IBAction func tapViewSelected(sender: AnyObject) {

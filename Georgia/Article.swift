@@ -20,7 +20,6 @@ class Article: NSManagedObject {
     @NSManaged var link: String?
     @NSManaged var publisherTime: NSNumber?
     @NSManaged var status: NSNumber?
-    @NSManaged var text: String?
     @NSManaged var title: String?
     @NSManaged var updatedAt: NSNumber?
     @NSManaged var video: String?
@@ -52,9 +51,6 @@ extension Article {
         }
         if let status = article.status {
             self.status = NSNumber(bool: status)
-        }
-        if let text = article.text {
-            self.text = text
         }
         if let title = article.title {
             self.title = title

@@ -27,6 +27,8 @@ class FiltersCell: UITableViewCell {
     
     var selectAll: UIBarButtonItem!
     
+    let dataManager = DataManager()
+    
     func setParameters(category: Category, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {
         self.category = category
         self.fetchedResultsController = fetchedResultsController
@@ -48,6 +50,7 @@ class FiltersCell: UITableViewCell {
         } else {
             self.categorySelectedCoreData()
         }
+        self.dataManager.getArticles()
     }
     
     func categoryIsSelected() {

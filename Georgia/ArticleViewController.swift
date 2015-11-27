@@ -19,6 +19,8 @@ class ArticleViewController: UIViewController {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    var text: String!
+    
     @IBOutlet weak var articleText: UITextView!
     
     @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
@@ -49,11 +51,16 @@ class ArticleViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        if let text = self.article.text {
-            self.articleText.text = text
-            let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
-            self.textHeightConstraint.constant = size.height
-        }
+        self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
+            if let text = data!["full_description"].string {
+                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                    self.text = self.stringEncoding.encoding(text)
+                    self.articleText.text = self.text
+                    let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
+                    self.textHeightConstraint.constant = size.height
+                })
+            }
+        })
         if let logo = self.article.publisher.logo {
             self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))
         } else {
@@ -74,20 +81,6 @@ class ArticleViewController: UIViewController {
                 self.imageHeightConstraint.constant = 0.0
             }
         }
-        self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
-            if let text = data!["full_description"].string {
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    self.article.text = self.stringEncoding.encoding(text)
-                    do {
-                        try self.managedObjectContext?.save()
-                    } catch _ {
-                    }
-                    self.articleText.text = self.article.text!
-                    let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
-                    self.textHeightConstraint.constant = size.height
-                })
-            }
-        })
         if (self.article.link == nil) || (self.article.link == "") {
             self.goToWebsiteButtonHeightConstraint.constant = 0.0
         }

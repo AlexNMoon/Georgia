@@ -14,6 +14,8 @@ class FiltersViewController: UITableViewController {
     @IBOutlet var selectAllButton: UIBarButtonItem!
     
     var filtersDataSource: FiltersDataSource!
+    
+    let dataManager = DataManager()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class FiltersViewController: UITableViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-        
+    
     @IBAction func tapSelectAll(sender: AnyObject) {
         if selectAllButton.title == "Select All" {
             for  category in self.filtersDataSource.fetchedResultsController.fetchedObjects! as! [Category] {
@@ -47,7 +49,7 @@ class FiltersViewController: UITableViewController {
                     category.isSelected = 1
                 }
             }
-        selectAllButton.title = "Unselect All"
+            selectAllButton.title = "Unselect All"
         } else {
             for category in self.filtersDataSource.fetchedResultsController.fetchedObjects! as! [Category] {
                 if category.isSelected == 1 {
@@ -60,7 +62,7 @@ class FiltersViewController: UITableViewController {
             try self.filtersDataSource.managedObjectContext?.save()
         } catch _ {
         }
-
+        self.dataManager.getArticles()
     }
     
-  }
+}
