@@ -21,7 +21,7 @@ class VideoViewController: AVPlayerViewController {
     override func viewWillAppear(animated: Bool) {
         let url = NSURL(string: self.article.video!)
         let player = AVPlayer(URL: url!)
-        var playerViewController = AVPlayerViewController()
+        let playerViewController = AVPlayerViewController()
         playerViewController.player = player
     }
 

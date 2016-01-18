@@ -72,7 +72,7 @@ class RestPublisher {
         } else {
             self.site = nil
         }
-        if let createdAt = publisherData["created_at"].int {
+        if let createdAt = publisherData["created_at"].int{
             self.createdAt = createdAt
         } else {
             self.createdAt = nil

@@ -42,23 +42,34 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             let categories = categoryResults as! [Category]
             searchTerm += "category_ids="
             commas = false
+            var categoriesCount: Int = 0
             for category in categories {
                 if category.isSelected == 1 {
-                    if commas {
-                        searchTerm += ","
-                    }
-                    searchTerm += "\(category.categoriesId)"
-                    commas = true
+                    ++categoriesCount
                 }
             }
-            if commas == false {
+            if categoriesCount > 0 {
+                for category in categories {
+                    if category.isSelected == 1 {
+                        if commas {
+                            searchTerm += ","
+                            commas = false
+                        }
+                        searchTerm += "\(category.categoriesId)"
+                        commas = true
+                    }
+                }
+
+            } else {
                 for category in categories {
                     if commas {
                         searchTerm += ","
+                        commas = false
                     }
                     searchTerm += "\(category.categoriesId)"
                     commas = true
                 }
+
             }
             searchTerm += "&publisher_ids="
             let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
