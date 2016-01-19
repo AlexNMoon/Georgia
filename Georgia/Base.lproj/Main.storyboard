@@ -624,7 +624,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzn-9V-j02" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2124" y="252"/>
+            <point key="canvasLocation" x="2124" y="243"/>
         </scene>
         <!--AV Player View Controller-->
         <scene sceneID="jcO-fx-ylI">

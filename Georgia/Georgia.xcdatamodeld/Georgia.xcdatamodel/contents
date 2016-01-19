@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
     <entity name="Article" representedClassName="Article" syncable="YES">
-        <attribute name="articleId" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="articleId" attributeType="Integer 64" syncable="YES"/>
         <attribute name="articleIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="publisherTime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="publisherTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="video" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="catArticles" inverseEntity="Category" syncable="YES"/>
         <relationship name="publisher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Publisher" inverseName="pubArticles" inverseEntity="Publisher" syncable="YES"/>
@@ -30,18 +30,18 @@
     </entity>
     <entity name="Publisher" representedClassName="Publisher" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="createdAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isSelected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="logo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="publDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="publidherId" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="publidherId" attributeType="Integer 64" syncable="YES"/>
         <attribute name="publIsDeleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="site" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stream" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="telephone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="updatedAt" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="pubArticles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="publisher" inverseEntity="Article" syncable="YES"/>
     </entity>
     <elements>

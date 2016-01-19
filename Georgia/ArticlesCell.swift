@@ -33,11 +33,12 @@ class ArticlesCell: UITableViewCell {
         if let image = article.publisher.logo {
             self.articleImage.sd_setImageWithURL(NSURL(string: image))
         }
-        if let time = article.createdAt {
+        if let time = article.publisherTime {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            dateFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
             let date = NSDate(timeIntervalSince1970: time.doubleValue)
-            self.time.text = "\(date)"
+            self.time.text = dateFormatter.stringFromDate(date)
         }
     }
     

@@ -72,6 +72,7 @@ class ArticleViewController: UIViewController {
         if let title = self.article.title {
             self.articleTitle.text = title
         }
+        let id = self.article.category.categoriesId
         if let videoUrl = self.article.video {
             
         } else {
