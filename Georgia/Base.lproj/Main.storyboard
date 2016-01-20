@@ -106,8 +106,8 @@
                                 <rect key="frame" x="0.0" y="568" width="301" height="32"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="rdb-iB-zVb"/>
-                                    <constraint firstAttribute="width" constant="301" id="wLb-sE-gaz"/>
+                                    <constraint firstAttribute="height" constant="32" id="PW3-Kt-6Oz"/>
+                                    <constraint firstAttribute="width" constant="301" id="Zzr-ec-mev"/>
                                 </constraints>
                                 <state key="normal" title="GO TO WEB-SITE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -121,8 +121,8 @@
                                 <rect key="frame" x="280" y="568" width="320" height="32"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="UUE-Iu-z4w"/>
-                                    <constraint firstAttribute="width" constant="320" id="yMp-4G-fFF"/>
+                                    <constraint firstAttribute="height" constant="32" id="5rY-v3-K6s"/>
+                                    <constraint firstAttribute="width" constant="320" id="Cq8-7I-BRB"/>
                                 </constraints>
                                 <state key="normal" title="LIVE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -263,18 +263,19 @@
                     </view>
                     <connections>
                         <outlet property="address" destination="TGS-WM-hVm" id="xBP-ua-3Q9"/>
+                        <outlet property="feedbackBottomLayoutCuide" destination="Ba7-Ld-H28" id="W0G-0c-RAg"/>
                         <outlet property="feedbackButton" destination="0XY-Vt-luZ" id="oQL-Te-PXa"/>
                         <outlet property="liveButton" destination="Wnz-ce-oNy" id="CVf-ka-PM3"/>
-                        <outlet property="liveButtonHeightConstraint" destination="UUE-Iu-z4w" id="pYY-sF-ANs"/>
-                        <outlet property="liveButtonWidthConstraint" destination="yMp-4G-fFF" id="FUN-Mn-Bho"/>
+                        <outlet property="liveButtonHeightConstraint" destination="5rY-v3-K6s" id="lyx-HE-qtd"/>
+                        <outlet property="liveButtonWidthConstraint" destination="Cq8-7I-BRB" id="yCw-jN-wcG"/>
                         <outlet property="logo" destination="00g-UV-qXZ" id="953-dX-vDm"/>
                         <outlet property="mail" destination="xkk-Zk-2rr" id="CvY-EM-GeZ"/>
                         <outlet property="name" destination="2sx-4v-Gol" id="lj8-QY-iHF"/>
                         <outlet property="phone" destination="9YL-6J-h3H" id="pXZ-V3-m2R"/>
                         <outlet property="scrollViewHeightConstraint" destination="qb3-xQ-4VZ" id="cID-vY-QoE"/>
                         <outlet property="siteButton" destination="5ix-d2-ZgG" id="hJB-NE-1qa"/>
-                        <outlet property="siteButtonHeightConstraint" destination="rdb-iB-zVb" id="nMv-8g-1qd"/>
-                        <outlet property="siteButtonWidthConstraint" destination="wLb-sE-gaz" id="OPB-X6-eph"/>
+                        <outlet property="siteButtonHeightConstraint" destination="PW3-Kt-6Oz" id="e6M-ZS-ZKI"/>
+                        <outlet property="siteButtonWidthConstraint" destination="Zzr-ec-mev" id="jd4-h7-XpH"/>
                         <outlet property="text" destination="GuH-BA-N4l" id="TI5-k0-k64"/>
                         <outlet property="textHeightConstraint" destination="pFG-Od-VIE" id="BVE-MB-eTP"/>
                     </connections>
@@ -585,6 +586,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="HnA-wV-ulK"/>
                                 </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="GO TO WEB-SITE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -606,12 +608,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hgf-S0-q0y">
-                        <barButtonItem key="rightBarButtonItem" image="article_share_icon" id="SyN-7R-UeN"/>
+                        <barButtonItem key="rightBarButtonItem" image="article_share_icon" id="SyN-7R-UeN">
+                            <connections>
+                                <action selector="tapShare:" destination="Xoc-jT-Dj7" id="z51-vp-CIy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="articleText" destination="vwe-gJ-56h" id="3Ri-AS-SWq"/>
                         <outlet property="articleTitle" destination="0Ek-KE-agX" id="eOJ-GI-6di"/>
                         <outlet property="date" destination="Uyb-CB-bXz" id="jc9-x1-IW1"/>
+                        <outlet property="goToWebSiteButton" destination="WFM-hM-f5I" id="hdE-cI-Re0"/>
                         <outlet property="goToWebsiteButtonHeightConstraint" destination="HnA-wV-ulK" id="PEg-j5-FEP"/>
                         <outlet property="image" destination="fU1-6q-dsR" id="29J-Xt-HAj"/>
                         <outlet property="imageHeightConstraint" destination="pkP-kR-xj2" id="fti-ag-b2S"/>

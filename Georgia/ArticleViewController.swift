@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import AVFoundation
 
 class ArticleViewController: UIViewController {
     
@@ -41,6 +42,8 @@ class ArticleViewController: UIViewController {
    
     @IBOutlet weak var goToWebsiteButtonHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var goToWebSiteButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
@@ -72,9 +75,22 @@ class ArticleViewController: UIViewController {
         if let title = self.article.title {
             self.articleTitle.text = title
         }
-        let id = self.article.category.categoriesId
+      //  let id = self.article.category.categoriesId
         if let videoUrl = self.article.video {
-            
+            let vidURL = NSURL(string: videoUrl)
+            let asset = AVURLAsset(URL: vidURL!)
+            let generator = AVAssetImageGenerator(asset: asset)
+            generator.appliesPreferredTrackTransform = true
+            var time = asset.duration
+            time.value = min(time.value, 2)
+            do {
+                let imageRef = try generator.copyCGImageAtTime(time, actualTime: nil)
+                self.image.image = UIImage(CGImage: imageRef)
+            }
+            catch let error as NSError
+            {
+                print("Image generation failed with error \(error)")
+            }
         } else {
             if let imageUrl = self.article.image {
                 self.image.sd_setImageWithURL(NSURL(string: imageUrl))
@@ -84,6 +100,8 @@ class ArticleViewController: UIViewController {
         }
         if (self.article.link == nil) || (self.article.link == "") {
             self.goToWebsiteButtonHeightConstraint.constant = 0.0
+            self.goToWebSiteButton.enabled = false
+            self.goToWebSiteButton.setTitle("", forState: UIControlState.Normal)
         }
     }
     
@@ -97,4 +115,21 @@ class ArticleViewController: UIViewController {
         }
     }
     
+    @IBAction func tapShare(sender: AnyObject) {
+        var sharingItems = [AnyObject]()
+        if let title = self.articleTitle.text {
+            sharingItems.append(title)
+        }
+        if let text = self.articleText.text {
+            sharingItems.append(text)
+        }
+        if let image = self.image.image {
+            sharingItems.append(image)
+        }
+        if let link = self.article.link {
+            sharingItems.append(link)
+        }
+        let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
 }

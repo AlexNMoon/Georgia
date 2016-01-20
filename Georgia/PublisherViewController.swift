@@ -45,6 +45,8 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     
     @IBOutlet weak var feedbackButton: UIButton!
     
+    @IBOutlet weak var feedbackBottomLayoutCuide: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.rightBarButtonItem = backButton
@@ -98,13 +100,16 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         }
         if (self.publisher.site == nil) || (self.publisher.site == "") {
             self.siteButton.enabled = false
+            self.siteButton.setTitle("", forState: UIControlState.Normal)
         }
         if (self.publisher.stream == nil) || (self.publisher.stream == "") {
             self.liveButton.enabled = false
+            self.liveButton.setTitle("", forState: UIControlState.Normal)
         }
         if (!self.siteButton.enabled) && (!self.liveButton.enabled) {
             self.liveButtonHeightConstraint.constant = 0.0
             self.siteButtonHeightConstraint.constant = 0.0
+            self.feedbackBottomLayoutCuide.constant = 0.0
         } else {
             if (self.siteButton.enabled) && (self.liveButton.enabled) {
                 self.liveButtonWidthConstraint.constant = self.view.frame.width / 2.0 + 10.0
