@@ -15,6 +15,10 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    var refreshControl:UIRefreshControl!
+    
+    let dataManager = DataManager()
+    
     var fetchedResultsController: NSFetchedResultsController {
         if self.restFetchedResultsController != nil {
             return self.restFetchedResultsController!
@@ -22,7 +26,7 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
         let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: self.managedObjectContext!)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
-        let sort = NSSortDescriptor(key: "title", ascending: true)
+        let sort = NSSortDescriptor(key: "publisherTime", ascending: false)
         fetchRequest.sortDescriptors = [sort]
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         aFetchedResultsController.delegate = self
@@ -41,10 +45,19 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
     
     var restFetchedResultsController: NSFetchedResultsController?
     
-    let tableView: UITableView!
+    var tableView: UITableView!
     
     init(tableView: UITableView) {
+        super.init()
         self.tableView = tableView
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    func refresh(sender:AnyObject) {
+        self.dataManager.updatingArticles()
+        self.refreshControl?.endRefreshing()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,6 +81,8 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
         return indexPath
     }
     
+    
+    
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
     }
@@ -75,17 +90,13 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            print("insert")
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Update:
-            print("update")
             self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Move:
-            print("move")
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Delete:
-            print("delete")
             self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
         

@@ -15,9 +15,9 @@ class DataManager {
         
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    
+    
     let api = API()
-    
-    
     
     func getText(id: Int, completionHandler: (data: JSON?) -> Void) {
         api.searchFor(.Text, articleId: id, completionHandler: { (json: JSON) -> Void in
@@ -28,13 +28,11 @@ class DataManager {
     func getArticles() {
         let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         articlesManagedObjectContext.parentContext = self.managedObjectContext
-        let entityDescription =
-        NSEntityDescription.entityForName("Article",
-            inManagedObjectContext: articlesManagedObjectContext)
+        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: articlesManagedObjectContext)
         let fetchRequest = NSFetchRequest()
         fetchRequest.entity = entityDescription
         let results = try? articlesManagedObjectContext.executeFetchRequest(fetchRequest)
-        let articles = results as! [NSManagedObject]
+        let articles = results as! [Article]
         for index in 0 ..< articles.count {
             articlesManagedObjectContext.deleteObject(articles[index])
         }
@@ -45,9 +43,7 @@ class DataManager {
         api.searchFor(.Articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 for index in 0 ..< data.count {
-                    let articleData = data[index]
-                        let restArticle = RestArticle(articleData: articleData)
-                        _ = Article(article: restArticle, entity: entityDescription!, insertIntoManagedObjectContext: articlesManagedObjectContext)
+                    self.createArticle(data[index], entityDescription: entityDescription!, articlesManagedObjectContext: articlesManagedObjectContext)
                 }
             }
             do {
@@ -57,7 +53,65 @@ class DataManager {
         })
     }
     
-    func getPublishers(publisherIndex: Int?, completionHandler: (publisherForArticle: Publisher) -> Void) {
+    func createArticle(articleData: JSON, entityDescription: NSEntityDescription, articlesManagedObjectContext: NSManagedObjectContext) {
+        let restArticle = RestArticle(articleData: articleData)
+        let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: articlesManagedObjectContext)
+        let publisherFetchRequest = NSFetchRequest()
+        publisherFetchRequest.entity = publisherEntityDescription
+        let publisherResults = try? articlesManagedObjectContext.executeFetchRequest(publisherFetchRequest)
+        let publishers = publisherResults as! [Publisher]
+        for publisherSearch in publishers {
+            if publisherSearch.publidherId == restArticle.publisherId {
+                restArticle.publisher = publisherSearch
+                break
+            }
+        }
+        let categoryEntityDescription =
+        NSEntityDescription.entityForName("Category",
+            inManagedObjectContext: articlesManagedObjectContext)
+        let categoryFetchRequest = NSFetchRequest()
+        categoryFetchRequest.entity = categoryEntityDescription
+        let categoryResults = try? articlesManagedObjectContext.executeFetchRequest(categoryFetchRequest)
+        let categories = categoryResults as! [Category]
+        for categorySearch in categories {
+            if categorySearch.categoriesId == restArticle.categoryId {
+                restArticle.category = categorySearch
+                break
+            }
+        }
+        _ = Article(article: restArticle, entity: entityDescription, insertIntoManagedObjectContext: articlesManagedObjectContext)
+    }
+    
+    func updatingArticles() {
+        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+        articlesManagedObjectContext.parentContext = self.managedObjectContext
+        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: articlesManagedObjectContext)
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = entityDescription
+        let results = try? articlesManagedObjectContext.executeFetchRequest(fetchRequest)
+        let articles = results as! [Article]
+        api.searchFor(.Articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
+            if let data = json["data"].array {
+                var number: Int = 0
+                for index in 0 ..< data.count {
+                    for article in articles {
+                        if article.articleId == data[index]["id"].int {
+                            number++
+                        }
+                    }
+                    if number == 0 {
+                        self.createArticle(data[index], entityDescription: entityDescription!, articlesManagedObjectContext: articlesManagedObjectContext)
+                    }
+                }
+            }
+            do {
+                try articlesManagedObjectContext.save()
+            } catch _ {
+            }
+        })
+    }
+    
+    func getPublishers() {
         let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         publishersManagedObjectContext.parentContext = self.managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: publishersManagedObjectContext)
@@ -66,46 +120,37 @@ class DataManager {
         fetchRequest.entity = entityDescription
         let results = try? publishersManagedObjectContext.executeFetchRequest(fetchRequest)
         publishers = results as! [Publisher]
-        if let publIndex = publisherIndex {
-            for publisher in publishers {
-                if publisher.publidherId == publIndex {
-                    completionHandler(publisherForArticle: publisher)
-                    break
-                }
-            }
-        } else {
-            api.searchFor(.Publishers, articleId: nil, completionHandler: { (json: JSON) -> Void in
-                if let data = json["data"].array {
-                    if publishers.count == 0 {
-                        for index in 0 ..< data.count {
-                            let publisherData = data[index]
-                            let restPublisher = RestPublisher(publisherData: publisherData)
+        api.searchFor(.Publishers, articleId: nil, completionHandler: { (json: JSON) -> Void in
+            if let data = json["data"].array {
+                if publishers.count == 0 {
+                    for index in 0 ..< data.count {
+                        let publisherData = data[index]
+                        let restPublisher = RestPublisher(publisherData: publisherData)
+                        _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
+                    }
+                } else {
+                    var number: Int = 0
+                    for index in 0 ..< data.count {
+                        for publisher in publishers {
+                            if publisher.publidherId == data[index]["id"].int {
+                                number++
+                            }
+                        }
+                        if number == 0 {
+                            let restPublisher = RestPublisher(publisherData: data[index])
                             _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
                         }
-                    } else {
-                        var number: Int = 0
-                        for index in 0 ..< data.count {
-                            for publisher in publishers {
-                                if publisher.publidherId == data[index]["id"].int {
-                                    number++
-                                }
-                            }
-                            if number == 0 {
-                                let restPublisher = RestPublisher(publisherData: data[index])
-                                _ = Publisher(publisher: restPublisher, entity: entityDescription!, insertIntoManagedObjectContext: publishersManagedObjectContext)
-                            }
-                        }
                     }
-                    
                 }
-                do {
-                    try publishersManagedObjectContext.save()
-                } catch _ {
-                }
-            })
-        }
+                
+            }
+            do {
+                try publishersManagedObjectContext.save()
+            } catch _ {
+            }
+        })
     }
-
+    
     func getBanners(completitionHandler: (image: UIImage?) ->  Void) {
         let bannersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         bannersManagedObjectContext.parentContext = self.managedObjectContext
@@ -132,7 +177,7 @@ class DataManager {
         })
     }
     
-    func getCategories(categoryIndex: Int?, completionHandler: (categoryForArticle: Category) -> Void) {
+    func getCategories() {
         let categoriesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
         categoriesManagedObjectContext.parentContext = self.managedObjectContext
         let entityDescription =
@@ -142,32 +187,23 @@ class DataManager {
         fetchRequest.entity = entityDescription
         let results = try? categoriesManagedObjectContext.executeFetchRequest(fetchRequest)
         let categories = results as! [Category]
-        if let categIndex = categoryIndex {
-            for category in categories {
-                if category.categoriesId == categIndex {
-                    completionHandler(categoryForArticle: category)
-                    break
+        api.searchFor(.Categories, articleId: nil, completionHandler: { (json: JSON) -> Void in
+            if let data = json["data"].array {
+                if categories.count == 0 {
+                    for index in 0 ..< data.count {
+                        let categoryData = data[index]
+                        let restCategory = RestCategory(categoryData: categoryData)
+                        _ = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: categoriesManagedObjectContext)
+                    }
+                } else {
+                    
                 }
             }
-        } else {
-            api.searchFor(.Categories, articleId: nil, completionHandler: { (json: JSON) -> Void in
-                if let data = json["data"].array {
-                    if categories.count == 0 {
-                        for index in 0 ..< data.count {
-                            let categoryData = data[index]
-                            let restCategory = RestCategory(categoryData: categoryData)
-                            _ = Category(category: restCategory, entity: entityDescription!, insertIntoManagedObjectContext: categoriesManagedObjectContext)
-                        }
-                    } else {
-                        
-                    }
-                }
-                do {
-                    try categoriesManagedObjectContext.save()
-                } catch _ {
-                }
-            })
-        }
+            do {
+                try categoriesManagedObjectContext.save()
+            } catch _ {
+            }
+        })
     }
     
 }

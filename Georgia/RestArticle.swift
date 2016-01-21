@@ -25,6 +25,8 @@ class RestArticle {
     var title: String? = nil
     var updatedAt: Int? = nil
     var video: String? = nil
+    var categoryId: Int? = nil
+    var publisherId: Int? = nil
     var category: Category? = nil
     var publisher: Publisher? = nil
     
@@ -42,7 +44,7 @@ class RestArticle {
             self.title = title
         }
         if let publisherId = articleData["publisher_id"].int {
-            self.getPublisher(publisherId)
+            self.publisherId = publisherId
         }
         if let publisherTime = articleData["publisher_time"].int {
             self.publisherTime = publisherTime
@@ -63,24 +65,8 @@ class RestArticle {
             self.video = video
         }
         if let categoryId = articleData["category"]["id"].int {
-            self.getCategory(categoryId)
+            self.categoryId = categoryId
         }
-    }
-    
-    func getCategory(categoryId: Int) {
-        self.dataManager.getCategories(categoryId, completionHandler: {(categoryForArticle: Category) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.category = categoryForArticle
-            })
-        })
-    }
-    
-    func getPublisher(publisherId: Int) {
-        self.dataManager.getPublishers(publisherId, completionHandler: {(publisherForArticle: Publisher) -> Void in
-            dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                self.publisher = publisherForArticle
-            })
-        })
     }
 
 }

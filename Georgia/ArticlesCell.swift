@@ -20,6 +20,8 @@ class ArticlesCell: UITableViewCell {
     @IBOutlet weak var articleImage: UIImageView!
     
     @IBOutlet weak var time: UILabel!
+    
+    let defoultImage = UIImage(named: "launch_logo")
    
     func setParameters(article: Article) {
         self.publisher.textColor = UIColor.cyanColor()
@@ -29,14 +31,18 @@ class ArticlesCell: UITableViewCell {
         }
         if let articleTitle = article.title {
             self.title.text = articleTitle
+            
         }
         if let image = article.publisher.logo {
             self.articleImage.sd_setImageWithURL(NSURL(string: image))
+            if self.articleImage.image == nil {
+                self.articleImage.image = self.defoultImage
+            }
         }
         if let time = article.publisherTime {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
-            dateFormatter.dateFormat = "HH:mm | dd.MM.yyyy"
+            dateFormatter.dateFormat = "HH:mm | yyyy/MM/dd"
             let date = NSDate(timeIntervalSince1970: time.doubleValue)
             self.time.text = dateFormatter.stringFromDate(date)
         }

@@ -31,9 +31,8 @@ class PublishersViewController: UITableViewController {
         let font = UIFont.systemFontOfSize(14);
         self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
-        self.dataManager.getPublishers(nil, completionHandler: {(publisherForArticle) -> Void in
-        })
-        self.dataManager.getCategories(nil, completionHandler: {(categoryForArticle: Category) -> Void in})
+        self.dataManager.getPublishers()
+        self.dataManager.getCategories()
         self.publishersDataSource.setSelectAll()
     }
     

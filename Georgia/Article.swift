@@ -61,5 +61,11 @@ extension Article {
         if let video = article.video {
             self.video = video
         }
+        if let publisher = article.publisher {
+            self.publisher = publisher
+        }
+        if let category = article.category {
+            self.category = category
+        }
     }
 }

@@ -28,8 +28,6 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var publishersLogoWidthConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var image: UIImageView!
     
     @IBOutlet weak var publishersLogo: UIImageView!
@@ -44,6 +42,12 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var goToWebSiteButton: UIButton!
     
+    @IBOutlet weak var webView: UIWebView!
+    
+    @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
+    
+    let defoultImage = UIImage(named: "launch_logo")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
@@ -54,6 +58,7 @@ class ArticleViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.date.textColor = UIColor.lightGrayColor()
         self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
             if let text = data!["full_description"].string {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
@@ -66,36 +71,32 @@ class ArticleViewController: UIViewController {
         })
         if let logo = self.article.publisher.logo {
             self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))
+            if self.publishersLogo.image == nil {
+                self.publishersLogo.image = self.defoultImage
+            }
         } else {
-            self.publishersLogoWidthConstraint.constant = 0.0
+            self.publishersLogo.image = self.defoultImage
         }
         if let name = self.article.publisher.name {
             self.publishersName.text = name
         }
         if let title = self.article.title {
             self.articleTitle.text = title
+            self.navigationItem.title = title
         }
-      //  let id = self.article.category.categoriesId
         if let videoUrl = self.article.video {
-            let vidURL = NSURL(string: videoUrl)
-            let asset = AVURLAsset(URL: vidURL!)
-            let generator = AVAssetImageGenerator(asset: asset)
-            generator.appliesPreferredTrackTransform = true
-            var time = asset.duration
-            time.value = min(time.value, 2)
-            do {
-                let imageRef = try generator.copyCGImageAtTime(time, actualTime: nil)
-                self.image.image = UIImage(CGImage: imageRef)
-            }
-            catch let error as NSError
-            {
-                print("Image generation failed with error \(error)")
-            }
+            let videoEmbed = videoUrl.stringByReplacingOccurrencesOfString("watch?v=", withString: "embed/")
+            let videoEmbedURL = NSURL(string: videoEmbed)
+            let request = NSURLRequest(URL: videoEmbedURL!)
+            webView.loadRequest(request)
         } else {
             if let imageUrl = self.article.image {
                 self.image.sd_setImageWithURL(NSURL(string: imageUrl))
+                if self.image.image == nil {
+                    self.hideImageView()
+                }
             } else {
-                self.imageHeightConstraint.constant = 0.0
+                self.hideImageView()
             }
         }
         if (self.article.link == nil) || (self.article.link == "") {
@@ -103,6 +104,19 @@ class ArticleViewController: UIViewController {
             self.goToWebSiteButton.enabled = false
             self.goToWebSiteButton.setTitle("", forState: UIControlState.Normal)
         }
+        if let time = article.publisherTime {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+            let date = NSDate(timeIntervalSince1970: time.doubleValue)
+            self.date.text = dateFormatter.stringFromDate(date)
+        }
+
+    }
+    
+    func hideImageView() {
+        self.imageHeightConstraint.constant = 0.0
+        self.webViewHeightConstraint.constant = 0.0
     }
     
     func closeView() {
