@@ -38,6 +38,7 @@
 		9ED9EC0C1BBC3104007DEE61 /* PublishersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */; };
 		9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */; };
 		9EEECD2B1BE8EEEF00BA90B8 /* FiltersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */; };
+		A809EA7C1C52466A000643B1 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A809EA7B1C52466A000643B1 /* PushNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersViewController.swift; sourceTree = "<group>"; };
 		9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersCell.swift; sourceTree = "<group>"; };
 		9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCell.swift; sourceTree = "<group>"; };
+		A809EA7B1C52466A000643B1 /* PushNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */,
 				9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */,
 				9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */,
+				A809EA7B1C52466A000643B1 /* PushNotifications.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */,
 				9E01327E1C0896DF004ACF48 /* VideoViewController.swift in Sources */,
 				9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */,
+				A809EA7C1C52466A000643B1 /* PushNotifications.swift in Sources */,
 				9EBC83961BCD26CC005A671C /* ArticleViewController.swift in Sources */,
 				9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */,
 				9E52D3901BE1193100F5A0D3 /* Publisher.swift in Sources */,
@@ -471,6 +475,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -494,6 +499,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -516,6 +522,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -531,6 +538,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -541,11 +549,13 @@
 			baseConfigurationReference = 376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Natalia Zheltukhina (75J9K382D2)";
 				INFOPLIST_FILE = Georgia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mozidev.Georgia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "022bcf58-6bf9-42ca-bad1-823e1a96568a";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
 			};
 			name = Debug;
@@ -555,11 +565,13 @@
 			baseConfigurationReference = 39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Natalia Zheltukhina (729WFR3HVU)";
 				INFOPLIST_FILE = Georgia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mozidev.Georgia;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "42d21e16-c768-4f12-9eaf-1f56eed88758";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
 			};
 			name = Release;

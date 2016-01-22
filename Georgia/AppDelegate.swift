@@ -16,8 +16,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let pushSettings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: UIUserNotificationType.Alert, categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(pushSettings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
         return true
+    }
+    
+    // Successfully registered for push
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let trimEnds = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        let cleanToken = trimEnds.stringByReplacingOccurrencesOfString(" ", withString: "")
+        NSLog("My device token is: %@", cleanToken)
+        //registerTokenOnServer(cleanToken) //theoretical method! Needs your own implementation
+    }
+    
+    // Failed to register for Push
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("error: ", error)
+        NSLog("Failed to get token; error: %@", error) //Log an error for debugging purposes, user doesn't need to know
     }
 
     func applicationWillResignActive(application: UIApplication) {
