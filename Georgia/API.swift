@@ -25,70 +25,18 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         
     }
     
+    enum getCategoryPurpose {
+        case Get
+        case Push
+    }
+    
     func searchFor(urltipe: urlTipe, articleId: Int?, completionHandler: (json: JSON) -> Void) {
         var searchTerm: String
         switch urltipe {
         case .Text:
             searchTerm = "http://46.101.211.105/v1/articles/text/\(articleId!)"
         case .Articles:
-            searchTerm = "http://46.101.211.105/v1/articles?"
-            var commas: Bool
-            let categoryEntityDescription =
-            NSEntityDescription.entityForName("Category",
-                inManagedObjectContext: self.managedObjectContext!)
-            let categoryFetchRequest = NSFetchRequest()
-            categoryFetchRequest.entity = categoryEntityDescription
-            let categoryResults = try? self.managedObjectContext!.executeFetchRequest(categoryFetchRequest)
-            let categories = categoryResults as! [Category]
-            searchTerm += "category_ids="
-            commas = false
-            var categoriesCount: Int = 0
-            for category in categories {
-                if category.isSelected == 1 {
-                    ++categoriesCount
-                }
-            }
-            if categoriesCount > 0 {
-                for category in categories {
-                    if category.isSelected == 1 {
-                        if commas {
-                            searchTerm += ","
-                            commas = false
-                        }
-                        searchTerm += "\(category.categoriesId)"
-                        commas = true
-                    }
-                }
-
-            } else {
-                for category in categories {
-                    if commas {
-                        searchTerm += ","
-                        commas = false
-                    }
-                    searchTerm += "\(category.categoriesId)"
-                    commas = true
-                }
-
-            }
-            searchTerm += "&publisher_ids="
-            let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
-            var publishers = [Publisher]()
-            let publisherFetchRequest = NSFetchRequest()
-            publisherFetchRequest.entity = publisherEntityDescription
-            let publisherResults = try? self.managedObjectContext!.executeFetchRequest(publisherFetchRequest)
-            publishers = publisherResults as! [Publisher]
-            commas = false
-            for publisher in publishers {
-                if publisher.isSelected == 1 {
-                    if commas {
-                        searchTerm += ","
-                    }
-                    searchTerm += "\(publisher.publidherId)"
-                    commas = true
-                }
-            }
-            searchTerm += "&limit=1000"
+            searchTerm = "http://46.101.211.105/v1/articles?" + "category_ids=" + self.getSelectedCategoies(.Get)! + "&publisher_ids=" + self.getSelectedPublishers() + "&limit=1000"
         case .Publishers:
            searchTerm = "http://46.101.211.105/v1/publishers"
         case .Banners:
@@ -105,6 +53,71 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             print("\(json.dictionary)")
         }
         dataTask.resume()
+    }
+    
+    func getSelectedCategoies(purpose: getCategoryPurpose) -> String? {
+        var commas = false
+        var result = ""
+        let categoryEntityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
+        let categoryFetchRequest = NSFetchRequest()
+        categoryFetchRequest.entity = categoryEntityDescription
+        let categoryResults = try? self.managedObjectContext!.executeFetchRequest(categoryFetchRequest)
+        let categories = categoryResults as! [Category]
+        var categoriesCount: Int = 0
+        for category in categories {
+            if category.isSelected == 1 {
+                ++categoriesCount
+            }
+        }
+        if categoriesCount > 0 {
+            for category in categories {
+                if category.isSelected == 1 {
+                    if commas {
+                        result += ","
+                        commas = false
+                    }
+                    result += "\(category.categoriesId)"
+                    commas = true
+                }
+            }
+            return result
+        } else {
+            switch purpose {
+            case .Get:
+                for category in categories {
+                    if commas {
+                        result += ","
+                        commas = false
+                    }
+                    result += "\(category.categoriesId)"
+                    commas = true
+                }
+                return result
+            case .Push:
+                return nil
+            }
+        }
+    }
+    
+    func getSelectedPublishers() -> String {
+        var commas = false
+        var result = ""
+        let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
+        var publishers = [Publisher]()
+        let publisherFetchRequest = NSFetchRequest()
+        publisherFetchRequest.entity = publisherEntityDescription
+        let publisherResults = try? self.managedObjectContext!.executeFetchRequest(publisherFetchRequest)
+        publishers = publisherResults as! [Publisher]
+        for publisher in publishers {
+            if publisher.isSelected == 1 {
+                if commas {
+                    result += ","
+                }
+                result += "\(publisher.publidherId)"
+                commas = true
+            }
+        }
+        return result
     }
 
 }
