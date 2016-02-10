@@ -51,6 +51,7 @@ class FiltersCell: UITableViewCell {
             self.categorySelectedCoreData()
         }
         self.dataManager.getArticles()
+        self.dataManager.sendAPNSSettings()
     }
     
     func categoryIsSelected() {

@@ -12,12 +12,20 @@ import SwiftyJSON
 
 class DataManager {
     
-        
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext: NSManagedObjectContext?
     
-    
+    var deviceToken: String? = nil
     
     let api = API()
+    
+    init() {
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            self.managedObjectContext = appDelegate.managedObjectContext!
+        }
+        else {
+            self.managedObjectContext = nil
+        }
+    }
     
     func getText(id: Int, completionHandler: (data: JSON?) -> Void) {
         api.searchFor(.Text, articleId: id, completionHandler: { (json: JSON) -> Void in
@@ -204,6 +212,28 @@ class DataManager {
             } catch _ {
             }
         })
+    }
+    
+    func sendAPNSToken(deviceToken: NSData) {
+        let trimEnds = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+        let cleanToken = trimEnds.stringByReplacingOccurrencesOfString(" ", withString: "")
+        self.deviceToken = cleanToken
+        let dataToken = ["id" : cleanToken]
+        self.api.putDeviceAPNSToken(dataToken)
+    }
+    
+    func sendAPNSSettings() {
+        if let deviceToken = self.deviceToken {
+            var dataSettings: Dictionary <String, String> = [:]
+            if let selectedCategories = self.api.getSelectedCategoies(.Push) {
+                dataSettings["category_ids"] = selectedCategories
+            }
+            if let selectedPublishers = self.api.getSelectedPublishers() {
+                dataSettings["publishers_ids"] = selectedPublishers
+            }
+            dataSettings["id"] = deviceToken
+            self.api.postAPNSSettingsWithParameters(dataSettings)
+        }
     }
     
 }

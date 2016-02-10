@@ -63,6 +63,7 @@ class FiltersViewController: UITableViewController {
         } catch _ {
         }
         self.dataManager.getArticles()
+        self.dataManager.sendAPNSSettings()
     }
     
 }

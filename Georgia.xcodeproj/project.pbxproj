@@ -38,7 +38,6 @@
 		9ED9EC0C1BBC3104007DEE61 /* PublishersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */; };
 		9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */; };
 		9EEECD2B1BE8EEEF00BA90B8 /* FiltersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */; };
-		A809EA7C1C52466A000643B1 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A809EA7B1C52466A000643B1 /* PushNotifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +89,6 @@
 		9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersViewController.swift; sourceTree = "<group>"; };
 		9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersCell.swift; sourceTree = "<group>"; };
 		9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCell.swift; sourceTree = "<group>"; };
-		A809EA7B1C52466A000643B1 /* PushNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,7 +204,6 @@
 				9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */,
 				9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */,
 				9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */,
-				A809EA7B1C52466A000643B1 /* PushNotifications.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -410,7 +407,6 @@
 				9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */,
 				9E01327E1C0896DF004ACF48 /* VideoViewController.swift in Sources */,
 				9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */,
-				A809EA7C1C52466A000643B1 /* PushNotifications.swift in Sources */,
 				9EBC83961BCD26CC005A671C /* ArticleViewController.swift in Sources */,
 				9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */,
 				9E52D3901BE1193100F5A0D3 /* Publisher.swift in Sources */,

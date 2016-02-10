@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    let dataManager = DataManager()
+    
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let pushSettings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: UIUserNotificationType.Alert, categories: nil)
@@ -24,30 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Successfully registered for push
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let trimEnds = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
-        let cleanToken = trimEnds.stringByReplacingOccurrencesOfString(" ", withString: "")
-        let dataToken: NSDictionary = ["id" : cleanToken, "url" : "http://46.101.211.105/v1/devices/ios"]
-      /*  dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            let postBody = NSString(format: "user=%@&token=%@", cleanToken)
-            let endBody = NSURL(string: "http://46.101.211.105/v1/devices/ios")
-            let request = NSMutableURLRequest(URL: endBody!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 30.0)
-            request.HTTPMethod = "POST";
-            request.HTTPBody = postBody.dataUsingEncoding(NSUTF8StringEncoding)
-            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) -> Void in
-                
-                if data != nil {
-                    print("data: \(data)")
-                } else {
-                    print("failed: \(error!.localizedDescription)")
-                }
-            }
-            
-        })*/
-        
-        NSLog("My device token is: %@", cleanToken)
-        //registerTokenOnServer(cleanToken) //theoretical method! Needs your own implementation
+        self.dataManager.sendAPNSToken(deviceToken)
     }
     
     // Failed to register for Push

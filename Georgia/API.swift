@@ -14,8 +14,21 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     
     let queue:NSOperationQueue = NSOperationQueue()
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    //let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    var managedObjectContext: NSManagedObjectContext?
     
+    let postRequestURL = NSURL(string: "http://46.101.211.105/v1/devices/ios")
+    
+    override init() {
+        super.init()
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            self.managedObjectContext = appDelegate.managedObjectContext!
+        }
+        else {
+            self.managedObjectContext = nil
+        }
+    }
+
     enum urlTipe {
         case Articles
         case Text
@@ -36,7 +49,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case .Text:
             searchTerm = "http://46.101.211.105/v1/articles/text/\(articleId!)"
         case .Articles:
-            searchTerm = "http://46.101.211.105/v1/articles?" + "category_ids=" + self.getSelectedCategoies(.Get)! + "&publisher_ids=" + self.getSelectedPublishers() + "&limit=1000"
+            searchTerm = "http://46.101.211.105/v1/articles?category_ids=" + self.getSelectedCategoies(.Get)! + "&publisher_ids=" + self.getSelectedPublishers()! + "&limit=1000"
         case .Publishers:
            searchTerm = "http://46.101.211.105/v1/publishers"
         case .Banners:
@@ -99,7 +112,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         }
     }
     
-    func getSelectedPublishers() -> String {
+    func getSelectedPublishers() -> String? {
         var commas = false
         var result = ""
         let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
@@ -118,6 +131,30 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             }
         }
         return result
+    }
+    
+    func putDeviceAPNSToken(parametrs: Dictionary<String, String>) {
+        let request = NSMutableURLRequest(URL: self.postRequestURL!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = NSKeyedArchiver.archivedDataWithRootObject(parametrs)
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+            print(response)
+        });
+        task.resume()
+    }
+    
+    func postAPNSSettingsWithParameters(parametrs: Dictionary<String, String>) {
+        let request = NSMutableURLRequest(URL: self.postRequestURL!)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = NSKeyedArchiver.archivedDataWithRootObject(parametrs)
+        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+        let session = NSURLSession(configuration: config)
+        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+            print(response)
+        });
+        task.resume()
     }
 
 }
