@@ -66,7 +66,6 @@ class PublishersViewController: UITableViewController {
                 try self.publishersDataSource.managedObjectContext?.save()
             } catch _ {
             }
-            self.dataManager.getArticles()
         }
     }
     
@@ -94,6 +93,7 @@ class PublishersViewController: UITableViewController {
             }))
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
+            self.dataManager.getArticles()
             self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController, animated: true)
         }
     }

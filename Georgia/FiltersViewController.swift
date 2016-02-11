@@ -22,8 +22,10 @@ class FiltersViewController: UITableViewController {
         self.filtersDataSource = FiltersDataSource(tableView: self.tableView, selectAll: self.selectAllButton)
         self.tableView.delegate = self.filtersDataSource
         self.tableView.dataSource = self.filtersDataSource
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationItem.title = "Filters"
-        let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
+        let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.navigationItem.leftBarButtonItem = selectAllButton
@@ -38,7 +40,7 @@ class FiltersViewController: UITableViewController {
     }
     
     func closeView() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.dismissViewControllerAnimated(true, completion: {() -> Void in })
     }
     
     

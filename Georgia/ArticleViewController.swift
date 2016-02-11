@@ -88,13 +88,12 @@ class ArticleViewController: UIViewController {
             let videoEmbed = videoUrl.stringByReplacingOccurrencesOfString("watch?v=", withString: "embed/")
             let videoEmbedURL = NSURL(string: videoEmbed)
             let request = NSURLRequest(URL: videoEmbedURL!)
-            webView.loadRequest(request)
+            self.webView.loadRequest(request)
         } else {
             if let imageUrl = self.article.image {
-                self.image.sd_setImageWithURL(NSURL(string: imageUrl))
-                if self.image.image == nil {
-                    self.hideImageView()
-                }
+                self.image.sd_setImageWithURL(NSURL(string: "https://photos-4.dropbox.com/t/2/AABKqeWjzPnXhgeRCVaKkViZojrj9srU5r-8nn7Nzcn_iA/12/505635861/png/32x32/3/1455213600/0/2/publisher_phone_icon%403x.png/ENvQ3owEGH8gAigC/sm-pY6ZgWAojHJ-mdFCq1umoSJ5sqa32MLFUAVWwxsw?size_mode=3&size=1280x960"))
+                self.webView.opaque = false;
+                self.webView.backgroundColor = UIColor.clearColor()
             } else {
                 self.hideImageView()
             }

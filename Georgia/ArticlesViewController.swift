@@ -35,7 +35,6 @@ class ArticlesViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
-        self.dataManager.getArticles()
         self.dataManager.getBanners({(image: UIImage?) -> Void in
             if (image != nil) {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
