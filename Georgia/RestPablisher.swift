@@ -28,12 +28,12 @@ class RestPublisher {
     
     init(publisherData: JSON) {
         if let address = publisherData["address"].string {
-            self.address = self.stringEncoding.encoding(address)
+            self.address = address
         } else {
             self.address = nil
         }
         if let description = publisherData["description"].string {
-            self.publDescription = self.stringEncoding.encoding(description)
+           self.publDescription = description
         } else {
             self.publDescription = nil
         }
@@ -63,7 +63,7 @@ class RestPublisher {
             self.telephone = nil
         }
         if let name = publisherData["publisher_name"].string {
-            self.name = self.stringEncoding.encoding(name)
+            self.name = name
         } else {
             self.name = nil
         }

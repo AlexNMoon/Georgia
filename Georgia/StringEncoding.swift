@@ -11,10 +11,19 @@ import Foundation
 class StringEncoding {
     
     func encoding(data: String) -> String {
-        return (try! NSAttributedString(data: data.dataUsingEncoding(NSUTF8StringEncoding)!, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSUTF8StringEncoding], documentAttributes: nil)).string
+        var encodedString = ""
+        let encodedData = data.dataUsingEncoding(NSUTF8StringEncoding)!
+        let attributedOptions : [String: AnyObject] = [
+            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+            NSCharacterEncodingDocumentAttribute: NSUTF8StringEncoding
+        ]
+        do {
+            let attributedString = try NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
+            encodedString = attributedString.string
+        } catch {
+            fatalError("Unhandled error: \(error)")
+        }
+        return encodedString
     }
     
-   /* func htmlEncoding(data: String) -> String {
-        return (try! )
-    }*/
 }

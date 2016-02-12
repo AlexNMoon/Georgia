@@ -29,7 +29,7 @@ class RestCategory {
             self.categoriesId = nil
         }
         if let title = categoryData["title"].string {
-            self.title = self.stringEncoding.encoding(title)
+            self.title = title
         } else {
             self.title = nil
         }

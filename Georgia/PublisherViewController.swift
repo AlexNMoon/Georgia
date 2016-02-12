@@ -28,10 +28,9 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     
     @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var siteButtonWidthConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var liveButtonWidthConstraint: NSLayoutConstraint!
     

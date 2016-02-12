@@ -22,9 +22,9 @@ class ArticleViewController: UIViewController {
     
     var text: String!
     
-    @IBOutlet weak var articleText: UITextView!
+    @IBOutlet weak var articleTextWebView: UIWebView!
     
-    @IBOutlet weak var textHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textWebViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     
@@ -63,9 +63,9 @@ class ArticleViewController: UIViewController {
             if let text = data!["full_description"].string {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
                     self.text = self.stringEncoding.encoding(text)
-                    self.articleText.text = self.text
-                    let size = self.articleText.sizeThatFits(CGSizeMake(self.articleText.frame.size.width,  CGFloat.max))
-                    self.textHeightConstraint.constant = size.height
+                    self.articleTextWebView.loadHTMLString(self.text, baseURL: nil)
+                    let size = self.articleTextWebView.sizeThatFits(CGSizeMake(self.articleTextWebView.frame.size.width,  CGFloat.max))
+                    self.textWebViewHeightConstraint.constant = size.height
                 })
             }
         })
@@ -133,7 +133,7 @@ class ArticleViewController: UIViewController {
         if let title = self.articleTitle.text {
             sharingItems.append(title)
         }
-        if let text = self.articleText.text {
+        if let text = self.text {
             sharingItems.append(text)
         }
         if let image = self.image.image {
