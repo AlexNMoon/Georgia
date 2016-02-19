@@ -26,6 +26,7 @@ class PublishersViewController: UITableViewController {
         self.publishersDataSource = PublishersDataSource(selectAll: self.selectAll, tableView: self.tableView)
         self.tableView.delegate = self.publishersDataSource
         self.tableView.dataSource = self.publishersDataSource
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         let font = UIFont.systemFontOfSize(14);

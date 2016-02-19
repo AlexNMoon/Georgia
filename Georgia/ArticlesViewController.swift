@@ -28,6 +28,7 @@ class ArticlesViewController: UIViewController {
         self.articlesDataSource = ArticlesDataSource(tableView: self.tableView)
         self.tableView.dataSource = self.articlesDataSource
         self.tableView.delegate = self.articlesDataSource
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         let font = UIFont.systemFontOfSize(22);
         self.settings.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
         self.navigationItem.rightBarButtonItems = [self.settings, self.filters]

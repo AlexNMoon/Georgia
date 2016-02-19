@@ -1,4 +1,4 @@
-//
+ //
 //  PublishersDataSource.swift
 //  Georgia
 //
@@ -75,7 +75,9 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            if indexPath == nil {
+                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
         case .Update:
             self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
         case .Move:

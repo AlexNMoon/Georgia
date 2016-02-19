@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6E007C93C103299830C913FC /* Pods_Georgia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A374C559BEEF6996CF7E58F /* Pods_Georgia.framework */; };
-		9E01327E1C0896DF004ACF48 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E01327D1C0896DF004ACF48 /* VideoViewController.swift */; };
 		9E4F09CE1BCBF5A200E8B99D /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F09CD1BCBF5A200E8B99D /* FiltersViewController.swift */; };
 		9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */; };
 		9E52D38A1BE1193000F5A0D3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3891BE1193000F5A0D3 /* Article.swift */; };
@@ -54,7 +53,6 @@
 		376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.debug.xcconfig"; sourceTree = "<group>"; };
 		39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.release.xcconfig"; sourceTree = "<group>"; };
 		6A374C559BEEF6996CF7E58F /* Pods_Georgia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Georgia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E01327D1C0896DF004ACF48 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		9E4F09CD1BCBF5A200E8B99D /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9E52D3891BE1193000F5A0D3 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
@@ -127,7 +125,6 @@
 				9ECC9F821BC412BF004400C9 /* PublisherViewController.swift */,
 				9EC30D3B1BCFE3C100C0B218 /* ArticlesViewController.swift */,
 				9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */,
-				9E01327D1C0896DF004ACF48 /* VideoViewController.swift */,
 			);
 			name = ControlViews;
 			sourceTree = "<group>";
@@ -405,7 +402,6 @@
 				9ED9EBEC1BBC24AA007DEE61 /* Georgia.xcdatamodeld in Sources */,
 				9E5560611BBEB4650065B5EC /* API.swift in Sources */,
 				9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */,
-				9E01327E1C0896DF004ACF48 /* VideoViewController.swift in Sources */,
 				9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */,
 				9EBC83961BCD26CC005A671C /* ArticleViewController.swift in Sources */,
 				9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */,
@@ -553,6 +549,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "022bcf58-6bf9-42ca-bad1-823e1a96568a";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -569,6 +566,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "42d21e16-c768-4f12-9eaf-1f56eed88758";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

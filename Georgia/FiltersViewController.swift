@@ -22,6 +22,7 @@ class FiltersViewController: UITableViewController {
         self.filtersDataSource = FiltersDataSource(tableView: self.tableView, selectAll: self.selectAllButton)
         self.tableView.delegate = self.filtersDataSource
         self.tableView.dataSource = self.filtersDataSource
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         self.navigationItem.title = "Filters"
