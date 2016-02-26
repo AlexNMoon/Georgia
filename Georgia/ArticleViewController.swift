@@ -16,8 +16,6 @@ class ArticleViewController: UIViewController {
     
     let dataManager = DataManager()
     
-    let stringEncoding = StringEncoding()
-    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var text: String!
@@ -63,7 +61,7 @@ class ArticleViewController: UIViewController {
         self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
             if let text = data!["full_description"].string {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    self.text = self.stringEncoding.encoding(text)
+                    self.text = text
                     self.articleTextWebView.loadHTMLString(self.text, baseURL: nil)
                     let size = self.articleTextWebView.sizeThatFits(CGSizeMake(self.articleTextWebView.frame.size.width,  CGFloat.max))
                     self.textWebViewHeightConstraint.constant = size.height
