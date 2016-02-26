@@ -13,8 +13,6 @@ class RestArticle {
     
     let dataManager = DataManager()
     
-   // let stringEncoding = StringEncoding()
-    
     var articleId: Int? = nil
     var articleIsDeleted: Bool? = nil
     var createdAt: Int? = nil

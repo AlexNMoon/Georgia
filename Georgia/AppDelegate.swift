@@ -38,15 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // Successfully registered for push
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         self.dataManager.sendAPNSToken(deviceToken)
     }
     
-    // Failed to register for Push
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("error: ", error)
-        NSLog("Failed to get token; error: %@", error) //Log an error for debugging purposes, user doesn't need to know
+        NSLog("Failed to get token; error: %@", error)
     }
 
     func applicationWillResignActive(application: UIApplication) {

@@ -11,8 +11,6 @@ import SwiftyJSON
 
 class RestCategory {
     
-    let stringEncoding = StringEncoding()
-    
     let categIsDeleted: Bool?
     let categoriesId: Int?
     let title: String?

@@ -91,10 +91,9 @@ class ArticleViewController: UIViewController {
             let request = NSURLRequest(URL: videoEmbedURL!)
             self.webView.loadRequest(request)
         } else {
-            if let imageUrl = self.article.image {
+            if let _ = self.article.image {
                 self.image.contentMode = .ScaleAspectFit
                 self.image.image = UIImage(named: "publishers_add_icon")
-               // self.image.sd_setImageWithURL(NSURL(string: "https://photos-2.dropbox.com/t/2/AAB6q_X0ge1qhIoPfN3KRC6O7V2WWHfi86rC2GMbxffm7g/12/505635861/png/32x32/1/_/1/2/publisher_phone_icon%403x.png/ENvQ3owEGH8gAigC/sm-pY6ZgWAojHJ-mdFCq1umoSJ5sqa32MLFUAVWwxsw?size=1280x960&size_mode=3"))
                 self.webViewHeightConstraint.constant = 0.0
             } else {
                 self.hideImageView()

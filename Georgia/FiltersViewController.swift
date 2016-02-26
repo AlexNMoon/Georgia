@@ -44,7 +44,6 @@ class FiltersViewController: UITableViewController {
         self.navigationController?.dismissViewControllerAnimated(true, completion: {() -> Void in })
     }
     
-    
     @IBAction func tapSelectAll(sender: AnyObject) {
         if selectAllButton.title == "Select All" {
             for  category in self.filtersDataSource.fetchedResultsController.fetchedObjects! as! [Category] {

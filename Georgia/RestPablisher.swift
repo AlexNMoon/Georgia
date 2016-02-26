@@ -11,8 +11,6 @@ import SwiftyJSON
 
 class RestPublisher {
     
-    let stringEncoding = StringEncoding()
-    
     let address: String?
     let createdAt: Int?
     let email: String?

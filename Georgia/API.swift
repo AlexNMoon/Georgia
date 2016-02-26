@@ -14,7 +14,6 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     
     let queue:NSOperationQueue = NSOperationQueue()
     
-    //let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var managedObjectContext: NSManagedObjectContext?
     
     let postRequestURL = NSURL(string: "http://46.101.211.105/v1/devices/ios")
