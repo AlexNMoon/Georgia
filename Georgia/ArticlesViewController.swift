@@ -52,7 +52,6 @@ class ArticlesViewController: UIViewController {
     
     func closeView() {
         self.navigationController?.popViewControllerAnimated(true)
-        //self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Publishers View Controller") as! PublishersViewController, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
