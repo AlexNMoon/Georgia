@@ -36,6 +36,7 @@ class ArticlesViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
+        self.dataManager.getArticles()
         self.dataManager.getBanners({(image: UIImage?) -> Void in
             if (image != nil) {
                 dispatch_async(dispatch_get_main_queue(), {() -> Void in
@@ -51,6 +52,7 @@ class ArticlesViewController: UIViewController {
     
     func closeView() {
         self.navigationController?.popViewControllerAnimated(true)
+        //self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Publishers View Controller") as! PublishersViewController, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
