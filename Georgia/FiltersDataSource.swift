@@ -13,16 +13,16 @@ class FiltersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, N
     
     let selectAll: UIBarButtonItem!
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     let tableView: UITableView!
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if self.restFetchedResultsController != nil {
             return self.restFetchedResultsController!
         }
-        let entityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
-        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Category", in: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
         let sort = NSSortDescriptor(key: "title", ascending: true)
         fetchRequest.sortDescriptors = [sort]
@@ -41,47 +41,47 @@ class FiltersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, N
         return self.restFetchedResultsController!
     }
     
-    var restFetchedResultsController: NSFetchedResultsController?
+    var restFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
     init(tableView: UITableView, selectAll: UIBarButtonItem) {
         self.tableView = tableView
         self.selectAll = selectAll
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let info = self.fetchedResultsController.sections![section]
         return  info.numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Filters Cell", forIndexPath: indexPath) as! FiltersCell
-        let category = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Category
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Filters Cell", for: indexPath) as! FiltersCell
+        let category = self.fetchedResultsController.object(at: indexPath) as! Category
         cell.setParameters(category, fetchedResultsController: self.fetchedResultsController, selectAll: self.selectAll)
         return cell
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
+        case .insert:
             if indexPath == nil {
-                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+                self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
             }
-        case .Update:
-            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+        case .update:
+            self.tableView.reloadRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+            self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
         }
         self.setSelectAll()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
     
@@ -98,7 +98,7 @@ class FiltersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, N
                 var unselected: Int = 0
                 for category in self.fetchedResultsController.fetchedObjects! as! [Category] {
                     if category.isSelected != 1 {
-                        unselected++
+                        unselected += 1
                     }
                 }
                 if unselected == 0 {

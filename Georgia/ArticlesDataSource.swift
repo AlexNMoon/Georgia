@@ -11,20 +11,20 @@ import CoreData
 
 class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate  {
     
-    var indexOfSelectedCell: NSIndexPath!
+    var indexOfSelectedCell: IndexPath!
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     var refreshControl:UIRefreshControl!
     
     let dataManager = DataManager()
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if self.restFetchedResultsController != nil {
             return self.restFetchedResultsController!
         }
-        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: self.managedObjectContext!)
-        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Article", in: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
         let sort = NSSortDescriptor(key: "publisherTime", ascending: false)
         fetchRequest.sortDescriptors = [sort]
@@ -43,7 +43,7 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
         return self.restFetchedResultsController!
     }
     
-    var restFetchedResultsController: NSFetchedResultsController?
+    var restFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
     var tableView: UITableView!
     
@@ -51,58 +51,58 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
         super.init()
         self.tableView = tableView
         self.refreshControl = UIRefreshControl()
-        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: #selector(ArticlesDataSource.refresh(_:)), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(_ sender:AnyObject) {
         self.dataManager.updatingArticles()
         self.refreshControl?.endRefreshing()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let info = self.fetchedResultsController.sections![section]
         return info.numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Articles Cell", forIndexPath: indexPath) as! ArticlesCell
-        let article = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Article
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Articles Cell", for: indexPath) as! ArticlesCell
+        let article = self.fetchedResultsController.object(at: indexPath) as! Article
         cell.setParameters(article)
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 109.0
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         indexOfSelectedCell = indexPath
         return indexPath
     }
     
     
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Update:
-            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+        case .insert:
+            self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
+        case .update:
+            self.tableView.reloadRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+            self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
         }
         
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
 

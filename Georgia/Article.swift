@@ -30,15 +30,15 @@ class Article: NSManagedObject {
 
 extension Article {
     convenience init(article: RestArticle, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
-        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+        self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
         if let id = article.articleId {
-            self.articleId = id
+            self.articleId = NSNumber(id)
         }
         if let isDeleted = article.articleIsDeleted {
-            self.articleIsDeleted = NSNumber(bool: isDeleted)
+            self.articleIsDeleted = NSNumber(value: isDeleted as Bool)
         }
         if let createdAt = article.createdAt {
-            self.createdAt = createdAt
+            self.createdAt = createdAt as NSNumber?
         }
         if let image = article.image {
             self.image = image
@@ -47,16 +47,16 @@ extension Article {
             self.link = link
         }
         if let publisherTime = article.publisherTime {
-            self.publisherTime = publisherTime
+            self.publisherTime = publisherTime as NSNumber?
         }
         if let status = article.status {
-            self.status = NSNumber(bool: status)
+            self.status = NSNumber(value: status as Bool)
         }
         if let title = article.title {
             self.title = title
         }
         if let updatedAt = article.updatedAt {
-            self.updatedAt = updatedAt
+            self.updatedAt = updatedAt as NSNumber?
         }
         if let video = article.video {
             self.video = video

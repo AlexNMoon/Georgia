@@ -33,12 +33,12 @@ class Publisher: NSManagedObject {
 
 extension Publisher {
      convenience init(publisher: RestPublisher, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
-        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+        self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
         if let address = publisher.address {
             self.address = address
         }
         if let createdAt = publisher.createdAt {
-        self.createdAt = createdAt
+        self.createdAt = createdAt as NSNumber?
         }
         if let email = publisher.email {
         self.email = email
@@ -53,10 +53,10 @@ extension Publisher {
             self.publDescription = description
         }
         if let id = publisher.publisherId {
-            self.publidherId = id
+            self.publidherId = NSNumber(id)
         }
         if let isDeleted = publisher.publIsDeleted {
-            self.publIsDeleted = NSNumber(bool: isDeleted)
+            self.publIsDeleted = NSNumber(value: isDeleted as Bool)
         }
         if let site = publisher.site {
             self.site = site
@@ -65,7 +65,7 @@ extension Publisher {
             self.telephone = telephone
         }
         if let updatedAt = publisher.updatedAt {
-            self.updatedAt = updatedAt
+            self.updatedAt = updatedAt as NSNumber?
         }
         if let stream = publisher.stream {
             self.stream = stream

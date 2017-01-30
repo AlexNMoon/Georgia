@@ -23,9 +23,9 @@ class ArticlesCell: UITableViewCell {
     
     let defoultImage = UIImage(named: "launch_logo")
    
-    func setParameters(article: Article) {
-        self.publisher.textColor = UIColor.cyanColor()
-        self.time.textColor = UIColor.lightGrayColor()
+    func setParameters(_ article: Article) {
+        self.publisher.textColor = UIColor.cyan
+        self.time.textColor = UIColor.lightGray
         if let publisherName = article.publisher.name {
                 self.publisher.text = publisherName
         }
@@ -34,17 +34,17 @@ class ArticlesCell: UITableViewCell {
             
         }
         if let image = article.publisher.logo {
-            self.articleImage.sd_setImageWithURL(NSURL(string: image))
+            self.articleImage.sd_setImage(with: URL(string: image))
             if self.articleImage.image == nil {
                 self.articleImage.image = self.defoultImage
             }
         }
         if let time = article.publisherTime {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.full
             dateFormatter.dateFormat = "HH:mm | yyyy/MM/dd"
-            let date = NSDate(timeIntervalSince1970: time.doubleValue)
-            self.time.text = dateFormatter.stringFromDate(date)
+            let date = Date(timeIntervalSince1970: time.doubleValue)
+            self.time.text = dateFormatter.string(from: date)
         }
     }
     

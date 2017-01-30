@@ -23,9 +23,9 @@ class Banner: NSManagedObject {
 
 extension Banner {
     convenience init(banner: RestBanner, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
-        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+        self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
         if let id = banner.bannerId {
-            self.bannerId = id
+            self.bannerId = NSNumber(id)
         }
         if let image = banner.image {
             self.image = image

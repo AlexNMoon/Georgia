@@ -47,20 +47,20 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     @IBOutlet weak var feedbackBottomLayoutCuide: NSLayoutConstraint!
     
     override func viewDidLoad() {
-        let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .Plain, target: self, action: "closeView")
+        let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .plain, target: self, action: #selector(PublisherViewController.closeView))
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     func closeView() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         if let logoUrl = publisher.logo {
-            self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+            self.logo.sd_setImage(with: URL(string: logoUrl))
             if self.logo.image != nil {
                 let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
                 self.text.textContainer.exclusionPaths = [imageRect]
@@ -73,7 +73,7 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         }
         if let text = publisher.publDescription {
             self.text.text = text
-            let size = self.text.sizeThatFits(CGSizeMake(self.text.frame.size.width,  CGFloat.max))
+            let size = self.text.sizeThatFits(CGSize(width: self.text.frame.size.width,  height: CGFloat.greatestFiniteMagnitude))
             if self.logo.image != nil {
                 if size.height > 125.0 {
                     self.textHeightConstraint.constant = size.height
@@ -98,23 +98,23 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
             self.phone.text = phone
         }
         if (self.publisher.site == nil) || (self.publisher.site == "") {
-            self.siteButton.enabled = false
-            self.siteButton.setTitle("", forState: UIControlState.Normal)
+            self.siteButton.isEnabled = false
+            self.siteButton.setTitle("", for: UIControlState())
         }
         if (self.publisher.stream == nil) || (self.publisher.stream == "") {
-            self.liveButton.enabled = false
-            self.liveButton.setTitle("", forState: UIControlState.Normal)
+            self.liveButton.isEnabled = false
+            self.liveButton.setTitle("", for: UIControlState())
         }
-        if (!self.siteButton.enabled) && (!self.liveButton.enabled) {
+        if (!self.siteButton.isEnabled) && (!self.liveButton.isEnabled) {
             self.liveButtonHeightConstraint.constant = 0.0
             self.siteButtonHeightConstraint.constant = 0.0
             self.feedbackBottomLayoutCuide.constant = 0.0
         } else {
-            if (self.siteButton.enabled) && (self.liveButton.enabled) {
+            if (self.siteButton.isEnabled) && (self.liveButton.isEnabled) {
                 self.liveButtonWidthConstraint.constant = self.view.frame.width / 2.0 + 10.0
                 self.siteButtonWidthConstraint.constant = self.liveButtonWidthConstraint.constant
             } else {
-                if self.siteButton.enabled {
+                if self.siteButton.isEnabled {
                     self.liveButtonWidthConstraint.constant = 0.0
                     self.siteButtonWidthConstraint.constant = self.view.frame.width + 20.0
                 } else {
@@ -125,41 +125,41 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         }
     }
     
-    @IBAction func tapGoToWebSiteButton(sender: AnyObject) {
+    @IBAction func tapGoToWebSiteButton(_ sender: AnyObject) {
         if let url = self.publisher.site {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func tapFeedback(sender: AnyObject) {
+    @IBAction func tapFeedback(_ sender: AnyObject) {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
     }
     
-    @IBAction func tapLive(sender: AnyObject) {
+    @IBAction func tapLive(_ sender: AnyObject) {
         if let url = self.publisher.stream {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func tapMail(sender: AnyObject) {
+    @IBAction func tapMail(_ sender: AnyObject) {
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
         mailComposeViewController.setToRecipients([self.publisher.email!])
-            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+            self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
             self.showSendMailErrorAlert()
         }
     }
     
-    @IBAction func tapPhone(sender: AnyObject) {
+    @IBAction func tapPhone(_ sender: AnyObject) {
         if let phone = self.publisher.telephone {
-            let url = "tel://" + phone.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil)
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            let url = "tel://" + phone.replacingOccurrences(of: " ", with: "", options: NSString.CompareOptions.caseInsensitive, range: nil)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
@@ -171,12 +171,12 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     }
     
     func showSendMailErrorAlert() {
-        let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.Alert)
-        self.presentViewController(sendMailErrorAlert, animated: true, completion: nil)
+        let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", preferredStyle: UIAlertControllerStyle.alert)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
     }
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }

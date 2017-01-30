@@ -23,12 +23,12 @@ class Category: NSManagedObject {
 
 extension Category {
     convenience init(category: RestCategory, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
-        self.init(entity: entity, insertIntoManagedObjectContext: insertIntoManagedObjectContext)
+        self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
         if let isDeleted = category.categIsDeleted {
-            self.categIsDeleted = NSNumber(bool: isDeleted) 
+            self.categIsDeleted = NSNumber(value: isDeleted as Bool) 
         }
         if let id = category.categoriesId {
-            self.categoriesId = id
+            self.categoriesId = NSNumber(id)
         }
         if let title = category.title {
             self.title = title

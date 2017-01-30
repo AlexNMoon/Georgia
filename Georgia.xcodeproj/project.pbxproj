@@ -282,9 +282,11 @@
 				TargetAttributes = {
 					9ED9EBE21BBC24AA007DEE61 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0820;
 					};
 					9ED9EBFA1BBC24AA007DEE61 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0820;
 						TestTargetID = 9ED9EBE21BBC24AA007DEE61;
 					};
 				};
@@ -545,6 +547,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "022bcf58-6bf9-42ca-bad1-823e1a96568a";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -562,6 +565,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "42d21e16-c768-4f12-9eaf-1f56eed88758";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/alexandra/Desktop/Georgia/Georgia/Georgia-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -582,6 +586,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Georgia.app/Georgia";
 			};
 			name = Debug;
@@ -598,6 +603,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Georgia.app/Georgia";
 			};
 			name = Release;

@@ -11,9 +11,9 @@ import CoreData
 
 class FiltersCell: UITableViewCell {
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     @IBOutlet weak var addCategory: UIButton!
     
@@ -29,7 +29,7 @@ class FiltersCell: UITableViewCell {
     
     let dataManager = DataManager()
     
-    func setParameters(category: Category, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {
+    func setParameters(_ category: Category, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>, selectAll: UIBarButtonItem) {
         self.category = category
         self.fetchedResultsController = fetchedResultsController
         self.selectAll = selectAll
@@ -44,7 +44,7 @@ class FiltersCell: UITableViewCell {
 
     }
     
-    @IBAction func tapAddCategory(sender: AnyObject) {
+    @IBAction func tapAddCategory(_ sender: AnyObject) {
         if category.isSelected == 1 {
             self.categoryUnselectedCoreData()
         } else {
@@ -55,13 +55,13 @@ class FiltersCell: UITableViewCell {
     }
     
     func categoryIsSelected() {
-        addCategory.setImage(added, forState: UIControlState.Normal)
-        addCategory.tintColor = UIColor.grayColor()
+        addCategory.setImage(added, for: UIControlState())
+        addCategory.tintColor = UIColor.gray
     }
     
     func categoryIsUnselected() {
-        addCategory.setImage(add, forState: UIControlState.Normal)
-        addCategory.tintColor = UIColor.cyanColor()
+        addCategory.setImage(add, for: UIControlState())
+        addCategory.tintColor = UIColor.cyan
     }
     
     func categorySelectedCoreData() {

@@ -26,12 +26,12 @@ class PublishersViewController: UITableViewController {
         self.publishersDataSource = PublishersDataSource(selectAll: self.selectAll, tableView: self.tableView)
         self.tableView.delegate = self.publishersDataSource
         self.tableView.dataSource = self.publishersDataSource
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        let font = UIFont.systemFontOfSize(14);
-        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
-        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        let font = UIFont.systemFont(ofSize: 14);
+        self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
+        self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
         self.dataManager.getPublishers()
         self.dataManager.getCategories()
         self.publishersDataSource.setSelectAll()
@@ -41,20 +41,20 @@ class PublishersViewController: UITableViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "seguePublisher" {
-            let publisherView = segue.destinationViewController as! PublisherViewController
-            let publisher = self.publishersDataSource.fetchedResultsController.objectAtIndexPath(publishersDataSource.indexOfSelectedCell) as! Publisher
+            let publisherView = segue.destination as! PublisherViewController
+            let publisher = self.publishersDataSource.fetchedResultsController.object(at: publishersDataSource.indexOfSelectedCell) as! Publisher
             publisherView.publisher = publisher
         }
     }
     
-    @IBAction func tapSelectAll(sender: AnyObject) {
+    @IBAction func tapSelectAll(_ sender: AnyObject) {
         if selectAll.title == "Select All" {
             self.selectAllPublishers()
         } else {
@@ -84,18 +84,18 @@ class PublishersViewController: UITableViewController {
         self.dataManager.sendAPNSSettings()
     }
     
-    @IBAction func tapViewSelected(sender: AnyObject) {
+    @IBAction func tapViewSelected(_ sender: AnyObject) {
         if self.selectAll.title == "Select All" {
-            let alertController = UIAlertController(title: "You have not selected any publisher", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Return to selection", style: UIAlertActionStyle.Default,handler: nil))
-            alertController.addAction(UIAlertAction(title: "Select all", style: UIAlertActionStyle.Default ,handler: { alertAction in
+            let alertController = UIAlertController(title: "You have not selected any publisher", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Return to selection", style: UIAlertActionStyle.default,handler: nil))
+            alertController.addAction(UIAlertAction(title: "Select all", style: UIAlertActionStyle.default ,handler: { alertAction in
                 self.selectAllPublishers()
-                self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController, animated: true)
+                self.navigationController?.pushViewController(self.storyboard?.instantiateViewController(withIdentifier: "Articles View Controller") as! ArticlesViewController, animated: true)
             }))
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         } else {
             self.dataManager.getArticles()
-            self.navigationController?.pushViewController(self.storyboard?.instantiateViewControllerWithIdentifier("Articles View Controller") as! ArticlesViewController, animated: true)
+            self.navigationController?.pushViewController(self.storyboard?.instantiateViewController(withIdentifier: "Articles View Controller") as! ArticlesViewController, animated: true)
         }
     }
 }

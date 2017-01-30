@@ -28,19 +28,19 @@ class ArticlesViewController: UIViewController {
         self.articlesDataSource = ArticlesDataSource(tableView: self.tableView)
         self.tableView.dataSource = self.articlesDataSource
         self.tableView.delegate = self.articlesDataSource
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        let font = UIFont.systemFontOfSize(22);
-        self.settings.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
+        let font = UIFont.systemFont(ofSize: 22);
+        self.settings.setTitleTextAttributes([NSFontAttributeName: font], for: UIControlState())
         self.navigationItem.rightBarButtonItems = [self.settings, self.filters]
         self.navigationItem.title = "News Feed"
-        let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
+        let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .plain, target: self, action: #selector(ArticlesViewController.closeView))
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
         self.dataManager.getArticles()
         self.dataManager.getBanners({(image: UIImage?) -> Void in
             if (image != nil) {
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                    self.bannerButton.setBackgroundImage(image, forState: UIControlState.Normal)
+                DispatchQueue.main.async(execute: {() -> Void in
+                    self.bannerButton.setBackgroundImage(image, for: UIControlState())
                 })
             }
         })
@@ -51,18 +51,18 @@ class ArticlesViewController: UIViewController {
     }
     
     func closeView() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueArticle" {
-            let articleView = segue.destinationViewController as! ArticleViewController
-            let article = self.articlesDataSource.fetchedResultsController.objectAtIndexPath(self.articlesDataSource.indexOfSelectedCell) as! Article
+            let articleView = segue.destination as! ArticleViewController
+            let article = self.articlesDataSource.fetchedResultsController.object(at: self.articlesDataSource.indexOfSelectedCell) as! Article
             articleView.article = article
         }
     }

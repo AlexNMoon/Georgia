@@ -11,7 +11,7 @@ import CoreData
 
 class PublishersCell: UITableViewCell {
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     var selectAll: UIBarButtonItem!
 
@@ -29,11 +29,11 @@ class PublishersCell: UITableViewCell {
     
     var publisher: Publisher!
     
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     let dataManager = DataManager()
 
-    @IBAction func tapAddPublisherButton(sender: AnyObject) {
+    @IBAction func tapAddPublisherButton(_ sender: AnyObject) {
         if publisher.isSelected == 1 {
             self.publisherUnselectedCoreData()
         } else {
@@ -43,7 +43,7 @@ class PublishersCell: UITableViewCell {
         self.dataManager.sendAPNSSettings()
     }
     
-    func setParameters(publisher: Publisher, fetchedResultsController: NSFetchedResultsController, selectAll: UIBarButtonItem) {
+    func setParameters(_ publisher: Publisher, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>, selectAll: UIBarButtonItem) {
         self.publisher = publisher
         self.fetchedResultsController = fetchedResultsController
         self.selectAll = selectAll
@@ -55,7 +55,7 @@ class PublishersCell: UITableViewCell {
             }
         }
         if let logoUrl = publisher.logo {
-            self.logo.sd_setImageWithURL(NSURL(string: logoUrl))
+            self.logo.sd_setImage(with: URL(string: logoUrl))
             if self.logo.image == nil {
                 self.logo.image = self.defoultImage
             }
@@ -66,14 +66,14 @@ class PublishersCell: UITableViewCell {
     }
     
     func publisherIsSelected() {
-        addPublisher.setImage(added, forState: UIControlState.Normal)
-        addPublisher.tintColor = UIColor.grayColor()
+        addPublisher.setImage(added, for: UIControlState())
+        addPublisher.tintColor = UIColor.gray
         addPublisher.imageEdgeInsets = UIEdgeInsetsMake(0, addPublisher.frame.size.width - (added!.size.width), 0, 0)
     }
     
     func publiserIsUnselected() {
-        addPublisher.setImage(add, forState: UIControlState.Normal)
-        addPublisher.tintColor = UIColor.cyanColor()
+        addPublisher.setImage(add, for: UIControlState())
+        addPublisher.tintColor = UIColor.cyan
         addPublisher.imageEdgeInsets = UIEdgeInsetsMake(0, addPublisher.frame.size.width - (add!.size.width), 0, 0)
     }
     

@@ -12,21 +12,21 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         self.navigationItem.title = "About Application"
-        let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .Plain, target: self, action: "closeView")
+        let backButton = UIBarButtonItem(image: UIImage(named: "filters_close_button"), style: .plain, target: self, action: #selector(SettingsViewController.closeView))
         self.navigationItem.rightBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
     }
     
     func closeView() {
-        self.navigationController?.dismissViewControllerAnimated(true, completion: {() -> Void in })
+        self.navigationController?.dismiss(animated: true, completion: {() -> Void in })
     }
     
 

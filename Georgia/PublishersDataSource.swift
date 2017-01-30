@@ -15,16 +15,16 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
     
     let tableView: UITableView!
     
-    var indexOfSelectedCell: NSIndexPath!
+    var indexOfSelectedCell: IndexPath!
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if self.restFetchedResultsController != nil {
             return self.restFetchedResultsController!
         }
-        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
-        let fetchRequest = NSFetchRequest()
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Publisher", in: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
         let sort = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [sort]
@@ -43,53 +43,53 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
         return self.restFetchedResultsController!
     }
     
-    var restFetchedResultsController: NSFetchedResultsController?
+    var restFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
     init(selectAll: UIBarButtonItem, tableView: UITableView) {
         self.selectAll = selectAll
         self.tableView = tableView
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let info = self.fetchedResultsController.sections![section]
         return  info.numberOfObjects
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Publishers cell", forIndexPath: indexPath) as! PublishersCell
-        let publisher = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Publisher
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Publishers cell", for: indexPath) as! PublishersCell
+        let publisher = self.fetchedResultsController.object(at: indexPath) as! Publisher
         cell.setParameters(publisher, fetchedResultsController: self.fetchedResultsController, selectAll: self.selectAll)
         return cell
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         indexOfSelectedCell = indexPath
         return indexPath
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
+        case .insert:
             if indexPath == nil {
-                self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+                self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
             }
-        case .Update:
-            self.tableView.reloadRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Move:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-            self.tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
-        case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Automatic)
+        case .update:
+            self.tableView.reloadRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+        case .move:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
+            self.tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.automatic)
+        case .delete:
+            self.tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.automatic)
         }
         self.setSelectAll()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
     
@@ -107,7 +107,7 @@ class PublishersDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource
                 var selected: Int = 0
                 for publisher in self.fetchedResultsController.fetchedObjects! as! [Publisher] {
                     if publisher.isSelected == 1 {
-                        selected++
+                        selected += 1
                     }
                 }
                 if selected == 0 {

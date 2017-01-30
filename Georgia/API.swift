@@ -12,15 +12,15 @@ import CoreData
 
 class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     
-    let queue:NSOperationQueue = NSOperationQueue()
+    let queue:OperationQueue = OperationQueue()
     
     var managedObjectContext: NSManagedObjectContext?
     
-    let postRequestURL = NSURL(string: "http://46.101.211.105/v1/devices/ios")
+    let postRequestURL = URL(string: "http://46.101.211.105/v1/devices/ios")
     
     override init() {
         super.init()
-        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             self.managedObjectContext = appDelegate.managedObjectContext!
         }
         else {
@@ -29,56 +29,56 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     }
 
     enum urlTipe {
-        case Articles
-        case Text
-        case Categories
-        case Publishers
-        case Banners
+        case articles
+        case text
+        case categories
+        case publishers
+        case banners
         
     }
     
     enum getCategoryPurpose {
-        case Get
-        case Push
+        case get
+        case push
     }
     
-    func searchFor(urltipe: urlTipe, articleId: Int?, completionHandler: (json: JSON) -> Void) {
+    func searchFor(_ urltipe: urlTipe, articleId: Int?, completionHandler: (_ json: JSON) -> Void) {
         var searchTerm: String
         switch urltipe {
-        case .Text:
+        case .text:
             searchTerm = "http://46.101.211.105/v1/articles/text/\(articleId!)"
-        case .Articles:
-            searchTerm = "http://46.101.211.105/v1/articles?category_ids=" + self.getSelectedCategoies(.Get)! + "&publisher_ids=" + self.getSelectedPublishers()! + "&limit=1000"
-        case .Publishers:
+        case .articles:
+            searchTerm = "http://46.101.211.105/v1/articles?category_ids=" + self.getSelectedCategoies(.get)! + "&publisher_ids=" + self.getSelectedPublishers()! + "&limit=1000"
+        case .publishers:
            searchTerm = "http://46.101.211.105/v1/publishers"
-        case .Banners:
+        case .banners:
             searchTerm = "http://46.101.211.105/v1/banners"
-        case .Categories:
+        case .categories:
             searchTerm = "http://46.101.211.105/v1/categories"
         }
-        let session = NSURLSession.sharedSession()
-        let url = NSURL(string: searchTerm)
-        let request = NSURLRequest(URL: url!)
-        let dataTask = session.dataTaskWithRequest(request) { (data:NSData?, response:NSURLResponse?, error:NSError?) -> Void in
+        let session = URLSession.shared
+        let url = URL(string: searchTerm)
+        let request = URLRequest(url: url!)
+        let dataTask = session.dataTask(with: request, completionHandler: { (data:Data?, response:URLResponse?, error:NSError?) -> Void in
             let json = JSON(data: data!)
             completionHandler(json: json)
             print("\(json.dictionary)")
-        }
+        } as! (Data?, URLResponse?, Error?) -> Void) 
         dataTask.resume()
     }
     
-    func getSelectedCategoies(purpose: getCategoryPurpose) -> String? {
+    func getSelectedCategoies(_ purpose: getCategoryPurpose) -> String? {
         var commas = false
         var result = ""
-        let categoryEntityDescription = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
-        let categoryFetchRequest = NSFetchRequest()
+        let categoryEntityDescription = NSEntityDescription.entity(forEntityName: "Category", in: self.managedObjectContext!)
+        let categoryFetchRequest = NSFetchRequest<NSFetchRequestResult>()
         categoryFetchRequest.entity = categoryEntityDescription
-        let categoryResults = try? self.managedObjectContext!.executeFetchRequest(categoryFetchRequest)
+        let categoryResults = try? self.managedObjectContext!.fetch(categoryFetchRequest)
         let categories = categoryResults as! [Category]
         var categoriesCount: Int = 0
         for category in categories {
             if category.isSelected == 1 {
-                ++categoriesCount
+                categoriesCount += 1
             }
         }
         if categoriesCount > 0 {
@@ -95,7 +95,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
             return result
         } else {
             switch purpose {
-            case .Get:
+            case .get:
                 for category in categories {
                     if commas {
                         result += ","
@@ -105,7 +105,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
                     commas = true
                 }
                 return result
-            case .Push:
+            case .push:
                 return nil
             }
         }
@@ -114,11 +114,11 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     func getSelectedPublishers() -> String? {
         var commas = false
         var result = ""
-        let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: self.managedObjectContext!)
+        let publisherEntityDescription = NSEntityDescription.entity(forEntityName: "Publisher", in: self.managedObjectContext!)
         var publishers = [Publisher]()
-        let publisherFetchRequest = NSFetchRequest()
+        let publisherFetchRequest = NSFetchRequest<NSFetchRequestResult>()
         publisherFetchRequest.entity = publisherEntityDescription
-        let publisherResults = try? self.managedObjectContext!.executeFetchRequest(publisherFetchRequest)
+        let publisherResults = try? self.managedObjectContext!.fetch(publisherFetchRequest)
         publishers = publisherResults as! [Publisher]
         for publisher in publishers {
             if publisher.isSelected == 1 {
@@ -132,25 +132,25 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         return result
     }
     
-    func putDeviceAPNSToken(parametrs: Dictionary<String, String>) {
-        let request = NSMutableURLRequest(URL: self.postRequestURL!)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = NSKeyedArchiver.archivedDataWithRootObject(parametrs)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+    func putDeviceAPNSToken(_ parametrs: Dictionary<String, String>) {
+        let request = NSMutableURLRequest(url: self.postRequestURL!)
+        request.httpMethod = "POST"
+        request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
             print(response)
         });
         task.resume()
     }
     
-    func postAPNSSettingsWithParameters(parametrs: Dictionary<String, String>) {
-        let request = NSMutableURLRequest(URL: self.postRequestURL!)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = NSKeyedArchiver.archivedDataWithRootObject(parametrs)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
-        let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+    func postAPNSSettingsWithParameters(_ parametrs: Dictionary<String, String>) {
+        let request = NSMutableURLRequest(url: self.postRequestURL!)
+        request.httpMethod = "POST"
+        request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
             print(response)
         });
         task.resume()

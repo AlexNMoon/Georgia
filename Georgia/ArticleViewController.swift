@@ -16,7 +16,7 @@ class ArticleViewController: UIViewController {
     
     let dataManager = DataManager()
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     var text: String!
     
@@ -49,27 +49,27 @@ class ArticleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .Plain, target: self, action: "closeView")
+        let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .plain, target: self, action: #selector(ArticleViewController.closeView))
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        self.date.textColor = UIColor.lightGrayColor()
-        self.dataManager.getText(self.article.articleId.integerValue, completionHandler: {(data: JSON?) -> Void in
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
+        self.date.textColor = UIColor.lightGray
+        self.dataManager.getText(self.article.articleId.intValue, completionHandler: {(data: JSON?) -> Void in
             if let text = data!["full_description"].string {
-                dispatch_async(dispatch_get_main_queue(), {() -> Void in
+                DispatchQueue.main.async(execute: {() -> Void in
                     self.text = text
                     self.articleTextWebView.loadHTMLString(self.text, baseURL: nil)
-                    let size = self.articleTextWebView.sizeThatFits(CGSizeMake(self.articleTextWebView.frame.size.width,  CGFloat.max))
+                    let size = self.articleTextWebView.sizeThatFits(CGSize(width: self.articleTextWebView.frame.size.width,  height: CGFloat.greatestFiniteMagnitude))
                     self.textWebViewHeightConstraint.constant = size.height
                 })
             }
         })
         if let logo = self.article.publisher.logo {
-            self.publishersLogo.sd_setImageWithURL(NSURL(string: logo))
+            self.publishersLogo.sd_setImage(with: URL(string: logo))
             if self.publishersLogo.image == nil {
                 self.publishersLogo.image = self.defoultImage
             }
@@ -84,13 +84,13 @@ class ArticleViewController: UIViewController {
             self.navigationItem.title = title
         }
         if let videoUrl = self.article.video {
-            let videoEmbed = videoUrl.stringByReplacingOccurrencesOfString("watch?v=", withString: "embed/")
-            let videoEmbedURL = NSURL(string: videoEmbed)
-            let request = NSURLRequest(URL: videoEmbedURL!)
+            let videoEmbed = videoUrl.replacingOccurrences(of: "watch?v=", with: "embed/")
+            let videoEmbedURL = URL(string: videoEmbed)
+            let request = URLRequest(url: videoEmbedURL!)
             self.webView.loadRequest(request)
         } else {
             if let _ = self.article.image {
-                self.image.contentMode = .ScaleAspectFit
+                self.image.contentMode = .scaleAspectFit
                 self.image.image = UIImage(named: "publishers_add_icon")
                 self.webViewHeightConstraint.constant = 0.0
             } else {
@@ -99,15 +99,15 @@ class ArticleViewController: UIViewController {
         }
         if (self.article.link == nil) || (self.article.link == "") {
             self.goToWebsiteButtonHeightConstraint.constant = 0.0
-            self.goToWebSiteButton.enabled = false
-            self.goToWebSiteButton.setTitle("", forState: UIControlState.Normal)
+            self.goToWebSiteButton.isEnabled = false
+            self.goToWebSiteButton.setTitle("", for: UIControlState())
         }
         if let time = article.publisherTime {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = NSDateFormatterStyle.FullStyle
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = DateFormatter.Style.full
             dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
-            let date = NSDate(timeIntervalSince1970: time.doubleValue)
-            self.date.text = dateFormatter.stringFromDate(date)
+            let date = Date(timeIntervalSince1970: time.doubleValue)
+            self.date.text = dateFormatter.string(from: date)
         }
 
     }
@@ -118,32 +118,32 @@ class ArticleViewController: UIViewController {
     }
     
     func closeView() {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func tapGoTOWebSite(sender: AnyObject) {
+    @IBAction func tapGoTOWebSite(_ sender: AnyObject) {
         if let url = self.article.link {
-            UIApplication.sharedApplication().openURL(NSURL(string: url)!)
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     
-    @IBAction func tapShare(sender: AnyObject) {
+    @IBAction func tapShare(_ sender: AnyObject) {
         var sharingItems = [AnyObject]()
         if let title = self.articleTitle.text {
-            sharingItems.append(title)
+            sharingItems.append(title as AnyObject)
         }
         if let text = self.text {
-            sharingItems.append(text)
+            sharingItems.append(text as AnyObject)
         }
         if let image = self.image.image {
             sharingItems.append(image)
         }
         if let link = self.article.link {
-            sharingItems.append(link)
+            sharingItems.append(link as AnyObject)
         }
         let activityViewController = UIActivityViewController(activityItems: sharingItems, applicationActivities: nil)
         activityViewController.popoverPresentationController?.barButtonItem = self.tapBarButtonItem
         
-        self.presentViewController(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true, completion: nil)
     }
 }

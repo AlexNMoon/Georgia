@@ -19,7 +19,7 @@ class DataManager {
     let api = API()
     
     init() {
-        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             self.managedObjectContext = appDelegate.managedObjectContext!
         }
         else {
@@ -27,28 +27,28 @@ class DataManager {
         }
     }
     
-    func getText(id: Int, completionHandler: (data: JSON?) -> Void) {
-        api.searchFor(.Text, articleId: id, completionHandler: { (json: JSON) -> Void in
+    func getText(_ id: Int, completionHandler: (_ data: JSON?) -> Void) {
+        api.searchFor(.text, articleId: id, completionHandler: { (json: JSON) -> Void in
             completionHandler(data: json["data"])
         })
     }
     
     func getArticles() {
-        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-        articlesManagedObjectContext.parentContext = self.managedObjectContext
-        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: articlesManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
+        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        articlesManagedObjectContext.parent = self.managedObjectContext
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Article", in: articlesManagedObjectContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
-        let results = try? articlesManagedObjectContext.executeFetchRequest(fetchRequest)
+        let results = try? articlesManagedObjectContext.fetch(fetchRequest)
         let articles = results as! [Article]
         for index in 0 ..< articles.count {
-            articlesManagedObjectContext.deleteObject(articles[index])
+            articlesManagedObjectContext.delete(articles[index])
         }
         do {
             try articlesManagedObjectContext.save()
         } catch _ {
         }
-        api.searchFor(.Articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
+        api.searchFor(.articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 for index in 0 ..< data.count {
                     self.createArticle(data[index], entityDescription: entityDescription!, articlesManagedObjectContext: articlesManagedObjectContext)
@@ -61,12 +61,12 @@ class DataManager {
         })
     }
     
-    func createArticle(articleData: JSON, entityDescription: NSEntityDescription, articlesManagedObjectContext: NSManagedObjectContext) {
+    func createArticle(_ articleData: JSON, entityDescription: NSEntityDescription, articlesManagedObjectContext: NSManagedObjectContext) {
         let restArticle = RestArticle(articleData: articleData)
-        let publisherEntityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: articlesManagedObjectContext)
-        let publisherFetchRequest = NSFetchRequest()
+        let publisherEntityDescription = NSEntityDescription.entity(forEntityName: "Publisher", in: articlesManagedObjectContext)
+        let publisherFetchRequest = NSFetchRequest<NSFetchRequestResult>()
         publisherFetchRequest.entity = publisherEntityDescription
-        let publisherResults = try? articlesManagedObjectContext.executeFetchRequest(publisherFetchRequest)
+        let publisherResults = try? articlesManagedObjectContext.fetch(publisherFetchRequest)
         let publishers = publisherResults as! [Publisher]
         for publisherSearch in publishers {
             if publisherSearch.publidherId == restArticle.publisherId {
@@ -75,11 +75,11 @@ class DataManager {
             }
         }
         let categoryEntityDescription =
-        NSEntityDescription.entityForName("Category",
-            inManagedObjectContext: articlesManagedObjectContext)
-        let categoryFetchRequest = NSFetchRequest()
+        NSEntityDescription.entity(forEntityName: "Category",
+            in: articlesManagedObjectContext)
+        let categoryFetchRequest = NSFetchRequest<NSFetchRequestResult>()
         categoryFetchRequest.entity = categoryEntityDescription
-        let categoryResults = try? articlesManagedObjectContext.executeFetchRequest(categoryFetchRequest)
+        let categoryResults = try? articlesManagedObjectContext.fetch(categoryFetchRequest)
         let categories = categoryResults as! [Category]
         for categorySearch in categories {
             if categorySearch.categoriesId == restArticle.categoryId {
@@ -91,14 +91,14 @@ class DataManager {
     }
     
     func updatingArticles() {
-        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-        articlesManagedObjectContext.parentContext = self.managedObjectContext
-        let entityDescription = NSEntityDescription.entityForName("Article", inManagedObjectContext: articlesManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
+        let articlesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        articlesManagedObjectContext.parent = self.managedObjectContext
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Article", in: articlesManagedObjectContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
-        let results = try? articlesManagedObjectContext.executeFetchRequest(fetchRequest)
+        let results = try? articlesManagedObjectContext.fetch(fetchRequest)
         let articles = results as! [Article]
-        api.searchFor(.Articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
+        api.searchFor(.articles, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 var number: Int = 0
                 for index in 0 ..< data.count {
@@ -120,15 +120,15 @@ class DataManager {
     }
     
     func getPublishers() {
-        let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-        publishersManagedObjectContext.parentContext = self.managedObjectContext
-        let entityDescription = NSEntityDescription.entityForName("Publisher", inManagedObjectContext: publishersManagedObjectContext)
+        let publishersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        publishersManagedObjectContext.parent = self.managedObjectContext
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Publisher", in: publishersManagedObjectContext)
         var publishers = [Publisher]()
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
-        let results = try? publishersManagedObjectContext.executeFetchRequest(fetchRequest)
+        let results = try? publishersManagedObjectContext.fetch(fetchRequest)
         publishers = results as! [Publisher]
-        api.searchFor(.Publishers, articleId: nil, completionHandler: { (json: JSON) -> Void in
+        api.searchFor(.publishers, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 if publishers.count == 0 {
                     for index in 0 ..< data.count {
@@ -159,13 +159,13 @@ class DataManager {
         })
     }
     
-    func getBanners(completitionHandler: (image: UIImage?) ->  Void) {
-        let bannersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-        bannersManagedObjectContext.parentContext = self.managedObjectContext
+    func getBanners(_ completitionHandler: @escaping (_ image: UIImage?) ->  Void) {
+        let bannersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        bannersManagedObjectContext.parent = self.managedObjectContext
         let entityDescription =
-        NSEntityDescription.entityForName("Banner",
-            inManagedObjectContext: bannersManagedObjectContext)
-        api.searchFor(.Banners, articleId: nil, completionHandler: { (json: JSON) -> Void in
+        NSEntityDescription.entity(forEntityName: "Banner",
+            in: bannersManagedObjectContext)
+        api.searchFor(.banners, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 if data.count == 0 {
                     completitionHandler(image: UIImage(named: "launch_background.png")!)
@@ -186,16 +186,16 @@ class DataManager {
     }
     
     func getCategories() {
-        let categoriesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
-        categoriesManagedObjectContext.parentContext = self.managedObjectContext
+        let categoriesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+        categoriesManagedObjectContext.parent = self.managedObjectContext
         let entityDescription =
-        NSEntityDescription.entityForName("Category",
-            inManagedObjectContext: categoriesManagedObjectContext)
-        let fetchRequest = NSFetchRequest()
+        NSEntityDescription.entity(forEntityName: "Category",
+            in: categoriesManagedObjectContext)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         fetchRequest.entity = entityDescription
-        let results = try? categoriesManagedObjectContext.executeFetchRequest(fetchRequest)
+        let results = try? categoriesManagedObjectContext.fetch(fetchRequest)
         let categories = results as! [Category]
-        api.searchFor(.Categories, articleId: nil, completionHandler: { (json: JSON) -> Void in
+        api.searchFor(.categories, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 if categories.count == 0 {
                     for index in 0 ..< data.count {
@@ -214,9 +214,9 @@ class DataManager {
         })
     }
     
-    func sendAPNSToken(deviceToken: NSData) {
-        let trimEnds = deviceToken.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
-        let cleanToken = trimEnds.stringByReplacingOccurrencesOfString(" ", withString: "")
+    func sendAPNSToken(_ deviceToken: Data) {
+        let trimEnds = deviceToken.description.trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
+        let cleanToken = trimEnds.replacingOccurrences(of: " ", with: "")
         self.deviceToken = cleanToken
         let dataToken = ["id" : cleanToken]
         self.api.putDeviceAPNSToken(dataToken)
@@ -225,7 +225,7 @@ class DataManager {
     func sendAPNSSettings() {
         if let deviceToken = self.deviceToken {
             var dataSettings: Dictionary <String, String> = [:]
-            if let selectedCategories = self.api.getSelectedCategoies(.Push) {
+            if let selectedCategories = self.api.getSelectedCategoies(.push) {
                 dataSettings["category_ids"] = selectedCategories
             }
             if let selectedPublishers = self.api.getSelectedPublishers() {
