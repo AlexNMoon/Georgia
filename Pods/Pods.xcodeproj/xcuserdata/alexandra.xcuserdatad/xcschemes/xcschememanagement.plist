@@ -6,33 +6,43 @@
 	<dict>
 		<key>Pods-Georgia.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GeorgiaTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>E720EDED8F39F3F17491765A1B00A3AF</key>
+		<key>6376DC4043DDECB97D3040FD7525FAE6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F0FBC83B0E14432EF3D91B9B2C7D793B</key>
+		<key>84F38A9CF2366FD031230D7CE3D5B4E3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F152663D8AE5B57BA47B92ED9B8BC5AE</key>
+		<key>97EE7D81A1AF1B181AD33AE17878C987</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C665D1FE33225C03EC6EFFEF33EABDF2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

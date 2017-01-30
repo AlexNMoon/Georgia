@@ -21,7 +21,6 @@ class ArticlesViewController: UIViewController {
    
     @IBOutlet var settings: UIBarButtonItem!
     
-    @IBOutlet weak var bannerButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +36,6 @@ class ArticlesViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
         self.dataManager.getArticles()
-        self.dataManager.getBanners({(image: UIImage?) -> Void in
-            if (image != nil) {
-                DispatchQueue.main.async(execute: {() -> Void in
-                    self.bannerButton.setBackgroundImage(image, for: UIControlState())
-                })
-            }
-        })
     }
     
     override func didReceiveMemoryWarning() {

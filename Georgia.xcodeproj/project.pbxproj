@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E007C93C103299830C913FC /* Pods_Georgia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A374C559BEEF6996CF7E58F /* Pods_Georgia.framework */; };
+		4A0E4E84C407A296D8A5A1E0 /* Pods_Georgia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0809912221A3175E89509F21 /* Pods_Georgia.framework */; };
 		9E4F09CE1BCBF5A200E8B99D /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F09CD1BCBF5A200E8B99D /* FiltersViewController.swift */; };
 		9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */; };
 		9E52D38A1BE1193000F5A0D3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3891BE1193000F5A0D3 /* Article.swift */; };
@@ -36,6 +36,7 @@
 		9ED9EC0C1BBC3104007DEE61 /* PublishersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */; };
 		9ED9EC0E1BBC3159007DEE61 /* PublishersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */; };
 		9EEECD2B1BE8EEEF00BA90B8 /* FiltersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */; };
+		B0400E7D9D46CBF806128482 /* libPods-GeorgiaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACAD061297B84B7331BC5F0A /* libPods-GeorgiaTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.debug.xcconfig"; sourceTree = "<group>"; };
-		39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.release.xcconfig"; sourceTree = "<group>"; };
-		6A374C559BEEF6996CF7E58F /* Pods_Georgia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Georgia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0809912221A3175E89509F21 /* Pods_Georgia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Georgia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BCFB7C6282FE1FA2CD0B1CD /* Pods-Georgia.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.debug.xcconfig"; sourceTree = "<group>"; };
+		696F7F2C36C7E3F55C0B4864 /* Pods-GeorgiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeorgiaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GeorgiaTests/Pods-GeorgiaTests.release.xcconfig"; sourceTree = "<group>"; };
+		99604118982B9D049F23E689 /* Pods-GeorgiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeorgiaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GeorgiaTests/Pods-GeorgiaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C7D995C8E69C8E53EDF14AB /* Pods-Georgia.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Georgia.release.xcconfig"; path = "Pods/Target Support Files/Pods-Georgia/Pods-Georgia.release.xcconfig"; sourceTree = "<group>"; };
 		9E4F09CD1BCBF5A200E8B99D /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9E52D3891BE1193000F5A0D3 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersViewController.swift; sourceTree = "<group>"; };
 		9ED9EC0D1BBC3159007DEE61 /* PublishersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersCell.swift; sourceTree = "<group>"; };
 		9EEECD2A1BE8EEEF00BA90B8 /* FiltersCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersCell.swift; sourceTree = "<group>"; };
+		ACAD061297B84B7331BC5F0A /* libPods-GeorgiaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GeorgiaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E007C93C103299830C913FC /* Pods_Georgia.framework in Frameworks */,
+				4A0E4E84C407A296D8A5A1E0 /* Pods_Georgia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,20 +104,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0400E7D9D46CBF806128482 /* libPods-GeorgiaTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0068B00673EC8920A5C9912A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6A374C559BEEF6996CF7E58F /* Pods_Georgia.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9E52D37D1BE1159E00F5A0D3 /* ControlViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,8 +152,8 @@
 				9ED9EBE51BBC24AA007DEE61 /* Georgia */,
 				9ED9EBFE1BBC24AA007DEE61 /* GeorgiaTests */,
 				9ED9EBE41BBC24AA007DEE61 /* Products */,
-				E59D77CA1CC0FF8613A5D773 /* Pods */,
-				0068B00673EC8920A5C9912A /* Frameworks */,
+				F4C19D9C513DB91FFB4D870C /* Pods */,
+				E6B90289904541B23D3719E2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -219,11 +216,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E59D77CA1CC0FF8613A5D773 /* Pods */ = {
+		E6B90289904541B23D3719E2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */,
-				39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */,
+				0809912221A3175E89509F21 /* Pods_Georgia.framework */,
+				ACAD061297B84B7331BC5F0A /* libPods-GeorgiaTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4C19D9C513DB91FFB4D870C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2BCFB7C6282FE1FA2CD0B1CD /* Pods-Georgia.debug.xcconfig */,
+				9C7D995C8E69C8E53EDF14AB /* Pods-Georgia.release.xcconfig */,
+				99604118982B9D049F23E689 /* Pods-GeorgiaTests.debug.xcconfig */,
+				696F7F2C36C7E3F55C0B4864 /* Pods-GeorgiaTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -235,12 +243,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9ED9EC051BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "Georgia" */;
 			buildPhases = (
-				916CA01FE42A208CAF2F9454 /* Check Pods Manifest.lock */,
+				23212072273B0FF883F7CE97 /* [CP] Check Pods Manifest.lock */,
 				9ED9EBDF1BBC24AA007DEE61 /* Sources */,
 				9ED9EBE01BBC24AA007DEE61 /* Frameworks */,
 				9ED9EBE11BBC24AA007DEE61 /* Resources */,
-				A03EB0DB5B767F709B328380 /* Copy Pods Resources */,
-				81C172D2EBFF9E37814A151B /* Embed Pods Frameworks */,
+				D1215AA04408937ACDFD858F /* [CP] Embed Pods Frameworks */,
+				42473AED0D1B1FA68698A934 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,9 +263,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9ED9EC081BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "GeorgiaTests" */;
 			buildPhases = (
+				1037C40C823EB6598F5D60C2 /* [CP] Check Pods Manifest.lock */,
 				9ED9EBF71BBC24AA007DEE61 /* Sources */,
 				9ED9EBF81BBC24AA007DEE61 /* Frameworks */,
 				9ED9EBF91BBC24AA007DEE61 /* Resources */,
+				CFADF837823C2F04D3104838 /* [CP] Embed Pods Frameworks */,
+				07911D2722D42FD1709670CB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -277,7 +288,7 @@
 			attributes = {
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "MOZI Development";
 				TargetAttributes = {
 					9ED9EBE21BBC24AA007DEE61 = {
@@ -331,49 +342,94 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		81C172D2EBFF9E37814A151B /* Embed Pods Frameworks */ = {
+		07911D2722D42FD1709670CB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Georgia/Pods-Georgia-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GeorgiaTests/Pods-GeorgiaTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		916CA01FE42A208CAF2F9454 /* Check Pods Manifest.lock */ = {
+		1037C40C823EB6598F5D60C2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		A03EB0DB5B767F709B328380 /* Copy Pods Resources */ = {
+		23212072273B0FF883F7CE97 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		42473AED0D1B1FA68698A934 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Georgia/Pods-Georgia-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFADF837823C2F04D3104838 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GeorgiaTests/Pods-GeorgiaTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1215AA04408937ACDFD858F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Georgia/Pods-Georgia-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -461,8 +517,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -508,8 +566,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -530,14 +590,16 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		9ED9EC061BBC24AA007DEE61 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 376CD39A9CFD5CFE8DCEC8DD /* Pods-Georgia.debug.xcconfig */;
+			baseConfigurationReference = 2BCFB7C6282FE1FA2CD0B1CD /* Pods-Georgia.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Natalia Zheltukhina (75J9K382D2)";
 				INFOPLIST_FILE = Georgia/Info.plist;
@@ -554,8 +616,9 @@
 		};
 		9ED9EC071BBC24AA007DEE61 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39D96B5194AD6BF6FF046409 /* Pods-Georgia.release.xcconfig */;
+			baseConfigurationReference = 9C7D995C8E69C8E53EDF14AB /* Pods-Georgia.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Natalia Zheltukhina (729WFR3HVU)";
 				INFOPLIST_FILE = Georgia/Info.plist;
@@ -572,6 +635,7 @@
 		};
 		9ED9EC091BBC24AA007DEE61 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99604118982B9D049F23E689 /* Pods-GeorgiaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -593,6 +657,7 @@
 		};
 		9ED9EC0A1BBC24AA007DEE61 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 696F7F2C36C7E3F55C0B4864 /* Pods-GeorgiaTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
