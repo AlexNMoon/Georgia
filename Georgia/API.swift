@@ -42,7 +42,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case push
     }
     
-    func searchFor(_ urltipe: urlTipe, articleId: Int?, completionHandler: (_ json: JSON) -> Void) {
+    func searchFor(_ urltipe: urlTipe, articleId: Int?, completionHandler: @escaping (_ json: JSON) -> Void) {
         var searchTerm: String
         switch urltipe {
         case .text:
@@ -61,7 +61,7 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         let request = URLRequest(url: url!)
         let dataTask = session.dataTask(with: request, completionHandler: { (data:Data?, response:URLResponse?, error:NSError?) -> Void in
             let json = JSON(data: data!)
-            completionHandler(json: json)
+            completionHandler(json)
             print("\(json.dictionary)")
         } as! (Data?, URLResponse?, Error?) -> Void) 
         dataTask.resume()
@@ -138,8 +138,8 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
-            print(response)
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+            print(response!)
         });
         task.resume()
     }
@@ -150,8 +150,8 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
-            print(response)
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+            print(response!)
         });
         task.resume()
     }

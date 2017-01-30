@@ -25,7 +25,7 @@ extension Banner {
     convenience init(banner: RestBanner, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
         self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
         if let id = banner.bannerId {
-            self.bannerId = NSNumber(id)
+            self.bannerId = NSNumber(value: id)
         }
         if let image = banner.image {
             self.image = image

@@ -27,9 +27,9 @@ class DataManager {
         }
     }
     
-    func getText(_ id: Int, completionHandler: (_ data: JSON?) -> Void) {
+    func getText(_ id: Int, completionHandler: @escaping (_ data: JSON?) -> Void) {
         api.searchFor(.text, articleId: id, completionHandler: { (json: JSON) -> Void in
-            completionHandler(data: json["data"])
+            completionHandler(json["data"])
         })
     }
     
@@ -69,7 +69,7 @@ class DataManager {
         let publisherResults = try? articlesManagedObjectContext.fetch(publisherFetchRequest)
         let publishers = publisherResults as! [Publisher]
         for publisherSearch in publishers {
-            if publisherSearch.publidherId == restArticle.publisherId {
+            if publisherSearch.publidherId.intValue == restArticle.publisherId {
                 restArticle.publisher = publisherSearch
                 break
             }
@@ -82,7 +82,7 @@ class DataManager {
         let categoryResults = try? articlesManagedObjectContext.fetch(categoryFetchRequest)
         let categories = categoryResults as! [Category]
         for categorySearch in categories {
-            if categorySearch.categoriesId == restArticle.categoryId {
+            if categorySearch.categoriesId.intValue == restArticle.categoryId {
                 restArticle.category = categorySearch
                 break
             }
@@ -103,8 +103,8 @@ class DataManager {
                 var number: Int = 0
                 for index in 0 ..< data.count {
                     for article in articles {
-                        if article.articleId == data[index]["id"].int {
-                            number++
+                        if article.articleId.intValue == data[index]["id"].int {
+                            number += 1
                         }
                     }
                     if number == 0 {
@@ -140,8 +140,8 @@ class DataManager {
                     var number: Int = 0
                     for index in 0 ..< data.count {
                         for publisher in publishers {
-                            if publisher.publidherId == data[index]["id"].int {
-                                number++
+                            if publisher.publidherId.intValue == data[index]["id"].int {
+                                number += 1
                             }
                         }
                         if number == 0 {
@@ -168,7 +168,7 @@ class DataManager {
         api.searchFor(.banners, articleId: nil, completionHandler: { (json: JSON) -> Void in
             if let data = json["data"].array {
                 if data.count == 0 {
-                    completitionHandler(image: UIImage(named: "launch_background.png")!)
+                    completitionHandler(UIImage(named: "launch_background.png")!)
                 } else {
                     for index in 0 ..< data.count {
                         let bannerData = data[index]

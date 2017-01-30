@@ -3,8 +3,8 @@ platform :ios, '8.0'
 
 target 'Georgia' do
 
-pod 'SDWebImage', '~> 3.7'
-pod 'SwiftyJSON', '~> 2.3'
+pod 'SDWebImage', '~> 4'
+pod 'SwiftyJSON', '~> 3.1.4'
 
 use_frameworks!
 end

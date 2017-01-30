@@ -28,7 +28,7 @@ extension Category {
             self.categIsDeleted = NSNumber(value: isDeleted as Bool) 
         }
         if let id = category.categoriesId {
-            self.categoriesId = NSNumber(id)
+            self.categoriesId = NSNumber(value: id)
         }
         if let title = category.title {
             self.title = title

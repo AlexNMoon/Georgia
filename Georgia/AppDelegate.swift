@@ -42,9 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.dataManager.sendAPNSToken(deviceToken)
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    private func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         print("error: ", error)
         NSLog("Failed to get token; error: %@", error)
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
