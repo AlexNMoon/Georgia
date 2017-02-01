@@ -31,6 +31,7 @@ class Article: NSManagedObject {
 extension Article {
     convenience init(article: RestArticle, entity: NSEntityDescription, insertIntoManagedObjectContext: NSManagedObjectContext?) {
         self.init(entity: entity, insertInto: insertIntoManagedObjectContext)
+        
         if let id = article.articleId {
             self.articleId = NSNumber(value: id)
         }

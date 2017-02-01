@@ -118,7 +118,7 @@ class ArticleViewController: UIViewController {
     }
     
     func closeView() {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func tapGoTOWebSite(_ sender: AnyObject) {

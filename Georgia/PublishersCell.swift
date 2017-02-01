@@ -40,7 +40,6 @@ class PublishersCell: UITableViewCell {
             self.publisherSelectedCoreData()
         }
         self.dataManager.getArticles()
-        self.dataManager.sendAPNSSettings()
     }
     
     func setParameters(_ publisher: Publisher, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>, selectAll: UIBarButtonItem) {

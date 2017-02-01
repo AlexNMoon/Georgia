@@ -16,8 +16,6 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
     
     var managedObjectContext: NSManagedObjectContext?
     
-    let postRequestURL = URL(string: "http://46.101.211.105/v1/devices/ios")
-    
     override init() {
         super.init()
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
@@ -33,8 +31,6 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         case text
         case categories
         case publishers
-        case banners
-        
     }
     
     enum getCategoryPurpose {
@@ -46,25 +42,24 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         var searchTerm: String
         switch urltipe {
         case .text:
-            searchTerm = "http://46.101.211.105/v1/articles/text/\(articleId!)"
+            searchTerm = "/api/0c08d029-e815-11e6-90ab-1bc4623f1a33/v1?article_id=\(articleId!)"
         case .articles:
-            searchTerm = "http://46.101.211.105/v1/articles?category_ids=" + self.getSelectedCategoies(.get)! + "&publisher_ids=" + self.getSelectedPublishers()! + "&limit=1000"
+            searchTerm = "/api/jsonBlob/fc4f161b-e814-11e6-90ab-b957bfda949e/category_id=" + self.getSelectedCategoies(.get)! + "&publisher_id=" + self.getSelectedPublishers()!
         case .publishers:
-           searchTerm = "http://46.101.211.105/v1/publishers"
-        case .banners:
-            searchTerm = "http://46.101.211.105/v1/banners"
+           searchTerm = "/api/jsonBlob/90d6a4ba-e812-11e6-90ab-fd49707f3a32"
         case .categories:
-            searchTerm = "http://46.101.211.105/v1/categories"
+            searchTerm = "/api/jsonBlob/8dee6837-e7d9-11e6-90ab-e3a3cf1c892d"
         }
         let session = URLSession.shared
-        let url = URL(string: searchTerm)
-        let request = URLRequest(url: url!)
-        let dataTask = session.dataTask(with: request, completionHandler: { (data:Data?, response:URLResponse?, error:NSError?) -> Void in
+        let url = NSURL(scheme: "http", host: "jsonblob.com", path: searchTerm)
+        let request = URLRequest(url: url! as URL)
+        _ = session.dataTask(with: request) { (data, response, error) in
             let json = JSON(data: data!)
             completionHandler(json)
             print("\(json.dictionary)")
-        } as! (Data?, URLResponse?, Error?) -> Void) 
-        dataTask.resume()
+        }.resume()
+        
+        
     }
     
     func getSelectedCategoies(_ purpose: getCategoryPurpose) -> String? {
@@ -132,28 +127,4 @@ class API : NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate{
         return result
     }
     
-    func putDeviceAPNSToken(_ parametrs: Dictionary<String, String>) {
-        let request = NSMutableURLRequest(url: self.postRequestURL!)
-        request.httpMethod = "POST"
-        request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
-            print(response!)
-        });
-        task.resume()
-    }
-    
-    func postAPNSSettingsWithParameters(_ parametrs: Dictionary<String, String>) {
-        let request = NSMutableURLRequest(url: self.postRequestURL!)
-        request.httpMethod = "POST"
-        request.httpBody = NSKeyedArchiver.archivedData(withRootObject: parametrs)
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
-            print(response!)
-        });
-        task.resume()
-    }
-
 }

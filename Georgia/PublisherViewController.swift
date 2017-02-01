@@ -53,7 +53,7 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
     }
     
     func closeView() {
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

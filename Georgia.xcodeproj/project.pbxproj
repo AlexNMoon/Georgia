@@ -12,12 +12,10 @@
 		9E4F09D21BCC00B600E8B99D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */; };
 		9E52D38A1BE1193000F5A0D3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3891BE1193000F5A0D3 /* Article.swift */; };
 		9E52D38C1BE1193100F5A0D3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D38B1BE1193100F5A0D3 /* Category.swift */; };
-		9E52D38E1BE1193100F5A0D3 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D38D1BE1193100F5A0D3 /* Banner.swift */; };
 		9E52D3901BE1193100F5A0D3 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D38F1BE1193100F5A0D3 /* Publisher.swift */; };
 		9E52D3921BE119F300F5A0D3 /* RestArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3911BE119F300F5A0D3 /* RestArticle.swift */; };
 		9E52D3941BE11A0700F5A0D3 /* RestPablisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */; };
 		9E52D3961BE11A1C00F5A0D3 /* RestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */; };
-		9E52D3981BE11A2E00F5A0D3 /* RestBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */; };
 		9E5560611BBEB4650065B5EC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5560601BBEB4650065B5EC /* API.swift */; };
 		9E5560631BBEB6040065B5EC /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5560621BBEB6040065B5EC /* DataManager.swift */; };
 		9E71FB151BF61D5600C10E68 /* ArticlesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */; };
@@ -59,12 +57,10 @@
 		9E4F09D11BCC00B600E8B99D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9E52D3891BE1193000F5A0D3 /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		9E52D38B1BE1193100F5A0D3 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		9E52D38D1BE1193100F5A0D3 /* Banner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		9E52D38F1BE1193100F5A0D3 /* Publisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		9E52D3911BE119F300F5A0D3 /* RestArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestArticle.swift; sourceTree = "<group>"; };
 		9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestPablisher.swift; sourceTree = "<group>"; };
 		9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestCategory.swift; sourceTree = "<group>"; };
-		9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestBanner.swift; sourceTree = "<group>"; };
 		9E55605F1BBEAE520065B5EC /* Georgia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Georgia-Bridging-Header.h"; sourceTree = "<group>"; };
 		9E5560601BBEB4650065B5EC /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		9E5560621BBEB6040065B5EC /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -139,7 +135,6 @@
 			children = (
 				9ED9EBEA1BBC24AA007DEE61 /* Georgia.xcdatamodeld */,
 				9E52D38F1BE1193100F5A0D3 /* Publisher.swift */,
-				9E52D38D1BE1193100F5A0D3 /* Banner.swift */,
 				9E52D38B1BE1193100F5A0D3 /* Category.swift */,
 				9E52D3891BE1193000F5A0D3 /* Article.swift */,
 			);
@@ -191,7 +186,6 @@
 				9E52D3911BE119F300F5A0D3 /* RestArticle.swift */,
 				9E52D3931BE11A0700F5A0D3 /* RestPablisher.swift */,
 				9E52D3951BE11A1C00F5A0D3 /* RestCategory.swift */,
-				9E52D3971BE11A2E00F5A0D3 /* RestBanner.swift */,
 				9E71FB141BF61D5600C10E68 /* ArticlesDataSource.swift */,
 				9E71FB161BF61D6F00C10E68 /* PublishersDataSource.swift */,
 				9E71FB181BF61D9000C10E68 /* FiltersDataSource.swift */,
@@ -440,7 +434,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E52D38A1BE1193000F5A0D3 /* Article.swift in Sources */,
-				9E52D38E1BE1193100F5A0D3 /* Banner.swift in Sources */,
 				9E5560631BBEB6040065B5EC /* DataManager.swift in Sources */,
 				9E52D38C1BE1193100F5A0D3 /* Category.swift in Sources */,
 				9ECC9F831BC412BF004400C9 /* PublisherViewController.swift in Sources */,
@@ -448,7 +441,6 @@
 				9E71FB191BF61D9000C10E68 /* FiltersDataSource.swift in Sources */,
 				9EB784031BC6A8BA007F963A /* ArticlesCell.swift in Sources */,
 				9EC30D3C1BCFE3C100C0B218 /* ArticlesViewController.swift in Sources */,
-				9E52D3981BE11A2E00F5A0D3 /* RestBanner.swift in Sources */,
 				9E52D3961BE11A1C00F5A0D3 /* RestCategory.swift in Sources */,
 				9E71FB171BF61D6F00C10E68 /* PublishersDataSource.swift in Sources */,
 				9EEECD2B1BE8EEEF00BA90B8 /* FiltersCell.swift in Sources */,

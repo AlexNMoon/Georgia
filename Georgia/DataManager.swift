@@ -159,32 +159,6 @@ class DataManager {
         })
     }
     
-    func getBanners(_ completitionHandler: @escaping (_ image: UIImage?) ->  Void) {
-        let bannersManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
-        bannersManagedObjectContext.parent = self.managedObjectContext
-        let entityDescription =
-        NSEntityDescription.entity(forEntityName: "Banner",
-            in: bannersManagedObjectContext)
-        api.searchFor(.banners, articleId: nil, completionHandler: { (json: JSON) -> Void in
-            if let data = json["data"].array {
-                if data.count == 0 {
-                    completitionHandler(UIImage(named: "launch_background.png")!)
-                } else {
-                    for index in 0 ..< data.count {
-                        let bannerData = data[index]
-                        let restBanner = RestBanner(bannerData: bannerData)
-                        _ = Banner(banner: restBanner, entity: entityDescription!, insertIntoManagedObjectContext: bannersManagedObjectContext)
-                    }
-                }
-            }
-            do {
-                try bannersManagedObjectContext.save()
-            } catch _ {
-            }
-            
-        })
-    }
-    
     func getCategories() {
         let categoriesManagedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
         categoriesManagedObjectContext.parent = self.managedObjectContext
@@ -212,28 +186,6 @@ class DataManager {
             } catch _ {
             }
         })
-    }
-    
-    func sendAPNSToken(_ deviceToken: Data) {
-        let trimEnds = deviceToken.description.trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
-        let cleanToken = trimEnds.replacingOccurrences(of: " ", with: "")
-        self.deviceToken = cleanToken
-        let dataToken = ["id" : cleanToken]
-        self.api.putDeviceAPNSToken(dataToken)
-    }
-    
-    func sendAPNSSettings() {
-        if let deviceToken = self.deviceToken {
-            var dataSettings: Dictionary <String, String> = [:]
-            if let selectedCategories = self.api.getSelectedCategoies(.push) {
-                dataSettings["category_ids"] = selectedCategories
-            }
-            if let selectedPublishers = self.api.getSelectedPublishers() {
-                dataSettings["publishers_ids"] = selectedPublishers
-            }
-            dataSettings["id"] = deviceToken
-            self.api.postAPNSSettingsWithParameters(dataSettings)
-        }
     }
     
 }

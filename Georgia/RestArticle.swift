@@ -62,7 +62,7 @@ class RestArticle {
         if let video = articleData["video"].string {
             self.video = video
         }
-        if let categoryId = articleData["category"]["id"].int {
+        if let categoryId = articleData["category_id"].int {
             self.categoryId = categoryId
         }
     }

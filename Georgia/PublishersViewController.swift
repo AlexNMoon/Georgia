@@ -81,7 +81,6 @@ class PublishersViewController: UITableViewController {
         } catch _ {
         }
         self.dataManager.getArticles()
-        self.dataManager.sendAPNSSettings()
     }
     
     @IBAction func tapViewSelected(_ sender: AnyObject) {

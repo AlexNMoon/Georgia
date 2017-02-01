@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        self.dataManager.sendAPNSToken(deviceToken)
+        //self.dataManager.sendAPNSToken(deviceToken)
     }
     
     private func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
