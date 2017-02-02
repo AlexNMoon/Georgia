@@ -56,7 +56,7 @@ class ArticlesDataSource: NSObject ,UITableViewDelegate, UITableViewDataSource, 
     }
     
     func refresh(_ sender:AnyObject) {
-        self.dataManager.updatingArticles()
+        self.dataManager.getArticles()
         self.refreshControl?.endRefreshing()
     }
     

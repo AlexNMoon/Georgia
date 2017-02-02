@@ -39,7 +39,6 @@ class PublishersCell: UITableViewCell {
         } else {
             self.publisherSelectedCoreData()
         }
-        self.dataManager.getArticles()
     }
     
     func setParameters(_ publisher: Publisher, fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>, selectAll: UIBarButtonItem) {

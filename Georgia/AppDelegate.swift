@@ -23,23 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.registerForRemoteNotifications()
         let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let navigationController = self.window?.rootViewController as! UINavigationController
-        let publishersViewController: PublishersViewController = storyboard.instantiateViewController(withIdentifier: "Publishers View Controller") as! PublishersViewController
-        if(UserDefaults.standard.bool(forKey: "HasLaunchedOnce"))
-        {
-            let articlesViewController: ArticlesViewController = storyboard.instantiateViewController(withIdentifier: "Articles View Controller") as! ArticlesViewController
-            navigationController.setViewControllers([publishersViewController , articlesViewController], animated: true)
-        }
-        else
-        {
-            navigationController.setViewControllers([publishersViewController], animated: true)
-            UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
-            UserDefaults.standard.synchronize()
-        }
+        //let publishersViewController: PublishersViewController = storyboard.instantiateViewController(withIdentifier: "Publishers View Controller") as! PublishersViewController
+        //navigationController.setViewControllers([publishersViewController], animated: true)
+        UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
+        UserDefaults.standard.synchronize()
         return true
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        //self.dataManager.sendAPNSToken(deviceToken)
+        
     }
     
     private func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
