@@ -97,7 +97,9 @@ class ArticleViewController: UIViewController {
             if let image = self.article.image {
                 self.image.contentMode = .scaleAspectFit
                 self.image.sd_setImage(with: URL(string: image))
-                self.webViewHeightConstraint.constant = 0.0
+                //self.webViewHeightConstraint.constant = 0.0
+               
+                self.webView.loadHTMLString("<img src=\"" + image + "\"/>", baseURL: nil)
             } else {
                 self.hideImageView()
             }

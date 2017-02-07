@@ -4,25 +4,25 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Georgia.xcscheme</key>
+		<key>Pods-Ukraine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
-		<key>Pods-GeorgiaTests.xcscheme</key>
+		<key>Pods-UkraineTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>

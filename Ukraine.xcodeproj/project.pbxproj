@@ -71,14 +71,14 @@
 		9EBC83951BCD26CC005A671C /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		9EC30D3B1BCFE3C100C0B218 /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		9ECC9F821BC412BF004400C9 /* PublisherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublisherViewController.swift; sourceTree = "<group>"; };
-		9ED9EBE31BBC24AA007DEE61 /* Georgia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Georgia.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ED9EBE31BBC24AA007DEE61 /* Ukraine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ukraine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED9EBE71BBC24AA007DEE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9ED9EBE81BBC24AA007DEE61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ED9EBEB1BBC24AA007DEE61 /* Georgia.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Georgia.xcdatamodel; sourceTree = "<group>"; };
 		9ED9EBF01BBC24AA007DEE61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9ED9EBF21BBC24AA007DEE61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9ED9EBF51BBC24AA007DEE61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		9ED9EBFB1BBC24AA007DEE61 /* GeorgiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeorgiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ED9EBFB1BBC24AA007DEE61 /* UkraineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UkraineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ED9EC001BBC24AA007DEE61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9ED9EC011BBC24AA007DEE61 /* GeorgiaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeorgiaTests.swift; sourceTree = "<group>"; };
 		9ED9EC0B1BBC3104007DEE61 /* PublishersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishersViewController.swift; sourceTree = "<group>"; };
@@ -144,8 +144,8 @@
 		9ED9EBDA1BBC24AA007DEE61 = {
 			isa = PBXGroup;
 			children = (
-				9ED9EBE51BBC24AA007DEE61 /* Georgia */,
-				9ED9EBFE1BBC24AA007DEE61 /* GeorgiaTests */,
+				9ED9EBE51BBC24AA007DEE61 /* Ukraine */,
+				9ED9EBFE1BBC24AA007DEE61 /* UkraineTests */,
 				9ED9EBE41BBC24AA007DEE61 /* Products */,
 				F4C19D9C513DB91FFB4D870C /* Pods */,
 				E6B90289904541B23D3719E2 /* Frameworks */,
@@ -155,13 +155,13 @@
 		9ED9EBE41BBC24AA007DEE61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9ED9EBE31BBC24AA007DEE61 /* Georgia.app */,
-				9ED9EBFB1BBC24AA007DEE61 /* GeorgiaTests.xctest */,
+				9ED9EBE31BBC24AA007DEE61 /* Ukraine.app */,
+				9ED9EBFB1BBC24AA007DEE61 /* UkraineTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9ED9EBE51BBC24AA007DEE61 /* Georgia */ = {
+		9ED9EBE51BBC24AA007DEE61 /* Ukraine */ = {
 			isa = PBXGroup;
 			children = (
 				9ED9EBEF1BBC24AA007DEE61 /* Main.storyboard */,
@@ -170,6 +170,7 @@
 				9E52D3801BE1188000F5A0D3 /* Data */,
 				9ED9EBE61BBC24AA007DEE61 /* Supporting Files */,
 			);
+			name = Ukraine;
 			path = Georgia;
 			sourceTree = "<group>";
 		};
@@ -193,12 +194,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9ED9EBFE1BBC24AA007DEE61 /* GeorgiaTests */ = {
+		9ED9EBFE1BBC24AA007DEE61 /* UkraineTests */ = {
 			isa = PBXGroup;
 			children = (
 				9ED9EC011BBC24AA007DEE61 /* GeorgiaTests.swift */,
 				9ED9EBFF1BBC24AA007DEE61 /* Supporting Files */,
 			);
+			name = UkraineTests;
 			path = GeorgiaTests;
 			sourceTree = "<group>";
 		};
@@ -233,9 +235,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9ED9EBE21BBC24AA007DEE61 /* Georgia */ = {
+		9ED9EBE21BBC24AA007DEE61 /* Ukraine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9ED9EC051BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "Georgia" */;
+			buildConfigurationList = 9ED9EC051BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "Ukraine" */;
 			buildPhases = (
 				23212072273B0FF883F7CE97 /* [CP] Check Pods Manifest.lock */,
 				9ED9EBDF1BBC24AA007DEE61 /* Sources */,
@@ -248,14 +250,14 @@
 			);
 			dependencies = (
 			);
-			name = Georgia;
+			name = Ukraine;
 			productName = Georgia;
-			productReference = 9ED9EBE31BBC24AA007DEE61 /* Georgia.app */;
+			productReference = 9ED9EBE31BBC24AA007DEE61 /* Ukraine.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9ED9EBFA1BBC24AA007DEE61 /* GeorgiaTests */ = {
+		9ED9EBFA1BBC24AA007DEE61 /* UkraineTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9ED9EC081BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "GeorgiaTests" */;
+			buildConfigurationList = 9ED9EC081BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "UkraineTests" */;
 			buildPhases = (
 				1037C40C823EB6598F5D60C2 /* [CP] Check Pods Manifest.lock */,
 				9ED9EBF71BBC24AA007DEE61 /* Sources */,
@@ -269,9 +271,9 @@
 			dependencies = (
 				9ED9EBFD1BBC24AA007DEE61 /* PBXTargetDependency */,
 			);
-			name = GeorgiaTests;
+			name = UkraineTests;
 			productName = GeorgiaTests;
-			productReference = 9ED9EBFB1BBC24AA007DEE61 /* GeorgiaTests.xctest */;
+			productReference = 9ED9EBFB1BBC24AA007DEE61 /* UkraineTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -296,7 +298,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9ED9EBDE1BBC24AA007DEE61 /* Build configuration list for PBXProject "Georgia" */;
+			buildConfigurationList = 9ED9EBDE1BBC24AA007DEE61 /* Build configuration list for PBXProject "Ukraine" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -309,8 +311,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9ED9EBE21BBC24AA007DEE61 /* Georgia */,
-				9ED9EBFA1BBC24AA007DEE61 /* GeorgiaTests */,
+				9ED9EBE21BBC24AA007DEE61 /* Ukraine */,
+				9ED9EBFA1BBC24AA007DEE61 /* UkraineTests */,
 			);
 		};
 /* End PBXProject section */
@@ -471,7 +473,7 @@
 /* Begin PBXTargetDependency section */
 		9ED9EBFD1BBC24AA007DEE61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9ED9EBE21BBC24AA007DEE61 /* Georgia */;
+			target = 9ED9EBE21BBC24AA007DEE61 /* Ukraine */;
 			targetProxy = 9ED9EBFC1BBC24AA007DEE61 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -643,7 +645,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Georgia.app/Georgia";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ukraine.app/Ukraine";
 			};
 			name = Debug;
 		};
@@ -661,14 +663,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mozi.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Georgia.app/Georgia";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Ukraine.app/Ukraine";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9ED9EBDE1BBC24AA007DEE61 /* Build configuration list for PBXProject "Georgia" */ = {
+		9ED9EBDE1BBC24AA007DEE61 /* Build configuration list for PBXProject "Ukraine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9ED9EC031BBC24AA007DEE61 /* Debug */,
@@ -677,7 +679,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9ED9EC051BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "Georgia" */ = {
+		9ED9EC051BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "Ukraine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9ED9EC061BBC24AA007DEE61 /* Debug */,
@@ -686,7 +688,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9ED9EC081BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "GeorgiaTests" */ = {
+		9ED9EC081BBC24AA007DEE61 /* Build configuration list for PBXNativeTarget "UkraineTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9ED9EC091BBC24AA007DEE61 /* Debug */,
