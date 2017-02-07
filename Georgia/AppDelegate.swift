@@ -21,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pushSettings: UIUserNotificationSettings = UIUserNotificationSettings( types: UIUserNotificationType.alert, categories: nil)
         UIApplication.shared.registerUserNotificationSettings(pushSettings)
         UIApplication.shared.registerForRemoteNotifications()
-        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let navigationController = self.window?.rootViewController as! UINavigationController
-        //let publishersViewController: PublishersViewController = storyboard.instantiateViewController(withIdentifier: "Publishers View Controller") as! PublishersViewController
-        //navigationController.setViewControllers([publishersViewController], animated: true)
         UserDefaults.standard.set(true, forKey: "HasLaunchedOnce")
         UserDefaults.standard.synchronize()
         return true

@@ -44,7 +44,10 @@ class ArticleViewController: UIViewController {
     
     @IBOutlet weak var webViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var tapBarButtonItem: UIBarButtonItem!
+    
     let defoultImage = UIImage(named: "launch_logo")
     
     override func viewDidLoad() {
@@ -52,6 +55,7 @@ class ArticleViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .plain, target: self, action: #selector(ArticleViewController.closeView))
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
+        self.scrollView.contentSize.width = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +67,7 @@ class ArticleViewController: UIViewController {
                 DispatchQueue.main.async(execute: {() -> Void in
                     self.text = text
                     self.articleTextWebView.loadHTMLString(self.text, baseURL: nil)
+                    self.articleTextWebView.frame.size.height = 2000
                     let size = self.articleTextWebView.sizeThatFits(CGSize(width: self.articleTextWebView.frame.size.width,  height: CGFloat.greatestFiniteMagnitude))
                     self.textWebViewHeightConstraint.constant = size.height
                 })
