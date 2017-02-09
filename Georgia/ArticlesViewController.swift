@@ -35,7 +35,6 @@ class ArticlesViewController: UIViewController {
         let backButton = UIBarButtonItem(image: UIImage(named: "feed_back_button"), style: .plain, target: self, action: #selector(ArticlesViewController.closeView))
         self.navigationItem.leftBarButtonItem = backButton
         self.navigationItem.setHidesBackButton(false, animated: true)
-        self.dataManager.getArticles()
     }
     
     override func didReceiveMemoryWarning() {

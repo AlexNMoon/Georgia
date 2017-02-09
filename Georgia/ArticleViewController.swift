@@ -20,14 +20,12 @@ class ArticleViewController: UIViewController {
     
     var text: String!
     
+    var image: String?
+    
     @IBOutlet weak var articleTextWebView: UIWebView!
     
     @IBOutlet weak var textWebViewHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var image: UIImageView!
-    
+  
     @IBOutlet weak var publishersLogo: UIImageView!
     
     @IBOutlet weak var publishersName: UILabel!
@@ -90,18 +88,17 @@ class ArticleViewController: UIViewController {
         }
         if let videoUrl = self.article.video {
             let videoEmbed = videoUrl.replacingOccurrences(of: "watch?v=", with: "embed/")
-            let videoEmbedURL = URL(string: videoEmbed)
+            let videoCorectedURL = videoEmbed.replacingOccurrences(of: "&feature=youtu.be", with: "")
+            let videoEmbedURL = URL(string: videoCorectedURL)
             let request = URLRequest(url: videoEmbedURL!)
             self.webView.loadRequest(request)
         } else {
             if let image = self.article.image {
-                self.image.contentMode = .scaleAspectFit
-                self.image.sd_setImage(with: URL(string: image))
-                //self.webViewHeightConstraint.constant = 0.0
-               
-                self.webView.loadHTMLString("<img src=\"" + image + "\"/>", baseURL: nil)
+                let height = self.webView.frame.height
+                let width = self.webView.frame.width
+                self.webView.loadHTMLString("<img src=\"\(image)\" height=\"\(height)\" width=\"\(width)\"/>", baseURL: nil)
             } else {
-                self.hideImageView()
+                self.webViewHeightConstraint.constant = 0.0
             }
         }
         if (self.article.link == nil) || (self.article.link == "") {
@@ -117,11 +114,6 @@ class ArticleViewController: UIViewController {
             self.date.text = dateFormatter.string(from: date)
         }
 
-    }
-    
-    func hideImageView() {
-        self.imageHeightConstraint.constant = 0.0
-        self.webViewHeightConstraint.constant = 0.0
     }
     
     func closeView() {
@@ -142,8 +134,8 @@ class ArticleViewController: UIViewController {
         if let text = self.text {
             sharingItems.append(text as AnyObject)
         }
-        if let image = self.image.image {
-            sharingItems.append(image)
+        if let image = self.image {
+            sharingItems.append(image as AnyObject)
         }
         if let link = self.article.link {
             sharingItems.append(link as AnyObject)

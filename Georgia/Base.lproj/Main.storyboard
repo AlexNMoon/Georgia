@@ -13,13 +13,13 @@
         <!--Filters View Controller-->
         <scene sceneID="GbI-Fn-num">
             <objects>
-                <tableViewController id="axa-e2-rhu" customClass="FiltersViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="axa-e2-rhu" customClass="FiltersViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="63" sectionHeaderHeight="22" sectionFooterHeight="22" id="sE6-Ma-VZZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Filters Cell" rowHeight="63" id="gcn-fm-NEB" customClass="FiltersCell" customModule="Georgia" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Filters Cell" rowHeight="63" id="gcn-fm-NEB" customClass="FiltersCell" customModule="Ukraine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="375" height="63"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gcn-fm-NEB" id="YZu-er-TCX">
@@ -100,7 +100,7 @@
         <!--Publisher View Controller-->
         <scene sceneID="hEw-OY-JfO">
             <objects>
-                <viewController id="bGa-oY-MiU" customClass="PublisherViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bGa-oY-MiU" customClass="PublisherViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6gQ-dK-N1x"/>
                         <viewControllerLayoutGuide type="bottom" id="TF7-4D-rcd"/>
@@ -328,13 +328,13 @@
         <!--Publishers-->
         <scene sceneID="U6c-Lf-fCY">
             <objects>
-                <tableViewController storyboardIdentifier="Publishers View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="awb-3e-BlY" customClass="PublishersViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Publishers View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="awb-3e-BlY" customClass="PublishersViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wr9-DK-wOh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publishers cell" rowHeight="83" id="bGO-rc-d4l" customClass="PublishersCell" customModule="Georgia" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publishers cell" rowHeight="83" id="bGO-rc-d4l" customClass="PublishersCell" customModule="Ukraine" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="22" width="375" height="83"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bGO-rc-d4l" id="xNm-mb-QKi">
@@ -419,7 +419,7 @@
         <!--Articles View Controller-->
         <scene sceneID="nbL-Y5-HYZ">
             <objects>
-                <viewController storyboardIdentifier="Articles View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YNj-bu-4Fu" customClass="ArticlesViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Articles View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YNj-bu-4Fu" customClass="ArticlesViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eh1-WF-zau"/>
                         <viewControllerLayoutGuide type="bottom" id="rQx-hb-XoA"/>
@@ -432,7 +432,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Articles Cell" rowHeight="109" id="WnB-mO-vzf" customClass="ArticlesCell" customModule="Georgia" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Articles Cell" rowHeight="109" id="WnB-mO-vzf" customClass="ArticlesCell" customModule="Ukraine" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WnB-mO-vzf" id="ieW-WW-UMq">
@@ -531,7 +531,7 @@
         <!--Article View Controller-->
         <scene sceneID="xw2-uW-hCm">
             <objects>
-                <viewController id="Xoc-jT-Dj7" customClass="ArticleViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xoc-jT-Dj7" customClass="ArticleViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gRf-Bw-Xd3"/>
                         <viewControllerLayoutGuide type="bottom" id="yO2-3B-DgG"/>
@@ -555,13 +555,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fU1-6q-dsR">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="234"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="374" id="EPm-47-Rwx"/>
-                                            <constraint firstAttribute="height" constant="234" id="kfD-Jk-Eg7"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ek-KE-agX">
                                         <rect key="frame" x="16" y="322" width="341" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -599,7 +592,6 @@
                                     <constraint firstItem="0Ek-KE-agX" firstAttribute="top" secondItem="BYs-66-NKX" secondAttribute="bottom" constant="8" symbolic="YES" id="CO5-Mo-JIO"/>
                                     <constraint firstItem="e6X-Sb-uhn" firstAttribute="top" secondItem="isc-Vc-lMo" secondAttribute="top" id="ENP-fh-tVc"/>
                                     <constraint firstItem="0Ek-KE-agX" firstAttribute="leading" secondItem="isc-Vc-lMo" secondAttribute="leading" constant="16" id="FIx-BQ-blY"/>
-                                    <constraint firstItem="fU1-6q-dsR" firstAttribute="leading" secondItem="e6X-Sb-uhn" secondAttribute="leading" id="Fnk-mn-AzH"/>
                                     <constraint firstAttribute="trailing" secondItem="e6X-Sb-uhn" secondAttribute="trailing" constant="1" id="Ju4-kY-FWO"/>
                                     <constraint firstItem="ILj-mi-5Cz" firstAttribute="top" secondItem="0Ek-KE-agX" secondAttribute="bottom" constant="8" symbolic="YES" id="Mql-rY-LP3"/>
                                     <constraint firstItem="0Ek-KE-agX" firstAttribute="trailing" secondItem="ILj-mi-5Cz" secondAttribute="trailing" id="PfU-ci-gwB"/>
@@ -610,15 +602,12 @@
                                     <constraint firstAttribute="bottom" secondItem="ILj-mi-5Cz" secondAttribute="bottom" constant="8" id="VVC-DN-F08"/>
                                     <constraint firstItem="BYs-66-NKX" firstAttribute="top" secondItem="e6X-Sb-uhn" secondAttribute="bottom" constant="8" symbolic="YES" id="Vsl-Vj-Lv1"/>
                                     <constraint firstItem="Uyb-CB-bXz" firstAttribute="top" secondItem="I2x-Ng-fKS" secondAttribute="bottom" constant="20" id="WHm-cJ-baz"/>
-                                    <constraint firstItem="fU1-6q-dsR" firstAttribute="leading" secondItem="isc-Vc-lMo" secondAttribute="leading" id="WQR-cv-ape"/>
                                     <constraint firstItem="e6X-Sb-uhn" firstAttribute="centerX" secondItem="0Ek-KE-agX" secondAttribute="centerX" id="XYz-dK-RH6"/>
                                     <constraint firstItem="I2x-Ng-fKS" firstAttribute="top" secondItem="e6X-Sb-uhn" secondAttribute="bottom" constant="24" id="aAA-Rm-cQB"/>
-                                    <constraint firstItem="e6X-Sb-uhn" firstAttribute="top" secondItem="fU1-6q-dsR" secondAttribute="top" id="cFP-TM-VLq"/>
                                     <constraint firstItem="I2x-Ng-fKS" firstAttribute="leading" secondItem="BYs-66-NKX" secondAttribute="trailing" constant="8" symbolic="YES" id="ftq-ZB-7zt"/>
                                     <constraint firstAttribute="trailing" secondItem="0Ek-KE-agX" secondAttribute="trailing" constant="18" id="gxW-gY-Gea"/>
                                     <constraint firstAttribute="trailing" secondItem="ILj-mi-5Cz" secondAttribute="trailing" constant="18" id="p0z-lP-7bU"/>
                                     <constraint firstItem="e6X-Sb-uhn" firstAttribute="centerX" secondItem="isc-Vc-lMo" secondAttribute="centerX" id="qcO-2U-Uwp"/>
-                                    <constraint firstItem="BYs-66-NKX" firstAttribute="top" secondItem="fU1-6q-dsR" secondAttribute="bottom" constant="8" symbolic="YES" id="tY1-at-CqL"/>
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WFM-hM-f5I">
@@ -665,8 +654,6 @@
                         <outlet property="date" destination="Uyb-CB-bXz" id="jc9-x1-IW1"/>
                         <outlet property="goToWebSiteButton" destination="WFM-hM-f5I" id="hdE-cI-Re0"/>
                         <outlet property="goToWebsiteButtonHeightConstraint" destination="rrT-Lo-Ed0" id="1h5-rU-rcT"/>
-                        <outlet property="image" destination="fU1-6q-dsR" id="29J-Xt-HAj"/>
-                        <outlet property="imageHeightConstraint" destination="kfD-Jk-Eg7" id="sD5-JS-SeI"/>
                         <outlet property="publishersLogo" destination="BYs-66-NKX" id="n5O-Kl-Kc3"/>
                         <outlet property="publishersName" destination="I2x-Ng-fKS" id="ZOQ-22-Kjf"/>
                         <outlet property="scrollView" destination="isc-Vc-lMo" id="HBC-yM-U99"/>
@@ -699,7 +686,7 @@
         <!--Settings View Controller-->
         <scene sceneID="c0x-Nf-eqQ">
             <objects>
-                <viewController id="oRS-Dy-IQx" customClass="SettingsViewController" customModule="Georgia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oRS-Dy-IQx" customClass="SettingsViewController" customModule="Ukraine" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hZp-E7-DUp"/>
                         <viewControllerLayoutGuide type="bottom" id="s9C-bk-zm1"/>
@@ -750,7 +737,7 @@
     <resources>
         <image name="article_share_icon" width="18" height="18"/>
         <image name="feed_filter_icon" width="19" height="19"/>
-        <image name="launch_logo" width="158" height="163"/>
+        <image name="launch_logo" width="512" height="512"/>
         <image name="publisher_location_icon" width="28" height="23"/>
         <image name="publisher_mail_icon" width="30" height="22"/>
         <image name="publisher_phone_icon" width="14" height="25"/>

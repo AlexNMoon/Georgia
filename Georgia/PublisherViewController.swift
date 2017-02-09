@@ -61,10 +61,8 @@ class PublisherViewController: UIViewController, MFMailComposeViewControllerDele
         self.navigationController?.navigationBar.barTintColor = UIColor.red
         if let logoUrl = publisher.logo {
             self.logo.sd_setImage(with: URL(string: logoUrl))
-            if self.logo.image != nil {
-                let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
-                self.text.textContainer.exclusionPaths = [imageRect]
-            }
+            let imageRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 120, height: 120))
+            self.text.textContainer.exclusionPaths = [imageRect]
             self.text.addSubview(self.logo)
         }
         if let name = publisher.name {
